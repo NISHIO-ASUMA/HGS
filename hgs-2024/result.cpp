@@ -151,5 +151,4 @@ void DrawResult(void)
 
 	// ƒŠƒUƒ‹ƒgƒ|ƒŠƒSƒ“‚Ì•`‰æ
 	pDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
-
 }
