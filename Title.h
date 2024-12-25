@@ -1,62 +1,40 @@
-//=================================
+//=============================================================================
 //
 // タイトル処理 [title.h]
-// Author: TEAM_2
+// Author : TANEKAWA RIKU
 //
-//=================================
-#ifndef _TITLE_H_
-#define _TITLE_H_
+//=============================================================================
+#ifndef _TITLE_H_//このマクロ定義がされていなかったら
+#define _TITLE_H_//2重インクルード防止のマクロ定義
 
-//****************************
-// インクルードファイル宣言
-//****************************
 #include "main.h"
-#include "input.h"
-#include "fade.h"
 
-//********************************
-// タイトルの状態列挙型宣言
-//********************************
+//タイトルの種類の構造体
 typedef enum
 {
-	TITLESTATE_NORMAL = 0,	// 通常状態
-	TITLESTATE_FLASH,		// 点滅状態
-	TITLESTATE_MAX
-}TITLESTATE;
+	TITLE_FIRST = 0,	//一つ目のタイトル
+	TITLE_SECOND,	//二つ目のタイトル
+	TITLE_TWO,		//ナンバー
 
-//*************************************
-// タイトルのテクスチャ列挙型宣言
-//*************************************
-typedef enum
-{
-	TITLE_FIRST = 0,					//1つ目のタイトル
-	TITLE_SECOND,						//2つ目のタイトル
 	TITLE_MAX
 }TITLE;
 
-static const char* TITLE_TEXTURE[TITLE_MAX] =
+//タイトルの状態
+typedef enum
 {
-	"data\\TEXTURE\\tutorial101.png",
-	"data\\TEXTURE\\Gamestart.png",
-};
-//****************************
-// タイトル構造体宣言
-//****************************
-typedef struct
-{
-	D3DXVECTOR3 pos;			// 座標
-	int nType;					// 種類
-	float fWidth;				// 横幅
-	float fHeight;				// 高さ
-	TITLESTATE state;			// 状態変数
-	bool bUse;					// 使用状態
-}Title;
+	TITLE_NONE = 0,	//通常状態
+	TITLE_FLASH,	//点滅状態
+	STATE_MAX
+}TITLESTATE;
 
-//**********************
-// プロトタイプ宣言
-//**********************
-void InitTitle(void);						// タイトルの初期化
-void UninitTitle(void);						// タイトルの終了
-void UpdateTitle(void);						// タイトルの更新
-void DrawTitle(void);						// タイトルの描画
+//プロトタイプ宣言
+void InitTitle(void);
+void UninitTitle(void);
+void UpdateTitle(void);
+void DrawTitle(void);
+
+void SetTitle(int nType, D3DXVECTOR3 pos);//タイトルの設定
+void TitleFlash(int nType);//タイトルの点滅
+
 #endif
+

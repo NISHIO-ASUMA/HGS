@@ -13,6 +13,7 @@
 #include "player.h"
 #include "Timer.h"
 #include "sound.h"
+#include "input.h"
 
 //***************************
 // グローバル変数宣言
@@ -122,7 +123,7 @@ void UpdateResult(void)
 	// カウントを加算
 	g_aCount++;
 
-	if (g_fade == FADE_NONE && (g_aCount >= 380 || KeyboardTrigger(DIK_RETURN) == true || JoypadTrigger(JOYKEY_A) == true))
+	if (g_fade == FADE_NONE && (g_aCount >= 380 || KeyboardTrigger(DIK_RETURN) == true || JoyPadTrigger(JOYKEY_A) == true))
 	{
 		// Enterキーが押された
 		// モード設定(リザルトに移動)

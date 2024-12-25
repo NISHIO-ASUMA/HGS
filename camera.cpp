@@ -51,8 +51,8 @@ void UpdateCamera(void)
 	// プレイヤーを取得
 	PLAYER* pPlayer = GetPlayer();
 
-	// マウス情報を取得
-	DIMOUSESTATE pMouse = GetMouseState();
+	//// マウス情報を取得
+	//DIMOUSESTATE pMouse = GetMouseState();
 
 	// カメラの右スティック
 	StickCamera();
@@ -76,31 +76,31 @@ void UpdateCamera(void)
 	//******************
 	// 視点の旋回
 	//******************
-	if (GetKeyboardPress(DIK_LEFT) == true || JoypadPress(JOYKEY_LEFT_B))
-	{// LEFTキーが押された
+	//if (GetKeyboardPress(DIK_LEFT) == true || JoypadPress(JOYKEY_LEFT_B))
+	//{// LEFTキーが押された
 
-		// カメラの回転
-		g_camera.rot.y -= 0.03f;
+	//	// カメラの回転
+	//	g_camera.rot.y -= 0.03f;
 
-		// 角度の正規化
-		if (g_camera.rot.y < -D3DX_PI)
-		{// D3DX_PIより小さくなったら
-			g_camera.rot.y += D3DX_PI * 2.0f;
-		}
-	}
+	//	// 角度の正規化
+	//	if (g_camera.rot.y < -D3DX_PI)
+	//	{// D3DX_PIより小さくなったら
+	//		g_camera.rot.y += D3DX_PI * 2.0f;
+	//	}
+	//}
 
-	if (GetKeyboardPress(DIK_RIGHT) == true || JoypadPress(JOYKEY_RIGHT_B))
-	{// RIGHTキーが押された
-		// カメラの回転
-		g_camera.rot.y += 0.03f;
+	//if (GetKeyboardPress(DIK_RIGHT) == true || JoypadPress(JOYKEY_RIGHT_B))
+	//{// RIGHTキーが押された
+	//	// カメラの回転
+	//	g_camera.rot.y += 0.03f;
 
-		// 角度の正規化
-		if (g_camera.rot.y > D3DX_PI)
-		{// D3DX_PIより大きくなったら
-			g_camera.rot.y -= D3DX_PI * 2.0f;
-		}
+	//	// 角度の正規化
+	//	if (g_camera.rot.y > D3DX_PI)
+	//	{// D3DX_PIより大きくなったら
+	//		g_camera.rot.y -= D3DX_PI * 2.0f;
+	//	}
 
-	}
+	//}
 
 #ifdef _DEBUG
 
