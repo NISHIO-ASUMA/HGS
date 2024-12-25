@@ -12,12 +12,9 @@
 #include "particle.h"
 #include "bullet.h"
 #include "model.h"
-//#include "wall.h"
 #include "motion.h"
-
 #include <stdio.h>
 #include <string.h>
-//#include "enemy.h"
 #include "sound.h"
 
 //グローバル変数
@@ -51,7 +48,6 @@ void InitPlayer(void)
 	g_player.motion.bLoopMotion = true;
 	g_player.motion.nCounterMotion = 0;
 	g_player.motion.aMotionInfo[MOTIONTYPE_MOVE].startKey = 1;
-	//g_player.pos = D3DXVECTOR3(150.0f, 0.0f, 270.0f);//デバッグ用
 
 	LoadPlayerTEXT();
 
