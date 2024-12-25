@@ -158,9 +158,6 @@ void DrawItem()
 			// マテリアルデータへのポインタを取得
 			pMat = (D3DXMATERIAL*)g_Item[nCnt].aModel[nType].pBuffMat->GetBufferPointer();
 
-			// マテリアル
-			D3DXMATERIAL mat;
-
 			// テクスチャ設定
 			pDevice->SetTexture(0, g_Item[nCnt].aModel[nType].pTexture[nCntMat]);
 
@@ -186,7 +183,7 @@ void SetItem(D3DXVECTOR3 pos, ITEMTYPE Type)
 			g_Item[nCnt1].bUse = true;		// 使用判定
 
 			// 影の設定
-			g_Item[nCnt1].nIdxshadow = SetShadow(D3DXVECTOR3(g_Item[nCnt1].pos.x, 0.0f, g_Item[nCnt1].pos.z), g_Item[nCnt1].rot, D3DXVECTOR3(0.5f, 0.0f, 0.5f));
+			g_Item[nCnt1].nIdxshadow = SetShadow(D3DXVECTOR3(g_Item[nCnt1].pos.x, 0.0f, g_Item[nCnt1].pos.z), g_Item[nCnt1].rot);
 
 			// アイテム数をカウント
 			nNumItem++;

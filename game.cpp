@@ -48,32 +48,35 @@ void InitGame(void)
 
 
 	//モデル
-	SetModel(D3DXVECTOR3(-220.0f, 0.0f, 385.0f), WALLTYPE_NORMAL);		//	奥壁左
-	SetModel(D3DXVECTOR3(260.0f, 0.0f, 385.0f), WALLTYPE_NORMAL);		//	奥壁右
-	//SetModel(D3DXVECTOR3(-60.0f, 0.0f, 480.0f), WALLTYPE_NORMAL);		//	奥の通路壁左
-	//SetModel(D3DXVECTOR3(100.0f, 0.0f, 480.0f), WALLTYPE_NORMAL);		//	奥の通路壁右
-	//SetModel(D3DXVECTOR3(-220.0f, 0.0f, -395.0f), WALLTYPE_MINI);		//	手前壁左
-	//SetModel(D3DXVECTOR3(240.0f, 0.0f, -395.0f), WALLTYPE_MINI);		//	手前壁右
-	//SetModel(D3DXVECTOR3(10.0f, 0.0f, -445.0f), WALLTYPE_MINI);			//	手前壁真ん中
-	//SetModel(D3DXVECTOR3(385.0f, 0.0f, 235.0f), WALLTYPE_NORMAL);		//	右の奥壁
-	//SetModel(D3DXVECTOR3(385.0f, 0.0f, -235.0f), WALLTYPE_NORMAL);		//	右の手前壁
-	//SetModel(D3DXVECTOR3(565.0f, 0.0f, -90.0f), WALLTYPE_MINI);			//	出口通路手前
-	//SetModel(D3DXVECTOR3(585.0f, 0.0f, 90.0f), WALLTYPE_NORMAL);		//	出口通路奥
-	//SetModel(D3DXVECTOR3(-385.0f, 0.0f, 235.0f), WALLTYPE_NORMAL);		//	左の奥壁
-	//SetModel(D3DXVECTOR3(-385.0f, 0.0f, -235.0f), WALLTYPE_NORMAL);		//	左の壁手前
-	//SetModel(D3DXVECTOR3(-565.0f, 0.0f, -90.0f), WALLTYPE_MINI);		//　入口通路手前
-	//SetModel(D3DXVECTOR3(-585.0f, 0.0f, 90.0f), WALLTYPE_NORMAL);		//	入口通路奥
-	//SetModel(D3DXVECTOR3(-160.0f, 0.0f, -20.0f), WALLTYPE_NORMAL);		//	真ん中の壁左
-	//SetModel(D3DXVECTOR3(180.0f, 0.0f, -20.0f), WALLTYPE_NORMAL);		//	真ん中の壁右
-	//SetModel(D3DXVECTOR3(10.0f, 0.0f, 180.0f), WALLTYPE_MINI);			//	真ん中の奥
-	//SetModel(D3DXVECTOR3(10.0f, 0.0f, -215.0f), WALLTYPE_MINI);			//	真ん中の手前
-	//SetModel(D3DXVECTOR3(-170.0f, 0.0f, 610.0f), WALLTYPE_MINI);		//	奥の部屋の手前左
-	//SetModel(D3DXVECTOR3(200.0f, 0.0f, 610.0f), WALLTYPE_MINI);			//	奥の部屋の手前右
-	//SetModel(D3DXVECTOR3(-260.0f, 0.0f, 750.0f), WALLTYPE_NORMAL);		//	奥の部屋の左
-	//SetModel(D3DXVECTOR3(280.0f, 0.0f, 750.0f), WALLTYPE_NORMAL);		//	奥の部屋の右
-	//SetModel(D3DXVECTOR3(10.0f, 0.0f, 920.0f), WALLTYPE_NORMAL);		//	奥の部屋の奥壁
-	//SetModel(D3DXVECTOR3(-480.0f, 0.0f, 0.0f), WALLTYPE_EXIT);			//	出口のドア奥
-	//SetModel(D3DXVECTOR3(-750.0f, 0.0f, 0.0f), WALLTYPE_ENTERDOOR);		//	入口ドア
+	SetModel(D3DXVECTOR3(-220.0f, 0.0f, 385.0f), WALLTYPE_OKU);		//	ルーム1の奥壁
+	SetModel(D3DXVECTOR3(-560.0f, 0.0f, 60.0f), WALLTYPE_HIDARI);	//	ルーム1の左壁
+	SetModel(D3DXVECTOR3(-220.0f, 0.0f, -305.0f), WALLTYPE_TEMAE);	//	ルーム1の手前壁
+	SetModel(D3DXVECTOR3(120.0f, 0.0f, 230.0f), WALLTYPE_MIGI);		//	ルーム1の右壁奥
+	SetModel(D3DXVECTOR3(120.0f, 0.0f, -150.0f), WALLTYPE_MIGI);	//	ルーム1の右壁手前
+
+	SetModel(D3DXVECTOR3(460.0f, 0.0f, 385.0f), WALLTYPE_OKU);		//	ルーム2の奥壁
+	SetModel(D3DXVECTOR3(460.0f, 0.0f, -305.0f), WALLTYPE_TEMAE);	//	ルーム2の手前壁
+	SetModel(D3DXVECTOR3(800.0f, 0.0f, 230.0f), WALLTYPE_MIGI);		//	ルーム2の右壁奥
+	SetModel(D3DXVECTOR3(800.0f, 0.0f, -150.0f), WALLTYPE_MIGI);	//	ルーム2の右壁手前
+
+	SetModel(D3DXVECTOR3(1140.0f, 0.0f, 385.0f), WALLTYPE_OKU);		//	ルーム3の奥壁
+	SetModel(D3DXVECTOR3(1140.0f, 0.0f, -305.0f), WALLTYPE_TEMAE);	//	ルーム3の手前壁
+	SetModel(D3DXVECTOR3(1480.0f, 0.0f, 230.0f), WALLTYPE_MIGI);	//	ルーム3の右壁奥
+	SetModel(D3DXVECTOR3(1480.0f, 0.0f, -150.0f), WALLTYPE_MIGI);	//	ルーム3の右壁手前
+
+	SetModel(D3DXVECTOR3(1820.0f, 0.0f, 385.0f), WALLTYPE_OKU);		//	ルーム4の奥壁
+	SetModel(D3DXVECTOR3(1820.0f, 0.0f, -305.0f), WALLTYPE_TEMAE);	//	ルーム4の手前壁
+	SetModel(D3DXVECTOR3(2160.0f, 0.0f, 230.0f), WALLTYPE_MIGI);	//	ルーム4の右壁奥
+	SetModel(D3DXVECTOR3(2160.0f, 0.0f, -150.0f), WALLTYPE_MIGI);	//	ルーム4の右壁手前
+
+	SetModel(D3DXVECTOR3(120.0f, 0.0f, 40.0f), WALLTYPE_DOOR1);		//	ルーム1のドア
+	SetModel(D3DXVECTOR3(800.0f, 0.0f, 40.0f), WALLTYPE_DOOR2);		//	ルーム2のドア
+	SetModel(D3DXVECTOR3(1480.0f, 0.0f, 40.0f), WALLTYPE_DOOR3);	//	ルーム3のドア
+	SetModel(D3DXVECTOR3(2160.0f, 0.0f, 40.0f), WALLTYPE_DOOR4);	//	ルーム4のドア
+
+	SetModel(D3DXVECTOR3(2260.0f, 0.0f, 140.0f), WALLTYPE_GOALOKU);		//	ゴールの奥壁
+	SetModel(D3DXVECTOR3(2260.0f, 0.0f, -60.0f), WALLTYPE_GOALTEMAE);	//	ゴールの手前壁
+	SetModel(D3DXVECTOR3(2370.0f, 0.0f, 30.0f), WALLTYPE_GOALMIGI);		//	ゴールの右壁
 
 	// カメラの初期化
 	InitCamera();

@@ -45,7 +45,7 @@ void InitModel(void)
 		g_aModel[nCntModel].bUse = false;
 		g_aModel[nCntModel].bScoreAdded = false;
 		g_aModel[nCntModel].bSoundPlayed = false;
-		g_aModel[nCntModel].nType = WALLTYPE_NORMAL;
+		g_aModel[nCntModel].nType = WALLTYPE_OKU;
 	}
 	g_bTask0 = false;
 	g_bTask = false;
@@ -391,7 +391,9 @@ void CollisionBlock(void)
 		Player* pPlayer = GetPlayer();
 		Enemy* pEnemy = GetEnemy();
 
-		if (g_aModel[nCntModel].nType == WALLTYPE_NORMAL)
+		if (g_aModel[nCntModel].nType == WALLTYPE_OKU || g_aModel[nCntModel].nType == WALLTYPE_HIDARI || g_aModel[nCntModel].nType == WALLTYPE_TEMAE ||
+			g_aModel[nCntModel].nType == WALLTYPE_MIGI || g_aModel[nCntModel].nType == WALLTYPE_GOALOKU || g_aModel[nCntModel].nType == WALLTYPE_GOALTEMAE ||
+			g_aModel[nCntModel].nType == WALLTYPE_GOALMIGI)
 		{
 
 			if (pPlayer->posOld.y < g_aModel[nCntModel].pos.y + g_aModel[nCntModel].size.y &&
@@ -467,304 +469,82 @@ void CollisionBlock(void)
 
 		}
 
-		if (g_aModel[nCntModel].nType == WALLTYPE_MINI)
-		{
+		//if (g_aModel[nCntModel].nType == WALLTYPE_DOOR1 || g_aModel[nCntModel].nType == WALLTYPE_DOOR2 ||
+		//	g_aModel[nCntModel].nType == WALLTYPE_DOOR3 || g_aModel[nCntModel].nType == WALLTYPE_DOOR4)
+		//{
 
-			//左右(X方向)の当たり判定
-			if (pPlayer->pos.z - pPlayer->size.z / 2 < g_aModel[nCntModel].pos.z + g_aModel[nCntModel].size.z / 2 &&
-				pPlayer->pos.z + pPlayer->size.z / 2 > g_aModel[nCntModel].pos.z - g_aModel[nCntModel].size.z / 2)
-			{
-				//左から右に当たった
-				if (pPlayer->posOld.x + pPlayer->size.x / 2 < g_aModel[nCntModel].pos.x - g_aModel[nCntModel].size.x / 2 &&
-					pPlayer->pos.x + pPlayer->size.x / 2 > g_aModel[nCntModel].pos.x - g_aModel[nCntModel].size.x / 2)
-				{
-					pPlayer->pos.x = g_aModel[nCntModel].pos.x - g_aModel[nCntModel].size.x / 2 - pPlayer->size.x / 2 - 0.1f;
-				}
-				//右から左に当たった
-				else if (pPlayer->posOld.x - pPlayer->size.x / 2 > g_aModel[nCntModel].pos.x + g_aModel[nCntModel].size.x / 2 &&
-					pPlayer->pos.x - pPlayer->size.x / 2 < g_aModel[nCntModel].pos.x + g_aModel[nCntModel].size.x / 2)
-				{
-					pPlayer->pos.x = (g_aModel[nCntModel].pos.x + g_aModel[nCntModel].size.x / 2) + pPlayer->size.x / 2 + 0.1f;
-				}
+		//	if (pPlayer->posOld.y < g_aModel[nCntModel].pos.y + g_aModel[nCntModel].size.y &&
+		//		pPlayer->posOld.y + pPlayer->size.y > g_aModel[nCntModel].pos.y)
+		//	{
 
-			}
+		//		//左右(X方向)の当たり判定
+		//		if (pPlayer->pos.z - pPlayer->size.z / 2 < g_aModel[nCntModel].pos.z + g_aModel[nCntModel].size.z / 2 &&
+		//			pPlayer->pos.z + pPlayer->size.z / 2 > g_aModel[nCntModel].pos.z - g_aModel[nCntModel].size.z / 2)
+		//		{
+		//			//左から右に当たった
+		//			if (pPlayer->posOld.x + pPlayer->size.x / 2 < g_aModel[nCntModel].pos.x - g_aModel[nCntModel].size.x / 2 &&
+		//				pPlayer->pos.x + pPlayer->size.x / 2 > g_aModel[nCntModel].pos.x - g_aModel[nCntModel].size.x / 2)
+		//			{
+		//				pPlayer->pos.x = g_aModel[nCntModel].pos.x - g_aModel[nCntModel].size.x / 2 - pPlayer->size.x / 2 - 0.1f;
+		//			}
+		//			//右から左に当たった
+		//			else if (pPlayer->posOld.x - pPlayer->size.x / 2 > g_aModel[nCntModel].pos.x + g_aModel[nCntModel].size.x / 2 &&
+		//				pPlayer->pos.x - pPlayer->size.x / 2 < g_aModel[nCntModel].pos.x + g_aModel[nCntModel].size.x / 2)
+		//			{
+		//				pPlayer->pos.x = (g_aModel[nCntModel].pos.x + g_aModel[nCntModel].size.x / 2) + pPlayer->size.x / 2 + 0.1f;
+		//			}
 
-			//前後(Z方向)の当たり判定
-			if (pPlayer->pos.x - pPlayer->size.x / 2 < g_aModel[nCntModel].pos.x + g_aModel[nCntModel].size.x / 2 &&
-				pPlayer->pos.x + pPlayer->size.x / 2 > g_aModel[nCntModel].pos.x - g_aModel[nCntModel].size.x / 2)
-			{
+		//		}
 
-				//手前から当たった
-				if (pPlayer->posOld.z + pPlayer->size.z / 2 < g_aModel[nCntModel].pos.z - g_aModel[nCntModel].size.z / 2 &&
-					pPlayer->pos.z + pPlayer->size.z / 2 > g_aModel[nCntModel].pos.z - g_aModel[nCntModel].size.z / 2)
-				{
-					pPlayer->pos.z = (g_aModel[nCntModel].pos.z - g_aModel[nCntModel].size.z / 2) - pPlayer->size.z / 2 - 0.1f;
-				}
-				//奥から当たった
-				else if (pPlayer->posOld.z - pPlayer->size.z / 2 > g_aModel[nCntModel].pos.z + g_aModel[nCntModel].size.z / 2 &&
-					pPlayer->pos.z - pPlayer->size.z / 2 < g_aModel[nCntModel].pos.z + g_aModel[nCntModel].size.z / 2)
-				{
-					pPlayer->pos.z = (g_aModel[nCntModel].pos.z + g_aModel[nCntModel].size.z / 2) + pPlayer->size.z / 2 + 0.1f;
-				}
+		//		//前後(Z方向)の当たり判定
+		//		if (pPlayer->pos.x - pPlayer->size.x / 2 < g_aModel[nCntModel].pos.x + g_aModel[nCntModel].size.x / 2 &&
+		//			pPlayer->pos.x + pPlayer->size.x / 2 > g_aModel[nCntModel].pos.x - g_aModel[nCntModel].size.x / 2)
+		//		{
 
-			}
+		//			//手前から当たった
+		//			if (pPlayer->posOld.z + pPlayer->size.z / 2 < g_aModel[nCntModel].pos.z - g_aModel[nCntModel].size.z / 2 &&
+		//				pPlayer->pos.z + pPlayer->size.z / 2 > g_aModel[nCntModel].pos.z - g_aModel[nCntModel].size.z / 2)
+		//			{
+		//				pPlayer->pos.z = (g_aModel[nCntModel].pos.z - g_aModel[nCntModel].size.z / 2) - pPlayer->size.z / 2 - 0.1f;
+		//			}
+		//			//奥から当たった
+		//			else if (pPlayer->posOld.z - pPlayer->size.z / 2 > g_aModel[nCntModel].pos.z + g_aModel[nCntModel].size.z / 2 &&
+		//				pPlayer->pos.z - pPlayer->size.z / 2 < g_aModel[nCntModel].pos.z + g_aModel[nCntModel].size.z / 2)
+		//			{
+		//				pPlayer->pos.z = (g_aModel[nCntModel].pos.z + g_aModel[nCntModel].size.z / 2) + pPlayer->size.z / 2 + 0.1f;
+		//			}
 
-			//縦(Y方向)の当たり判定
-			if (pPlayer->posOld.x - pPlayer->size.x / 2 < g_aModel[nCntModel].pos.x + g_aModel[nCntModel].size.x / 2 &&
-				pPlayer->pos.x + pPlayer->size.x / 2 > g_aModel[nCntModel].pos.x - g_aModel[nCntModel].size.x / 2)
-			{
+		//		}
 
-				if (pPlayer->posOld.z - pPlayer->size.z / 2 < g_aModel[nCntModel].pos.z + g_aModel[nCntModel].size.z / 2 &&
-					pPlayer->pos.z + pPlayer->size.z / 2 > g_aModel[nCntModel].pos.z - g_aModel[nCntModel].size.z / 2)
-				{
+		//		//縦(Y方向)の当たり判定
+		//		if (pPlayer->posOld.x - pPlayer->size.x / 2 < g_aModel[nCntModel].pos.x + g_aModel[nCntModel].size.x / 2 &&
+		//			pPlayer->pos.x + pPlayer->size.x / 2 > g_aModel[nCntModel].pos.x - g_aModel[nCntModel].size.x / 2)
+		//		{
 
-					//上から下に当たった
-					if (pPlayer->posOld.y < g_aModel[nCntModel].pos.y + g_aModel[nCntModel].size.y &&
-						pPlayer->pos.y > g_aModel[nCntModel].pos.y - g_aModel[nCntModel].size.y)
-					{
-						pPlayer->pos.y = (g_aModel[nCntModel].pos.y + g_aModel[nCntModel].size.y / 2) + pPlayer->size.y / 2 - 0.9f;
-						pPlayer->move.y = 0.0f;
-					}
-					//下から上に当たった
-					if (pPlayer->posOld.y - pPlayer->size.y / 2 < g_aModel[nCntModel].pos.y / 2 &&
-						pPlayer->pos.y - pPlayer->size.y / 2 > g_aModel[nCntModel].pos.y / 2)
-					{
-						pPlayer->pos.y = (g_aModel[nCntModel].pos.y - pPlayer->size.y);
-						pPlayer->move.y = 0.0f;
-					}
+		//			if (pPlayer->posOld.z - pPlayer->size.z / 2 < g_aModel[nCntModel].pos.z + g_aModel[nCntModel].size.z / 2 &&
+		//				pPlayer->pos.z + pPlayer->size.z / 2 > g_aModel[nCntModel].pos.z - g_aModel[nCntModel].size.z / 2)
+		//			{
 
-				}
-			}
+		//				//上から下に当たった
+		//				if (pPlayer->posOld.y < g_aModel[nCntModel].pos.y + g_aModel[nCntModel].size.y &&
+		//					pPlayer->pos.y > g_aModel[nCntModel].pos.y - g_aModel[nCntModel].size.y)
+		//				{
+		//					pPlayer->pos.y = (g_aModel[nCntModel].pos.y + g_aModel[nCntModel].size.y / 2) + pPlayer->size.y / 2 - 0.9f;
+		//					pPlayer->move.y = 0.0f;
+		//				}
+		//				//下から上に当たった
+		//				if (pPlayer->posOld.y - pPlayer->size.y / 2 < g_aModel[nCntModel].pos.y / 2 &&
+		//					pPlayer->pos.y - pPlayer->size.y / 2 > g_aModel[nCntModel].pos.y / 2)
+		//				{
+		//					pPlayer->pos.y = (g_aModel[nCntModel].pos.y - pPlayer->size.y);
+		//					pPlayer->move.y = 0.0f;
+		//				}
 
-		}
+		//			}
+		//		}
+		//	}
 
-		if (g_aModel[nCntModel].nType == WALLTYPE_DOOR)
-		{
-
-			if (pPlayer->posOld.y < g_aModel[nCntModel].pos.y + g_aModel[nCntModel].size.y &&
-				pPlayer->posOld.y + pPlayer->size.y > g_aModel[nCntModel].pos.y)
-			{
-
-				//左右(X方向)の当たり判定
-				if (pPlayer->pos.z - pPlayer->size.z / 2 < g_aModel[nCntModel].pos.z + g_aModel[nCntModel].size.z / 2 &&
-					pPlayer->pos.z + pPlayer->size.z / 2 > g_aModel[nCntModel].pos.z - g_aModel[nCntModel].size.z / 2)
-				{
-					//左から右に当たった
-					if (pPlayer->posOld.x + pPlayer->size.x / 2 < g_aModel[nCntModel].pos.x - g_aModel[nCntModel].size.x / 2 &&
-						pPlayer->pos.x + pPlayer->size.x / 2 > g_aModel[nCntModel].pos.x - g_aModel[nCntModel].size.x / 2)
-					{
-						pPlayer->pos.x = g_aModel[nCntModel].pos.x - g_aModel[nCntModel].size.x / 2 - pPlayer->size.x / 2 - 0.1f;
-					}
-					//右から左に当たった
-					else if (pPlayer->posOld.x - pPlayer->size.x / 2 > g_aModel[nCntModel].pos.x + g_aModel[nCntModel].size.x / 2 &&
-						pPlayer->pos.x - pPlayer->size.x / 2 < g_aModel[nCntModel].pos.x + g_aModel[nCntModel].size.x / 2)
-					{
-						pPlayer->pos.x = (g_aModel[nCntModel].pos.x + g_aModel[nCntModel].size.x / 2) + pPlayer->size.x / 2 + 0.1f;
-					}
-
-				}
-
-				//前後(Z方向)の当たり判定
-				if (pPlayer->pos.x - pPlayer->size.x / 2 < g_aModel[nCntModel].pos.x + g_aModel[nCntModel].size.x / 2 &&
-					pPlayer->pos.x + pPlayer->size.x / 2 > g_aModel[nCntModel].pos.x - g_aModel[nCntModel].size.x / 2)
-				{
-
-					//手前から当たった
-					if (pPlayer->posOld.z + pPlayer->size.z / 2 < g_aModel[nCntModel].pos.z - g_aModel[nCntModel].size.z / 2 &&
-						pPlayer->pos.z + pPlayer->size.z / 2 > g_aModel[nCntModel].pos.z - g_aModel[nCntModel].size.z / 2)
-					{
-						pPlayer->pos.z = (g_aModel[nCntModel].pos.z - g_aModel[nCntModel].size.z / 2) - pPlayer->size.z / 2 - 0.1f;
-					}
-					//奥から当たった
-					else if (pPlayer->posOld.z - pPlayer->size.z / 2 > g_aModel[nCntModel].pos.z + g_aModel[nCntModel].size.z / 2 &&
-						pPlayer->pos.z - pPlayer->size.z / 2 < g_aModel[nCntModel].pos.z + g_aModel[nCntModel].size.z / 2)
-					{
-						pPlayer->pos.z = (g_aModel[nCntModel].pos.z + g_aModel[nCntModel].size.z / 2) + pPlayer->size.z / 2 + 0.1f;
-					}
-
-				}
-
-				//縦(Y方向)の当たり判定
-				if (pPlayer->posOld.x - pPlayer->size.x / 2 < g_aModel[nCntModel].pos.x + g_aModel[nCntModel].size.x / 2 &&
-					pPlayer->pos.x + pPlayer->size.x / 2 > g_aModel[nCntModel].pos.x - g_aModel[nCntModel].size.x / 2)
-				{
-
-					if (pPlayer->posOld.z - pPlayer->size.z / 2 < g_aModel[nCntModel].pos.z + g_aModel[nCntModel].size.z / 2 &&
-						pPlayer->pos.z + pPlayer->size.z / 2 > g_aModel[nCntModel].pos.z - g_aModel[nCntModel].size.z / 2)
-					{
-
-						//上から下に当たった
-						if (pPlayer->posOld.y < g_aModel[nCntModel].pos.y + g_aModel[nCntModel].size.y &&
-							pPlayer->pos.y > g_aModel[nCntModel].pos.y - g_aModel[nCntModel].size.y)
-						{
-							pPlayer->pos.y = (g_aModel[nCntModel].pos.y + g_aModel[nCntModel].size.y / 2) + pPlayer->size.y / 2 - 0.9f;
-							pPlayer->move.y = 0.0f;
-						}
-						//下から上に当たった
-						if (pPlayer->posOld.y - pPlayer->size.y / 2 < g_aModel[nCntModel].pos.y / 2 &&
-							pPlayer->pos.y - pPlayer->size.y / 2 > g_aModel[nCntModel].pos.y / 2)
-						{
-							pPlayer->pos.y = (g_aModel[nCntModel].pos.y - pPlayer->size.y);
-							pPlayer->move.y = 0.0f;
-						}
-
-					}
-				}
-			}
-
-		}
-
-		if (g_aModel[nCntModel].nType == WALLTYPE_ROOM)
-		{
-
-			if (pPlayer->posOld.y < g_aModel[nCntModel].pos.y + g_aModel[nCntModel].size.y &&
-				pPlayer->posOld.y + pPlayer->size.y > g_aModel[nCntModel].pos.y)
-			{
-
-				//左右(X方向)の当たり判定
-				if (pPlayer->pos.z - pPlayer->size.z / 2 < g_aModel[nCntModel].pos.z + g_aModel[nCntModel].size.z / 2 &&
-					pPlayer->pos.z + pPlayer->size.z / 2 > g_aModel[nCntModel].pos.z - g_aModel[nCntModel].size.z / 2)
-				{
-					//左から右に当たった
-					if (pPlayer->posOld.x + pPlayer->size.x / 2 < g_aModel[nCntModel].pos.x - g_aModel[nCntModel].size.x / 2 &&
-						pPlayer->pos.x + pPlayer->size.x / 2 > g_aModel[nCntModel].pos.x - g_aModel[nCntModel].size.x / 2)
-					{
-						pPlayer->pos.x = g_aModel[nCntModel].pos.x - g_aModel[nCntModel].size.x / 2 - pPlayer->size.x / 2 - 0.1f;
-					}
-					//右から左に当たった
-					else if (pPlayer->posOld.x - pPlayer->size.x / 2 > g_aModel[nCntModel].pos.x + g_aModel[nCntModel].size.x / 2 &&
-						pPlayer->pos.x - pPlayer->size.x / 2 < g_aModel[nCntModel].pos.x + g_aModel[nCntModel].size.x / 2)
-					{
-						pPlayer->pos.x = (g_aModel[nCntModel].pos.x + g_aModel[nCntModel].size.x / 2) + pPlayer->size.x / 2 + 0.1f;
-					}
-
-				}
-
-				//前後(Z方向)の当たり判定
-				if (pPlayer->pos.x - pPlayer->size.x / 2 < g_aModel[nCntModel].pos.x + g_aModel[nCntModel].size.x / 2 &&
-					pPlayer->pos.x + pPlayer->size.x / 2 > g_aModel[nCntModel].pos.x - g_aModel[nCntModel].size.x / 2)
-				{
-
-					//手前から当たった
-					if (pPlayer->posOld.z + pPlayer->size.z / 2 < g_aModel[nCntModel].pos.z - g_aModel[nCntModel].size.z / 2 &&
-						pPlayer->pos.z + pPlayer->size.z / 2 > g_aModel[nCntModel].pos.z - g_aModel[nCntModel].size.z / 2)
-					{
-						pPlayer->pos.z = (g_aModel[nCntModel].pos.z - g_aModel[nCntModel].size.z / 2) - pPlayer->size.z / 2 - 0.1f;
-					}
-					//奥から当たった
-					else if (pPlayer->posOld.z - pPlayer->size.z / 2 > g_aModel[nCntModel].pos.z + g_aModel[nCntModel].size.z / 2 &&
-						pPlayer->pos.z - pPlayer->size.z / 2 < g_aModel[nCntModel].pos.z + g_aModel[nCntModel].size.z / 2)
-					{
-						pPlayer->pos.z = (g_aModel[nCntModel].pos.z + g_aModel[nCntModel].size.z / 2) + pPlayer->size.z / 2 + 0.1f;
-					}
-
-				}
-
-				//縦(Y方向)の当たり判定
-				if (pPlayer->posOld.x - pPlayer->size.x / 2 < g_aModel[nCntModel].pos.x + g_aModel[nCntModel].size.x / 2 &&
-					pPlayer->pos.x + pPlayer->size.x / 2 > g_aModel[nCntModel].pos.x - g_aModel[nCntModel].size.x / 2)
-				{
-
-					if (pPlayer->posOld.z - pPlayer->size.z / 2 < g_aModel[nCntModel].pos.z + g_aModel[nCntModel].size.z / 2 &&
-						pPlayer->pos.z + pPlayer->size.z / 2 > g_aModel[nCntModel].pos.z - g_aModel[nCntModel].size.z / 2)
-					{
-
-						//上から下に当たった
-						if (pPlayer->posOld.y < g_aModel[nCntModel].pos.y + g_aModel[nCntModel].size.y &&
-							pPlayer->pos.y > g_aModel[nCntModel].pos.y - g_aModel[nCntModel].size.y)
-						{
-							pPlayer->pos.y = (g_aModel[nCntModel].pos.y + g_aModel[nCntModel].size.y / 2) + pPlayer->size.y / 2 - 0.9f;
-							pPlayer->move.y = 0.0f;
-						}
-						//下から上に当たった
-						if (pPlayer->posOld.y - pPlayer->size.y / 2 < g_aModel[nCntModel].pos.y / 2 &&
-							pPlayer->pos.y - pPlayer->size.y / 2 > g_aModel[nCntModel].pos.y / 2)
-						{
-							pPlayer->pos.y = (g_aModel[nCntModel].pos.y - pPlayer->size.y);
-							pPlayer->move.y = 0.0f;
-						}
-
-					}
-				}
-			}
-
-		}
-
-		if (g_aModel[nCntModel].nType == WALLTYPE_ENTERDOOR)
-		{
-
-			if (pPlayer->posOld.y < g_aModel[nCntModel].pos.y + g_aModel[nCntModel].size.y &&
-				pPlayer->posOld.y + pPlayer->size.y > g_aModel[nCntModel].pos.y)
-			{
-
-				//左右(X方向)の当たり判定
-				if (pPlayer->pos.z - pPlayer->size.z / 2 < g_aModel[nCntModel].pos.z + g_aModel[nCntModel].size.z / 2 &&
-					pPlayer->pos.z + pPlayer->size.z / 2 > g_aModel[nCntModel].pos.z - g_aModel[nCntModel].size.z / 2)
-				{
-					//左から右に当たった
-					if (pPlayer->posOld.x + pPlayer->size.x / 2 < g_aModel[nCntModel].pos.x - g_aModel[nCntModel].size.x / 2 &&
-						pPlayer->pos.x + pPlayer->size.x / 2 > g_aModel[nCntModel].pos.x - g_aModel[nCntModel].size.x / 2)
-					{
-						pPlayer->pos.x = g_aModel[nCntModel].pos.x - g_aModel[nCntModel].size.x / 2 - pPlayer->size.x / 2 - 0.1f;
-					}
-					//右から左に当たった
-					else if (pPlayer->posOld.x - pPlayer->size.x / 2 > g_aModel[nCntModel].pos.x + g_aModel[nCntModel].size.x / 2 &&
-						pPlayer->pos.x - pPlayer->size.x / 2 < g_aModel[nCntModel].pos.x + g_aModel[nCntModel].size.x / 2)
-					{
-						pPlayer->pos.x = (g_aModel[nCntModel].pos.x + g_aModel[nCntModel].size.x / 2) + pPlayer->size.x / 2 + 0.1f;
-					}
-
-				}
-
-				//前後(Z方向)の当たり判定
-				if (pPlayer->pos.x - pPlayer->size.x / 2 < g_aModel[nCntModel].pos.x + g_aModel[nCntModel].size.x / 2 &&
-					pPlayer->pos.x + pPlayer->size.x / 2 > g_aModel[nCntModel].pos.x - g_aModel[nCntModel].size.x / 2)
-				{
-
-					//手前から当たった
-					if (pPlayer->posOld.z + pPlayer->size.z / 2 < g_aModel[nCntModel].pos.z - g_aModel[nCntModel].size.z / 2 &&
-						pPlayer->pos.z + pPlayer->size.z / 2 > g_aModel[nCntModel].pos.z - g_aModel[nCntModel].size.z / 2)
-					{
-						pPlayer->pos.z = (g_aModel[nCntModel].pos.z - g_aModel[nCntModel].size.z / 2) - pPlayer->size.z / 2 - 0.1f;
-					}
-					//奥から当たった
-					else if (pPlayer->posOld.z - pPlayer->size.z / 2 > g_aModel[nCntModel].pos.z + g_aModel[nCntModel].size.z / 2 &&
-						pPlayer->pos.z - pPlayer->size.z / 2 < g_aModel[nCntModel].pos.z + g_aModel[nCntModel].size.z / 2)
-					{
-						pPlayer->pos.z = (g_aModel[nCntModel].pos.z + g_aModel[nCntModel].size.z / 2) + pPlayer->size.z / 2 + 0.1f;
-					}
-
-				}
-
-				//縦(Y方向)の当たり判定
-				if (pPlayer->posOld.x - pPlayer->size.x / 2 < g_aModel[nCntModel].pos.x + g_aModel[nCntModel].size.x / 2 &&
-					pPlayer->pos.x + pPlayer->size.x / 2 > g_aModel[nCntModel].pos.x - g_aModel[nCntModel].size.x / 2)
-				{
-
-					if (pPlayer->posOld.z - pPlayer->size.z / 2 < g_aModel[nCntModel].pos.z + g_aModel[nCntModel].size.z / 2 &&
-						pPlayer->pos.z + pPlayer->size.z / 2 > g_aModel[nCntModel].pos.z - g_aModel[nCntModel].size.z / 2)
-					{
-
-						//上から下に当たった
-						if (pPlayer->posOld.y < g_aModel[nCntModel].pos.y + g_aModel[nCntModel].size.y &&
-							pPlayer->pos.y > g_aModel[nCntModel].pos.y - g_aModel[nCntModel].size.y)
-						{
-							pPlayer->pos.y = (g_aModel[nCntModel].pos.y + g_aModel[nCntModel].size.y / 2) + pPlayer->size.y / 2 - 0.9f;
-							pPlayer->move.y = 0.0f;
-						}
-						//下から上に当たった
-						if (pPlayer->posOld.y - pPlayer->size.y / 2 < g_aModel[nCntModel].pos.y / 2 &&
-							pPlayer->pos.y - pPlayer->size.y / 2 > g_aModel[nCntModel].pos.y / 2)
-						{
-							pPlayer->pos.y = (g_aModel[nCntModel].pos.y - pPlayer->size.y);
-							pPlayer->move.y = 0.0f;
-						}
-
-					}
-				}
-			}
-
-		}
+		//}
 
 	}
 
