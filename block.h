@@ -62,7 +62,7 @@ void UninitBlock(void);		// ブロック終了処理
 void UpdateBlock(void);		// ブロック更新処理
 void DrawBlock(void);		// ブロック描画処理
 void SetBlock(D3DXVECTOR3 pos, D3DXVECTOR3 rot, BLOCKTYPE nType);	// ブロックの設定
-void CollisionBlock(void);	// 当たり判定関数
+//void CollisionBlock(void);	// 当たり判定関数
 Block* GetBlock();
 
 #endif // !_BLOCK_H_

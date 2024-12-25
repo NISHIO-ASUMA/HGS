@@ -22,6 +22,8 @@
 #include "Title.h"
 #include "ranking.h"
 #include "sound.h"
+#include "input.h"
+#include "tutorial2.h"
 
 //***************************
 // プロトタイプ宣言
@@ -398,7 +400,7 @@ HRESULT Init(HINSTANCE hInstance, HWND hWnd, BOOL bWindow)
 		DEFAULT_PITCH,
 		"Terminal", &g_pFont);
 
-	InitDInputMouse(hWnd);
+	//InitDInputMouse(hWnd);
 
 	// サウンドの初期化
 	InitSound(hWnd);
@@ -421,7 +423,7 @@ void Uninit(void)
 	//==================
 	UninitKeyboard();
 
-	ReleaseDInputMouse();
+	//ReleaseDInputMouse();
 
 	UninitJoypad();
 
@@ -463,7 +465,7 @@ void Update(void)
 	//===========================
 	UpdateKeyboard();
 
-	UpdateMouse();
+	//UpdateMouse();
 
 	UpdateJoypad();
 
@@ -475,6 +477,10 @@ void Update(void)
 
 	case MODE_TUTORIAL:// チュートリアル画面
 		UpdateTutorial();
+		break;
+
+	case MODE_TUTORIAL2:// チュートリアル画面2
+		UpdateTutorial2();
 		break;
 
 	case MODE_GAME:// ゲーム画面
@@ -534,6 +540,10 @@ void Draw(void)
 
 		case MODE_TUTORIAL: // チュートリアル画面
 			DrawTutorial();
+			break;
+
+		case MODE_TUTORIAL2: // チュートリアル画面2
+			DrawTutorial2();
 			break;
 
 		case MODE_GAME: // ゲーム画面
@@ -626,7 +636,7 @@ void DrawDebugPlayerPos(void)
 	char aString3[256];
 
 	// 取得
-	PLAYER* pPlayer = GetPlayer();
+	Player* pPlayer = GetPlayer();
 
 	// 文字列に代入
 	sprintf(&aString[0],  "プレイヤーのpos.x:%.2f\n",  pPlayer->pos.x);
@@ -708,6 +718,10 @@ void SetMode(MODE mode)
 		UninitTutorial();
 		break;
 
+	case MODE_TUTORIAL2:// チュートリアル画面2
+		UninitTutorial2();
+		break;
+
 	case MODE_GAME:	  // ゲーム画面
 		UninitGame();
 		break;
@@ -733,6 +747,10 @@ void SetMode(MODE mode)
 
 	case MODE_TUTORIAL://チュートリアル画面
 		InitTutorial();
+		break;
+
+	case MODE_TUTORIAL2://チュートリアル画面2
+		InitTutorial2();
 		break;
 
 	case MODE_GAME:		//ゲーム画面

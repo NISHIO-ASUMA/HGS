@@ -219,7 +219,7 @@ void CollisionMeshWall()
 	D3DXVECTOR3 VecA[XVTX], VecB[XVTX], Cross[XVTX];
 
 	// ƒvƒŒƒCƒ„[‚Ìæ“¾
-	PLAYER* pPlayer = GetPlayer();
+	Player* pPlayer = GetPlayer();
 
 	// XVTX•ª
 	for (int nCnt = 0; nCnt < XVTX; nCnt++)

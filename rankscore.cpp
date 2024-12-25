@@ -214,7 +214,7 @@ void UpdateRankingScore(void)
 
 	g_nTimeRanking++;	// タイマーを加算
 
-	if (g_fade == FADE_NONE && (g_nTimeRanking >= 600 || KeyboardTrigger(DIK_RETURN) == true || JoypadTrigger(JOYKEY_A) == true))
+	if (g_fade == FADE_NONE && (g_nTimeRanking >= 600 || KeyboardTrigger(DIK_RETURN) == true || JoyPadTrigger(JOYKEY_A) == true))
 	{
 		//タイトルにいく
 		SetFade(MODE_TITLE);

@@ -268,150 +268,150 @@ void DrawBlock(void)
 //=============================
 //　ブロックの当たり判定処理
 //=============================
-void CollisionBlock(void)
-{
-	for (int nCnt = 0; nCnt < BLOCKTYPE_MAX; nCnt++)
-	{
-		for (int nCnt1 = 0; nCnt1 < MAX_BLOCK; nCnt1++)
-		{// 最大数分回す
-			// プレイヤーの取得
-			PLAYER* pPlayer = GetPlayer();
-
-			if (g_Block[nCnt][nCnt1].bUse)
-			{// 使用判定の時
-
-				if (pPlayer->pos.y < g_Block[nCnt][nCnt1].pos.y + g_Block[nCnt][nCnt1].size.y &&
-					pPlayer->pos.y + pPlayer->size.y > g_Block[nCnt][nCnt1].pos.y - g_Block[nCnt][nCnt1].size.y)
-				{
-					// 左右の当たり判定----------------------
-					if (pPlayer->posOld.z - pPlayer->size.z * HALF < g_Block[nCnt][nCnt1].pos.z + g_Block[nCnt][nCnt1].size.z * HALF &&
-						pPlayer->pos.z + pPlayer->size.z * HALF > g_Block[nCnt][nCnt1].pos.z - g_Block[nCnt][nCnt1].size.z * HALF)
-					{
-						// 左からめり込む
-						if (pPlayer->posOld.x + pPlayer->size.x * HALF < g_Block[nCnt][nCnt1].pos.x - g_Block[nCnt][nCnt1].size.x * HALF &&
-							pPlayer->pos.x + pPlayer->size.x * HALF > g_Block[nCnt][nCnt1].pos.x - g_Block[nCnt][nCnt1].size.x * HALF)
-						{
-							pPlayer->pos.x = g_Block[nCnt][nCnt1].pos.x - g_Block[nCnt][nCnt1].size.x * HALF - pPlayer->size.x * HALF - 0.1f;
-
-						}
-						// 右からめり込む
-						else if (pPlayer->posOld.x - pPlayer->size.x * HALF > g_Block[nCnt][nCnt1].pos.x + g_Block[nCnt][nCnt1].size.x * HALF &&
-							pPlayer->pos.x - pPlayer->size.x * HALF < g_Block[nCnt][nCnt1].pos.x + g_Block[nCnt][nCnt1].size.x * HALF)
-						{
-							pPlayer->pos.x = g_Block[nCnt][nCnt1].pos.x + g_Block[nCnt][nCnt1].size.x * 0.5f + pPlayer->size.x * HALF + 0.1f;
-						}
-					}
-
-					// 前後の当たり判定------------------------------
-					if (pPlayer->posOld.x - pPlayer->size.z * HALF < g_Block[nCnt][nCnt1].pos.x + g_Block[nCnt][nCnt1].size.x * HALF &&
-						pPlayer->pos.x + pPlayer->size.x * HALF > g_Block[nCnt][nCnt1].pos.x - g_Block[nCnt][nCnt1].size.x * HALF)
-					{
-						// 手前からめり込む
-						if (pPlayer->posOld.z + pPlayer->size.z * HALF < g_Block[nCnt][nCnt1].pos.z - g_Block[nCnt][nCnt1].size.z * HALF &&
-							pPlayer->pos.z + pPlayer->size.z * HALF > g_Block[nCnt][nCnt1].pos.z - g_Block[nCnt][nCnt1].size.z * HALF)
-						{
-							pPlayer->pos.z = g_Block[nCnt][nCnt1].pos.z - g_Block[nCnt][nCnt1].size.z * 0.5f - pPlayer->size.z * HALF - 0.3f;
-
-						}
-						// 奥からめり込む
-						else if (pPlayer->posOld.z - pPlayer->size.z * HALF > g_Block[nCnt][nCnt1].pos.z + g_Block[nCnt][nCnt1].size.z * HALF &&
-							pPlayer->pos.z - pPlayer->size.z * HALF < g_Block[nCnt][nCnt1].pos.z + g_Block[nCnt][nCnt1].size.z * HALF)
-						{
-							pPlayer->pos.z = g_Block[nCnt][nCnt1].pos.z + g_Block[nCnt][nCnt1].size.z * HALF + pPlayer->size.z * HALF + 0.3f;
-
-						}
-					}
-
-					// 縦の当たり判定--------------------------
-					if (pPlayer->pos.x - pPlayer->size.x * HALF < g_Block[nCnt][nCnt1].pos.x + g_Block[nCnt][nCnt1].size.x * HALF &&
-						pPlayer->pos.x + pPlayer->size.x * HALF > g_Block[nCnt][nCnt1].pos.x - g_Block[nCnt][nCnt1].size.x * HALF)
-					{
-						if (pPlayer->posOld.z - pPlayer->size.z * HALF < g_Block[nCnt][nCnt1].pos.z + g_Block[nCnt][nCnt1].size.z * HALF &&
-							pPlayer->pos.z + pPlayer->size.z * HALF > g_Block[nCnt][nCnt1].pos.z - g_Block[nCnt][nCnt1].size.z * HALF)
-						{
-							// 上からめり込んだ時
-							if (pPlayer->posOld.y >= g_Block[nCnt][nCnt1].pos.y + g_Block[nCnt][nCnt1].size.y * HALF &&
-								pPlayer->pos.y < g_Block[nCnt][nCnt1].pos.y + g_Block[nCnt][nCnt1].size.y * HALF)
-							{
-								pPlayer->bLanding = true;	// ジャンプ
-								pPlayer->pos.y = (g_Block[nCnt][nCnt1].pos.y + g_Block[nCnt][nCnt1].size.y * HALF);
-								pPlayer->move.y = 0.0f;
-
-							}
-							// 下からめり込んだ時
-							else if (pPlayer->posOld.y + pPlayer->size.y <= g_Block[nCnt][nCnt1].pos.y - g_Block[nCnt][nCnt1].size.y * HALF &&
-								pPlayer->pos.y + pPlayer->size.y > g_Block[nCnt][nCnt1].pos.y - g_Block[nCnt][nCnt1].size.y * HALF)
-							{
-								pPlayer->pos.y = (g_Block[nCnt][nCnt1].pos.y - g_Block[nCnt][nCnt1].size.y) - pPlayer->size.y * HALF;
-								pPlayer->move.y = 0.0f;
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-
-	// エネミー版
-	for (int nCntEnemy = 0; nCntEnemy < MAX_ENEMY; nCntEnemy++)
-	{
-		for (int nCnt = 0; nCnt < BLOCKTYPE_MAX; nCnt++)
-		{
-			for (int nCnt1 = 0; nCnt1 < MAX_BLOCK; nCnt1++)
-			{// 最大数分回す
-				// エネミーの取得
-				Enemy* pEnemy = GetEnemy();
-
-				if (g_Block[nCnt][nCnt1].bUse)
-				{// 使用判定の時
-
-					if (pEnemy[nCntEnemy].pos.y < g_Block[nCnt][nCnt1].pos.y + g_Block[nCnt][nCnt1].size.y &&
-						pEnemy[nCntEnemy].pos.y + pEnemy[nCntEnemy].size.y > g_Block[nCnt][nCnt1].pos.y - g_Block[nCnt][nCnt1].size.y)
-					{
-						// 左右の当たり判定----------------------
-						if (pEnemy[nCntEnemy].posOld.z - pEnemy[nCntEnemy].size.z * HALF < g_Block[nCnt][nCnt1].pos.z + g_Block[nCnt][nCnt1].size.z * HALF &&
-							pEnemy[nCntEnemy].pos.z + pEnemy[nCntEnemy].size.z * HALF > g_Block[nCnt][nCnt1].pos.z - g_Block[nCnt][nCnt1].size.z * HALF)
-						{
-							// 左からめり込む
-							if (pEnemy[nCntEnemy].posOld.x + pEnemy[nCntEnemy].size.x * HALF < g_Block[nCnt][nCnt1].pos.x - g_Block[nCnt][nCnt1].size.x * HALF &&
-								pEnemy[nCntEnemy].pos.x + pEnemy[nCntEnemy].size.x * HALF > g_Block[nCnt][nCnt1].pos.x - g_Block[nCnt][nCnt1].size.x * HALF)
-							{
-								pEnemy[nCntEnemy].pos.x = g_Block[nCnt][nCnt1].pos.x - g_Block[nCnt][nCnt1].size.x * HALF - pEnemy[nCntEnemy].size.x * HALF - 0.1f;
-
-							}
-							// 右からめり込む
-							else if (pEnemy[nCntEnemy].posOld.x - pEnemy[nCntEnemy].size.x * HALF > g_Block[nCnt][nCnt1].pos.x + g_Block[nCnt][nCnt1].size.x * HALF &&
-								pEnemy[nCntEnemy].pos.x - pEnemy[nCntEnemy].size.x * HALF < g_Block[nCnt][nCnt1].pos.x + g_Block[nCnt][nCnt1].size.x * HALF)
-							{
-								pEnemy[nCntEnemy].pos.x = g_Block[nCnt][nCnt1].pos.x + g_Block[nCnt][nCnt1].size.x * 0.5f + pEnemy[nCntEnemy].size.x * HALF + 0.1f;
-							}
-						}
-
-						// 前後の当たり判定------------------------------
-						if (pEnemy[nCntEnemy].posOld.x - pEnemy[nCntEnemy].size.z * HALF < g_Block[nCnt][nCnt1].pos.x + g_Block[nCnt][nCnt1].size.x * HALF &&
-							pEnemy[nCntEnemy].pos.x + pEnemy[nCntEnemy].size.x * HALF > g_Block[nCnt][nCnt1].pos.x - g_Block[nCnt][nCnt1].size.x * HALF)
-						{
-							// 手前からめり込む
-							if (pEnemy[nCntEnemy].posOld.z + pEnemy[nCntEnemy].size.z * HALF < g_Block[nCnt][nCnt1].pos.z - g_Block[nCnt][nCnt1].size.z * HALF &&
-								pEnemy[nCntEnemy].pos.z + pEnemy[nCntEnemy].size.z * HALF > g_Block[nCnt][nCnt1].pos.z - g_Block[nCnt][nCnt1].size.z * HALF)
-							{
-								pEnemy[nCntEnemy].pos.z = g_Block[nCnt][nCnt1].pos.z - g_Block[nCnt][nCnt1].size.z * 0.5f - pEnemy[nCntEnemy].size.z * HALF - 0.3f;
-
-							}
-							// 奥からめり込む
-							else if (pEnemy[nCntEnemy].posOld.z - pEnemy[nCntEnemy].size.z * HALF > g_Block[nCnt][nCnt1].pos.z + g_Block[nCnt][nCnt1].size.z * HALF &&
-								pEnemy[nCntEnemy].pos.z - pEnemy[nCntEnemy].size.z * HALF < g_Block[nCnt][nCnt1].pos.z + g_Block[nCnt][nCnt1].size.z * HALF)
-							{
-								pEnemy[nCntEnemy].pos.z = g_Block[nCnt][nCnt1].pos.z + g_Block[nCnt][nCnt1].size.z * HALF + pEnemy[nCntEnemy].size.z * HALF + 0.3f;
-							}
-						}
-
-					}
-				}
-			}
-		}
-	}
-}
+//void CollisionBlock(void)
+//{
+//	for (int nCnt = 0; nCnt < BLOCKTYPE_MAX; nCnt++)
+//	{
+//		for (int nCnt1 = 0; nCnt1 < MAX_BLOCK; nCnt1++)
+//		{// 最大数分回す
+//			// プレイヤーの取得
+//			Player* pPlayer = GetPlayer();
+//
+//			if (g_Block[nCnt][nCnt1].bUse)
+//			{// 使用判定の時
+//
+//				if (pPlayer->pos.y < g_Block[nCnt][nCnt1].pos.y + g_Block[nCnt][nCnt1].size.y &&
+//					pPlayer->pos.y + pPlayer->size.y > g_Block[nCnt][nCnt1].pos.y - g_Block[nCnt][nCnt1].size.y)
+//				{
+//					// 左右の当たり判定----------------------
+//					if (pPlayer->posOld.z - pPlayer->size.z * HALF < g_Block[nCnt][nCnt1].pos.z + g_Block[nCnt][nCnt1].size.z * HALF &&
+//						pPlayer->pos.z + pPlayer->size.z * HALF > g_Block[nCnt][nCnt1].pos.z - g_Block[nCnt][nCnt1].size.z * HALF)
+//					{
+//						// 左からめり込む
+//						if (pPlayer->posOld.x + pPlayer->size.x * HALF < g_Block[nCnt][nCnt1].pos.x - g_Block[nCnt][nCnt1].size.x * HALF &&
+//							pPlayer->pos.x + pPlayer->size.x * HALF > g_Block[nCnt][nCnt1].pos.x - g_Block[nCnt][nCnt1].size.x * HALF)
+//						{
+//							pPlayer->pos.x = g_Block[nCnt][nCnt1].pos.x - g_Block[nCnt][nCnt1].size.x * HALF - pPlayer->size.x * HALF - 0.1f;
+//
+//						}
+//						// 右からめり込む
+//						else if (pPlayer->posOld.x - pPlayer->size.x * HALF > g_Block[nCnt][nCnt1].pos.x + g_Block[nCnt][nCnt1].size.x * HALF &&
+//							pPlayer->pos.x - pPlayer->size.x * HALF < g_Block[nCnt][nCnt1].pos.x + g_Block[nCnt][nCnt1].size.x * HALF)
+//						{
+//							pPlayer->pos.x = g_Block[nCnt][nCnt1].pos.x + g_Block[nCnt][nCnt1].size.x * 0.5f + pPlayer->size.x * HALF + 0.1f;
+//						}
+//					}
+//
+//					// 前後の当たり判定------------------------------
+//					if (pPlayer->posOld.x - pPlayer->size.z * HALF < g_Block[nCnt][nCnt1].pos.x + g_Block[nCnt][nCnt1].size.x * HALF &&
+//						pPlayer->pos.x + pPlayer->size.x * HALF > g_Block[nCnt][nCnt1].pos.x - g_Block[nCnt][nCnt1].size.x * HALF)
+//					{
+//						// 手前からめり込む
+//						if (pPlayer->posOld.z + pPlayer->size.z * HALF < g_Block[nCnt][nCnt1].pos.z - g_Block[nCnt][nCnt1].size.z * HALF &&
+//							pPlayer->pos.z + pPlayer->size.z * HALF > g_Block[nCnt][nCnt1].pos.z - g_Block[nCnt][nCnt1].size.z * HALF)
+//						{
+//							pPlayer->pos.z = g_Block[nCnt][nCnt1].pos.z - g_Block[nCnt][nCnt1].size.z * 0.5f - pPlayer->size.z * HALF - 0.3f;
+//
+//						}
+//						// 奥からめり込む
+//						else if (pPlayer->posOld.z - pPlayer->size.z * HALF > g_Block[nCnt][nCnt1].pos.z + g_Block[nCnt][nCnt1].size.z * HALF &&
+//							pPlayer->pos.z - pPlayer->size.z * HALF < g_Block[nCnt][nCnt1].pos.z + g_Block[nCnt][nCnt1].size.z * HALF)
+//						{
+//							pPlayer->pos.z = g_Block[nCnt][nCnt1].pos.z + g_Block[nCnt][nCnt1].size.z * HALF + pPlayer->size.z * HALF + 0.3f;
+//
+//						}
+//					}
+//
+//					// 縦の当たり判定--------------------------
+//					if (pPlayer->pos.x - pPlayer->size.x * HALF < g_Block[nCnt][nCnt1].pos.x + g_Block[nCnt][nCnt1].size.x * HALF &&
+//						pPlayer->pos.x + pPlayer->size.x * HALF > g_Block[nCnt][nCnt1].pos.x - g_Block[nCnt][nCnt1].size.x * HALF)
+//					{
+//						if (pPlayer->posOld.z - pPlayer->size.z * HALF < g_Block[nCnt][nCnt1].pos.z + g_Block[nCnt][nCnt1].size.z * HALF &&
+//							pPlayer->pos.z + pPlayer->size.z * HALF > g_Block[nCnt][nCnt1].pos.z - g_Block[nCnt][nCnt1].size.z * HALF)
+//						{
+//							// 上からめり込んだ時
+//							if (pPlayer->posOld.y >= g_Block[nCnt][nCnt1].pos.y + g_Block[nCnt][nCnt1].size.y * HALF &&
+//								pPlayer->pos.y < g_Block[nCnt][nCnt1].pos.y + g_Block[nCnt][nCnt1].size.y * HALF)
+//							{
+//								//pPlayer->bLanding = true;	// ジャンプ
+//								pPlayer->pos.y = (g_Block[nCnt][nCnt1].pos.y + g_Block[nCnt][nCnt1].size.y * HALF);
+//								pPlayer->move.y = 0.0f;
+//
+//							}
+//							// 下からめり込んだ時
+//							else if (pPlayer->posOld.y + pPlayer->size.y <= g_Block[nCnt][nCnt1].pos.y - g_Block[nCnt][nCnt1].size.y * HALF &&
+//								pPlayer->pos.y + pPlayer->size.y > g_Block[nCnt][nCnt1].pos.y - g_Block[nCnt][nCnt1].size.y * HALF)
+//							{
+//								pPlayer->pos.y = (g_Block[nCnt][nCnt1].pos.y - g_Block[nCnt][nCnt1].size.y) - pPlayer->size.y * HALF;
+//								pPlayer->move.y = 0.0f;
+//							}
+//						}
+//					}
+//				}
+//			}
+//		}
+//	}
+//
+//	// エネミー版
+//	for (int nCntEnemy = 0; nCntEnemy < MAX_ENEMY; nCntEnemy++)
+//	{
+//		for (int nCnt = 0; nCnt < BLOCKTYPE_MAX; nCnt++)
+//		{
+//			for (int nCnt1 = 0; nCnt1 < MAX_BLOCK; nCnt1++)
+//			{// 最大数分回す
+//				// エネミーの取得
+//				Enemy* pEnemy = GetEnemy();
+//
+//				if (g_Block[nCnt][nCnt1].bUse)
+//				{// 使用判定の時
+//
+//					if (pEnemy[nCntEnemy].pos.y < g_Block[nCnt][nCnt1].pos.y + g_Block[nCnt][nCnt1].size.y &&
+//						pEnemy[nCntEnemy].pos.y + pEnemy[nCntEnemy].size.y > g_Block[nCnt][nCnt1].pos.y - g_Block[nCnt][nCnt1].size.y)
+//					{
+//						// 左右の当たり判定----------------------
+//						if (pEnemy[nCntEnemy].posOld.z - pEnemy[nCntEnemy].size.z * HALF < g_Block[nCnt][nCnt1].pos.z + g_Block[nCnt][nCnt1].size.z * HALF &&
+//							pEnemy[nCntEnemy].pos.z + pEnemy[nCntEnemy].size.z * HALF > g_Block[nCnt][nCnt1].pos.z - g_Block[nCnt][nCnt1].size.z * HALF)
+//						{
+//							// 左からめり込む
+//							if (pEnemy[nCntEnemy].posOld.x + pEnemy[nCntEnemy].size.x * HALF < g_Block[nCnt][nCnt1].pos.x - g_Block[nCnt][nCnt1].size.x * HALF &&
+//								pEnemy[nCntEnemy].pos.x + pEnemy[nCntEnemy].size.x * HALF > g_Block[nCnt][nCnt1].pos.x - g_Block[nCnt][nCnt1].size.x * HALF)
+//							{
+//								pEnemy[nCntEnemy].pos.x = g_Block[nCnt][nCnt1].pos.x - g_Block[nCnt][nCnt1].size.x * HALF - pEnemy[nCntEnemy].size.x * HALF - 0.1f;
+//
+//							}
+//							// 右からめり込む
+//							else if (pEnemy[nCntEnemy].posOld.x - pEnemy[nCntEnemy].size.x * HALF > g_Block[nCnt][nCnt1].pos.x + g_Block[nCnt][nCnt1].size.x * HALF &&
+//								pEnemy[nCntEnemy].pos.x - pEnemy[nCntEnemy].size.x * HALF < g_Block[nCnt][nCnt1].pos.x + g_Block[nCnt][nCnt1].size.x * HALF)
+//							{
+//								pEnemy[nCntEnemy].pos.x = g_Block[nCnt][nCnt1].pos.x + g_Block[nCnt][nCnt1].size.x * 0.5f + pEnemy[nCntEnemy].size.x * HALF + 0.1f;
+//							}
+//						}
+//
+//						// 前後の当たり判定------------------------------
+//						if (pEnemy[nCntEnemy].posOld.x - pEnemy[nCntEnemy].size.z * HALF < g_Block[nCnt][nCnt1].pos.x + g_Block[nCnt][nCnt1].size.x * HALF &&
+//							pEnemy[nCntEnemy].pos.x + pEnemy[nCntEnemy].size.x * HALF > g_Block[nCnt][nCnt1].pos.x - g_Block[nCnt][nCnt1].size.x * HALF)
+//						{
+//							// 手前からめり込む
+//							if (pEnemy[nCntEnemy].posOld.z + pEnemy[nCntEnemy].size.z * HALF < g_Block[nCnt][nCnt1].pos.z - g_Block[nCnt][nCnt1].size.z * HALF &&
+//								pEnemy[nCntEnemy].pos.z + pEnemy[nCntEnemy].size.z * HALF > g_Block[nCnt][nCnt1].pos.z - g_Block[nCnt][nCnt1].size.z * HALF)
+//							{
+//								pEnemy[nCntEnemy].pos.z = g_Block[nCnt][nCnt1].pos.z - g_Block[nCnt][nCnt1].size.z * 0.5f - pEnemy[nCntEnemy].size.z * HALF - 0.3f;
+//
+//							}
+//							// 奥からめり込む
+//							else if (pEnemy[nCntEnemy].posOld.z - pEnemy[nCntEnemy].size.z * HALF > g_Block[nCnt][nCnt1].pos.z + g_Block[nCnt][nCnt1].size.z * HALF &&
+//								pEnemy[nCntEnemy].pos.z - pEnemy[nCntEnemy].size.z * HALF < g_Block[nCnt][nCnt1].pos.z + g_Block[nCnt][nCnt1].size.z * HALF)
+//							{
+//								pEnemy[nCntEnemy].pos.z = g_Block[nCnt][nCnt1].pos.z + g_Block[nCnt][nCnt1].size.z * HALF + pEnemy[nCntEnemy].size.z * HALF + 0.3f;
+//							}
+//						}
+//
+//					}
+//				}
+//			}
+//		}
+//	}
+//}
 //=============================
 //　ブロックの設定処理
 //=============================
@@ -420,13 +420,14 @@ void SetBlock(D3DXVECTOR3 pos, D3DXVECTOR3 rot,BLOCKTYPE nType)
 	for (int nCnt1 = 0; nCnt1 < MAX_BLOCK; nCnt1++)
 	{
 		if (!g_Block[nType][nCnt1].bUse)
+
 		{
 			// 未使用なら
 			g_Block[nType][nCnt1].pos = pos;	// 座標
 			g_Block[nType][nCnt1].rot = rot;	// 角度
 			g_Block[nType][nCnt1].nType = nType;// 種類
 			g_Block[nType][nCnt1].bUse = true;	// 使用判定
-			g_Block[nType][nCnt1].nidxshadow = SetShadow(D3DXVECTOR3(g_Block[nType][nCnt1].pos.x, 0.0f, g_Block[nType][nCnt1].pos.z), g_Block[nType][nCnt1].rot, D3DXVECTOR3(2.0f, 2.0f, 2.0f));
+			//g_Block[nType][nCnt1].nidxshadow = SetShadow(D3DXVECTOR3(g_Block[nType][nCnt1].pos.x, 0.0f, g_Block[nType][nCnt1].pos.z), g_Block[nType][nCnt1].rot, D3DXVECTOR3(2.0f, 2.0f, 2.0f));
 			break;
 		}
 	}

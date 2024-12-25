@@ -208,7 +208,7 @@ void UpdateEnemy(void)
 	MODE nMode = GetMode();
 
 	// プレイヤーの取得
-	PLAYER* pPlayer = GetPlayer();
+	Player* pPlayer = GetPlayer();
 
 	for (int nCnt = 0; nCnt < MAX_ENEMY; nCnt++)
 	{// 敵の数
@@ -276,9 +276,9 @@ void UpdateEnemy(void)
 
 			// 右手の当たり判定用==================================
 			// 距離を求める
-			float fRightX = (pPlayer->aModel[4].mtxWorld._41 - g_Enemy[nCnt].pos.x);
-			float fRightY = (pPlayer->aModel[4].mtxWorld._42 - g_Enemy[nCnt].pos.y);
-			float fRightZ = (pPlayer->aModel[4].mtxWorld._43 - g_Enemy[nCnt].pos.z);
+			//float fRightX = (pPlayer->aModel[4].mtxWorld._41 - g_Enemy[nCnt].pos.x);
+			//float fRightY = (pPlayer->aModel[4].mtxWorld._42 - g_Enemy[nCnt].pos.y);
+			//float fRightZ = (pPlayer->aModel[4].mtxWorld._43 - g_Enemy[nCnt].pos.z);
 
 			// 2つの半径
 			float fX = (radiusPlayer.x + radiusEnemy.x);
@@ -286,7 +286,7 @@ void UpdateEnemy(void)
 
 #ifdef _DEBUG
 			// 当たり判定確認用
-			SetEffect(D3DXVECTOR3(pPlayer->aModel[4].mtxWorld._41, pPlayer->aModel[4].mtxWorld._42, pPlayer->aModel[4].mtxWorld._43), D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f), D3DXVECTOR3(1.0f, 1.0f, 1.0f), 10);
+			//SetEffect(D3DXVECTOR3(pPlayer->aModel[4].mtxWorld._41, pPlayer->aModel[4].mtxWorld._42, pPlayer->aModel[4].mtxWorld._43), D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f), D3DXVECTOR3(1.0f, 1.0f, 1.0f), 10);
 #endif
 			switch (g_Enemy[nCnt].State)
 			{
@@ -335,42 +335,42 @@ void UpdateEnemy(void)
 					pPlayer->move.y = 5.0f;
 					pPlayer->move.z = cosf(g_Enemy[nCnt].rot.y + D3DX_PI) * 25.0f;
 
-					if (pPlayer->Pcon == PLAYERCONDITION_NORMAL)
-					{// プレイヤーの体力を減らす
-						
-						//DamageFade(MODE_DAMAGEFADE);
-						HitPlayer(1);
+					//if (pPlayer->Pcon == PLAYERCONDITION_NORMAL)
+					//{// プレイヤーの体力を減らす
+					//	
+					//	//DamageFade(MODE_DAMAGEFADE);
+					//	//HitPlayer(1);
 
-						// 音楽再生
-						PlaySound(SOUND_LABLE_PLAYERDAMAGE);
-					}
+					//	// 音楽再生
+					//	PlaySound(SOUND_LABLE_PLAYERDAMAGE);
+					//}
 				}
 
 				//  敵をはじきとばす処理を入れたい
-				if ((fRightX * fRightX) + (fRightY * fRightY) + (fRightZ * fRightZ) <= (fX + fX) * (fX + fX))
-				{
-					if (g_Enemy[nCnt].State == ENEMYSTATE_NORMAL && pPlayer->state == PLAYERSTATE_ACTION)
-					{// 攻撃モーション
-						// 右手に当たっていたら
-						HitEnemy(nCnt, 2);
+				//if ((fRightX * fRightX) + (fRightY * fRightY) + (fRightZ * fRightZ) <= (fX + fX) * (fX + fX))
+				//{
+					//if (g_Enemy[nCnt].State == ENEMYSTATE_NORMAL && pPlayer->state == PLAYERSTATE_ACTION)
+					//{// 攻撃モーション
+					//	// 右手に当たっていたら
+					//	HitEnemy(nCnt, 2);
 
-						// 音楽再生
-						PlaySound(SOUND_LABLE_DAMAGESE);
+					//	// 音楽再生
+					//	PlaySound(SOUND_LABLE_DAMAGESE);
 
-						if (g_Enemy[nCnt].State == ENEMYSTATE_DAMAGE)
-						{
-							// 敵を吹っ飛ばす
-							g_Enemy[nCnt].move.x = sinf(pPlayer->rot.y + D3DX_PI) * 70.0f;
-							g_Enemy[nCnt].move.y = 8.0f;
-							g_Enemy[nCnt].move.z = cosf(pPlayer->rot.y + D3DX_PI) * 70.0f;
+					//	if (g_Enemy[nCnt].State == ENEMYSTATE_DAMAGE)
+					//	{
+					//		// 敵を吹っ飛ばす
+					//		g_Enemy[nCnt].move.x = sinf(pPlayer->rot.y + D3DX_PI) * 70.0f;
+					//		g_Enemy[nCnt].move.y = 8.0f;
+					//		g_Enemy[nCnt].move.z = cosf(pPlayer->rot.y + D3DX_PI) * 70.0f;
 
-							// 位置更新
-							g_Enemy[nCnt].pos.x += g_Enemy[nCnt].move.x;
-							g_Enemy[nCnt].pos.z += g_Enemy[nCnt].move.z;
+					//		// 位置更新
+					//		g_Enemy[nCnt].pos.x += g_Enemy[nCnt].move.x;
+					//		g_Enemy[nCnt].pos.z += g_Enemy[nCnt].move.z;
 
-						}
-					}
-				}
+					//	}
+					//}
+				//}
 
 				break;
 
@@ -408,7 +408,7 @@ void UpdateEnemy(void)
 	}
 
 	// 当たり判定
-	CollisionBlock();
+	//CollisionBlock();
 }
 //====================================
 // 敵の描画処理
@@ -516,7 +516,7 @@ void SetEnemy(ENEMYTYPE nType, D3DXVECTOR3 pos)
 			g_Enemy[nCnt1].move = D3DXVECTOR3(0.0f, 0.0f, 0.0f);	// 移動量
 			g_Enemy[nCnt1].nType = nType;							// 種類
 			g_Enemy[nCnt1].bUse = true;								// 使用判定
-			g_Enemy[nCnt1].nIdxEnemy = SetShadow(D3DXVECTOR3(g_Enemy[nCnt1].pos.x, 0.0f, g_Enemy[nCnt1].pos.z), g_Enemy[nCnt1].rot, D3DXVECTOR3(0.5f, 0.0f, 0.5f));
+			//g_Enemy[nCnt1].nIdxEnemy = SetShadow(D3DXVECTOR3(g_Enemy[nCnt1].pos.x, 0.0f, g_Enemy[nCnt1].pos.z), g_Enemy[nCnt1].rot, D3DXVECTOR3(0.5f, 0.0f, 0.5f));
 
 			// 敵数をカウント
 			g_nNumEnemy++;					
@@ -548,8 +548,8 @@ void HitEnemy(int nCntEnemy,int nDamage)
 		// 未使用状態
 		g_Enemy[nCntEnemy].bUse = false;
 
-		// 影の消去
-		DeleteShadow(g_Enemy[nCntEnemy].nIdxEnemy);
+		//// 影の消去
+		//DeleteShadow(g_Enemy[nCntEnemy].nIdxEnemy);
 
 		// パーティクル
 		SetParticle(g_Enemy[nCntEnemy].pos, D3DXCOLOR(1.0f, 1.0f, 0.0f, 0.7f), 20, PARTICLETYPE_ENEMY);

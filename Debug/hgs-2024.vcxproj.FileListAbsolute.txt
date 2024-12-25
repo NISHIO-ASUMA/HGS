@@ -1,1 +1,3 @@
 C:\Users\student\source\repos\hgs-2024\Debug\hgs-2024.exe
+C:\Users\student\Desktop\HGS\HGS\Debug\hgs-2024.exe
+C:\Users\student\Desktop\ハッカソン\HGS\Debug\hgs-2024.exe
