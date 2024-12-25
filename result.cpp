@@ -14,6 +14,7 @@
 #include "Timer.h"
 #include "sound.h"
 #include "input.h"
+#include "item.h"
 
 //***************************
 // グローバル変数宣言
@@ -21,7 +22,7 @@
 LPDIRECT3DVERTEXBUFFER9 g_pVtxBuffResult = NULL; // 頂点バッファのポインタ
 LPDIRECT3DTEXTURE9 g_pTextureResult= NULL;		 // テクスチャのポインタ
 int g_aCount;									 // カウント
-
+int nNumResult;
 //==================
 // リザルトの初期化
 //==================
@@ -38,10 +39,47 @@ void InitResult(void)
 
 	// 初期化
 	g_aCount = 0;
+	nNumResult = 0;
+
+	// 取得
+	nNumResult = GetResultNumber();
+
+	const char* TextureName = {};
+
+	switch (nNumResult)
+	{
+	case 0:
+		TextureName = "data\\TEXTURE\\result_B.png";
+		break;
+
+	case 1:
+		TextureName = "data\\TEXTURE\\result_D.png";
+		break;
+
+	case 2:
+		TextureName = "data\\TEXTURE\\result_S.png";
+		break;
+
+	case 3:
+		TextureName = "data\\TEXTURE\\result_A.png";
+		break;
+
+	case 4:
+		TextureName = "data\\TEXTURE\\result_C.png";
+		break;
+
+	case 5:
+		TextureName = "data\\TEXTURE\\result_hatena.png";
+		break;
+
+	default:
+		TextureName = "data\\TEXTURE\\result_hatena.png";
+		break;
+	}
 
 	// テクスチャ設定
 	D3DXCreateTextureFromFile(pDevice,
-		"data\\TEXTURE\\gameover.png",
+		TextureName ,
 		&g_pTextureResult);
 
 	// 頂点情報のポインタ
@@ -127,7 +165,7 @@ void UpdateResult(void)
 	{
 		// Enterキーが押された
 		// モード設定(リザルトに移動)
-		SetFade(MODE_RANKING);
+		SetFade(MODE_TITLE);
 	}
 }
 //==================

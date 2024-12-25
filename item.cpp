@@ -89,9 +89,6 @@ void InitItem()
 //==============================
 void UninitItem()
 {
-	// テクスチャの破棄
-	// TODO : モデルのテクスチャ枚数によるため,のちに変更
-
 	// メッシュ,マテリアルの破棄
 	for (int nCnt = 0; nCnt < MAX_ITEM; nCnt++)
 	{
@@ -128,9 +125,6 @@ void UpdateItem()
 
 		// 種類を保存
 		int nType = g_Item[nCnt].Type;
-
-		// 影の座標更新設定
-		//SetPositionShadow(g_Item[nCnt].nIdxshadow, D3DXVECTOR3(g_Item[nCnt].pos.x, 0.0f, g_Item[nCnt].pos.z));
 
 		// 半径を算出する変数
 		D3DXVECTOR3 PlayerPos(6.0f, 0.0f, 6.0f);
@@ -171,6 +165,7 @@ void UpdateItem()
 					g_Item[ITEMTYPE_AUTUMN].bUse = false;
 					g_Item[ITEMTYPE_WINTER].bUse = false;
 
+					g_bItem[ITEMTYPE_SPRING] = true;
 
 					bGet = false;
 				}
@@ -180,6 +175,8 @@ void UpdateItem()
 					g_Item[ITEMTYPE_AUTUMN].bUse = false;
 					g_Item[ITEMTYPE_WINTER].bUse = false;
 
+					g_bItem[ITEMTYPE_SUMMER] = true;
+
 					bGet = false;
 				}
 				else if (bGet && g_Item[nCnt].Type == ITEMTYPE_AUTUMN)
@@ -188,6 +185,8 @@ void UpdateItem()
 					g_Item[ITEMTYPE_SUMMER].bUse = false;
 					g_Item[ITEMTYPE_WINTER].bUse = false;
 
+					g_bItem[ITEMTYPE_AUTUMN] = true;
+
 					bGet = false;
 				}
 				else if (bGet && g_Item[nCnt].Type == ITEMTYPE_WINTER)
@@ -195,6 +194,8 @@ void UpdateItem()
 					g_Item[ITEMTYPE_SPRING].bUse = false;
 					g_Item[ITEMTYPE_SUMMER].bUse = false;
 					g_Item[ITEMTYPE_AUTUMN].bUse = false;
+
+					g_bItem[ITEMTYPE_WINTER] = true;
 
 					bGet = false;
 				}
@@ -205,6 +206,8 @@ void UpdateItem()
 					g_Item[ITEMTYPE_PARK].bUse = false;
 					g_Item[ITEMTYPE_SCHOOL].bUse = false;
 
+					g_bItem[ITEMTYPE_SHOP] = true;
+
 					bGet = false;
 				}
 				else if (bGet && g_Item[nCnt].Type == ITEMTYPE_PARK)
@@ -212,12 +215,16 @@ void UpdateItem()
 					g_Item[ITEMTYPE_SHOP].bUse = false;
 					g_Item[ITEMTYPE_SCHOOL].bUse = false;
 
+					g_bItem[ITEMTYPE_PARK] = true;
+
 					bGet = false;
 				}
 				else if (bGet && g_Item[nCnt].Type == ITEMTYPE_SCHOOL)
 				{
 					g_Item[ITEMTYPE_SHOP].bUse = false;
 					g_Item[ITEMTYPE_PARK].bUse = false;
+
+					g_bItem[ITEMTYPE_SCHOOL] = true;
 
 					bGet = false;
 				}
@@ -229,6 +236,7 @@ void UpdateItem()
 					g_Item[ITEMTYPE_FOOD3].bUse = false;
 					g_Item[ITEMTYPE_FOOD4].bUse = false;
 
+					g_bItem[ITEMTYPE_FOOD1] = true;
 
 					bGet = false;
 				}
@@ -238,6 +246,8 @@ void UpdateItem()
 					g_Item[ITEMTYPE_FOOD3].bUse = false;
 					g_Item[ITEMTYPE_FOOD4].bUse = false;
 
+					g_bItem[ITEMTYPE_FOOD2] = true;
+
 					bGet = false;
 				}
 				else if (bGet && g_Item[nCnt].Type == ITEMTYPE_FOOD3)
@@ -246,6 +256,8 @@ void UpdateItem()
 					g_Item[ITEMTYPE_FOOD2].bUse = false;
 					g_Item[ITEMTYPE_FOOD4].bUse = false;
 
+					g_bItem[ITEMTYPE_FOOD3] = true;
+
 					bGet = false;
 				}
 				else if (bGet && g_Item[nCnt].Type == ITEMTYPE_FOOD4)
@@ -253,6 +265,8 @@ void UpdateItem()
 					g_Item[ITEMTYPE_FOOD1].bUse = false;
 					g_Item[ITEMTYPE_FOOD2].bUse = false;
 					g_Item[ITEMTYPE_FOOD3].bUse = false;
+
+					g_bItem[ITEMTYPE_FOOD4] = true;
 
 					bGet = false;
 				}
@@ -264,6 +278,7 @@ void UpdateItem()
 					g_Item[ITEMTYPE_KARISUMA].bUse = false;
 					g_Item[ITEMTYPE_HYO].bUse = false;
 
+					g_bItem[ITEMTYPE_TALK] = true;
 
 					bGet = false;
 				}
@@ -273,6 +288,8 @@ void UpdateItem()
 					g_Item[ITEMTYPE_KARISUMA].bUse = false;
 					g_Item[ITEMTYPE_HYO].bUse = false;
 
+					g_bItem[ITEMTYPE_KIKAKU] = true;
+
 					bGet = false;
 				}
 				else if (bGet && g_Item[nCnt].Type == ITEMTYPE_KARISUMA)
@@ -281,6 +298,8 @@ void UpdateItem()
 					g_Item[ITEMTYPE_KIKAKU].bUse = false;
 					g_Item[ITEMTYPE_HYO].bUse = false;
 
+					g_bItem[ITEMTYPE_KARISUMA] = true;
+
 					bGet = false;
 				}
 				else if (bGet && g_Item[nCnt].Type == ITEMTYPE_HYO)
@@ -288,6 +307,8 @@ void UpdateItem()
 					g_Item[ITEMTYPE_TALK].bUse = false;
 					g_Item[ITEMTYPE_KARISUMA].bUse = false;
 					g_Item[ITEMTYPE_KIKAKU].bUse = false;
+
+					g_bItem[ITEMTYPE_HYO] = true;
 
 					bGet = false;
 				}
@@ -429,8 +450,6 @@ void DrawItem()
 		}
 		// マテリアルを戻す
 		pDevice->SetMaterial(&matDef);
-
-
 	}
 }
 //==============================
@@ -446,9 +465,6 @@ void SetItem(D3DXVECTOR3 pos, ITEMTYPE Type)
 			g_Item[nCnt1].pos = pos;		// 座標
 			g_Item[nCnt1].Type = Type;		// 種類
 			g_Item[nCnt1].bUse = true;		// 使用判定
-
-			// 影の設定
-			//g_Item[nCnt1].nIdxshadow = SetShadow(D3DXVECTOR3(g_Item[nCnt1].pos.x, 0.0f, g_Item[nCnt1].pos.z), g_Item[nCnt1].rot);
 
 			// アイテム数をカウント
 			nNumItem++;
@@ -486,7 +502,122 @@ void HitItem(int nCnt, int nDamage)
 //============================
 int GetResultNumber()
 {
-	// TODO : 取ったアイテムによってリザルトのテクスチャを変更させる処理
+	// 取ったアイテムによってリザルトのテクスチャを変更させる処理
+	if (g_bItem[ITEMTYPE_SPRING])
+	{// 春を獲得
+		if (g_bItem[ITEMTYPE_SHOP])
+		{// 店
+			if (g_bItem[ITEMTYPE_FOOD1])
+			{// 団子を獲得
+				if (g_bItem[ITEMTYPE_HYO])
+				{// 表現
+					// 番号を返す
+					nGetNumber = 2;
+				}
+			}
+			else if (g_bItem[ITEMTYPE_FOOD3])
+			{// サツマイモ
+				// 番号を返す
+				nGetNumber = 5;
+			}
+		}
+		else
+		{// 条件式に入らないとき
+			// 番号を返す
+			nGetNumber = 5;
+		}
+
+	}
+	else if (g_bItem[ITEMTYPE_SUMMER])
+	{// 夏を獲得
+		if (g_bItem[ITEMTYPE_PARK])
+		{// 公園
+			if (g_bItem[ITEMTYPE_FOOD2])
+			{// スイカを獲得
+				if (g_bItem[ITEMTYPE_KARISUMA])
+				{
+					// 番号を返す
+					nGetNumber = 2;
+				}
+			}
+			else if (g_bItem[ITEMTYPE_FOOD4])
+			{// みかん
+				// 番号を返す
+				nGetNumber = 5;
+			}
+
+		}
+		else if (g_bItem[ITEMTYPE_SHOP])
+		{// 店
+			if (g_bItem[ITEMTYPE_FOOD2])
+			{// スイカを獲得
+				if (g_bItem[ITEMTYPE_TALK])
+				{
+					// 番号を返す
+					nGetNumber = 3;
+				}
+			}
+		}
+
+	}
+	else if (g_bItem[ITEMTYPE_AUTUMN])
+	{// 秋を獲得
+		if (g_bItem[ITEMTYPE_SCHOOL])
+		{// 学校
+			if (g_bItem[ITEMTYPE_FOOD3])
+			{// サツマイモを獲得
+				if (g_bItem[ITEMTYPE_KIKAKU])
+				{
+					// 番号を返す
+					nGetNumber = 2;
+				}
+			}
+			else if (g_bItem[ITEMTYPE_FOOD1])
+			{// 団子
+				// 番号を返す
+				nGetNumber = 5;
+			}
+		}
+		else if (g_bItem[ITEMTYPE_SHOP])
+		{// 店
+			if (g_bItem[ITEMTYPE_FOOD3])
+			{// サツマイモを獲得
+				if (g_bItem[ITEMTYPE_TALK])
+				{
+					// 番号を返す
+					nGetNumber = 0;
+				}
+			}
+		}
+	}
+	else if (g_bItem[ITEMTYPE_WINTER])
+	{// 冬を獲得
+		if (g_bItem[ITEMTYPE_SCHOOL])
+		{// 学校
+			if (g_bItem[ITEMTYPE_FOOD4])
+			{// みかんを獲得
+				if (g_bItem[ITEMTYPE_TALK])
+				{// 話術
+					// 番号を返す
+					nGetNumber = 2;
+				}
+			}
+			else if (g_bItem[ITEMTYPE_FOOD2])
+			{// スイカ
+				// 番号を返す
+				nGetNumber = 5;
+			}
+		}
+		else if (g_bItem[ITEMTYPE_PARK])
+		{// 公園
+			if (g_bItem[ITEMTYPE_FOOD1] || g_bItem[ITEMTYPE_HYO])
+			{// 団子 または 表現力
+				// 番号を返す
+				nGetNumber = 1;
+			}
+		}
+	}
+
 	return nGetNumber;
 }
 //============================
