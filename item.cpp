@@ -257,10 +257,44 @@ void UpdateItem()
 					bGet = false;
 				}
 
+				//エリア4
+				if (bGet && g_Item[nCnt].Type == ITEMTYPE_TALK)
+				{
+					g_Item[ITEMTYPE_KIKAKU].bUse = false;
+					g_Item[ITEMTYPE_KARISUMA].bUse = false;
+					g_Item[ITEMTYPE_HYO].bUse = false;
+
+
+					bGet = false;
+				}
+				else if (bGet && g_Item[nCnt].Type == ITEMTYPE_KIKAKU)
+				{
+					g_Item[ITEMTYPE_TALK].bUse = false;
+					g_Item[ITEMTYPE_KARISUMA].bUse = false;
+					g_Item[ITEMTYPE_HYO].bUse = false;
+
+					bGet = false;
+				}
+				else if (bGet && g_Item[nCnt].Type == ITEMTYPE_KARISUMA)
+				{
+					g_Item[ITEMTYPE_TALK].bUse = false;
+					g_Item[ITEMTYPE_KIKAKU].bUse = false;
+					g_Item[ITEMTYPE_HYO].bUse = false;
+
+					bGet = false;
+				}
+				else if (bGet && g_Item[nCnt].Type == ITEMTYPE_HYO)
+				{
+					g_Item[ITEMTYPE_TALK].bUse = false;
+					g_Item[ITEMTYPE_KARISUMA].bUse = false;
+					g_Item[ITEMTYPE_KIKAKU].bUse = false;
+
+					bGet = false;
+				}
+
 			}
 		}
 
-<<<<<<< HEAD
 		//エリア1
 		if (g_Item[nCnt].Type == ITEMTYPE_SPRING && g_Item[nCnt].bUse == false)
 		{
@@ -311,9 +345,25 @@ void UpdateItem()
 			bItemGet3 = true;
 		}
 
-=======
+		//エリア4
+		if (g_Item[nCnt].Type == ITEMTYPE_TALK && g_Item[nCnt].bUse == false)
+		{
+			bItemGet4 = true;
+		}
+		else if (g_Item[nCnt].Type == ITEMTYPE_KIKAKU && g_Item[nCnt].bUse == false)
+		{
+			bItemGet4 = true;
+		}
+		else if (g_Item[nCnt].Type == ITEMTYPE_KARISUMA && g_Item[nCnt].bUse == false)
+		{
+			bItemGet4 = true;
+		}
+		else if (g_Item[nCnt].Type == ITEMTYPE_HYO && g_Item[nCnt].bUse == false)
+		{
+			bItemGet4 = true;
+		}
+
 		// 回転
->>>>>>> a68248052c48030b33f092368eb1f0f3d4971d17
 		g_Item[nCnt].rot.y += 0.02f;
 	}	
 }

@@ -59,7 +59,17 @@ void InitGame(void)
 
 	SetBillboard(D3DXVECTOR3(600.0f, 85.0f, 160.0f), BILLBOARDTYPE_SHOP, D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 	SetBillboard(D3DXVECTOR3(280.0f, 85.0f, 160.0f), BILLBOARDTYPE_PARK, D3DXVECTOR3(0.0f, 0.0f, 0.0f));
-	SetBillboard(D3DXVECTOR3(280.0f, 85.0f, -160.0f), BILLBOARDTYPE_SCHOOL, D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+	SetBillboard(D3DXVECTOR3(450.0f, 85.0f, -160.0f), BILLBOARDTYPE_SCHOOL, D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+
+	SetBillboard(D3DXVECTOR3(1300.0f, 85.0f, 160.0f), BILLBOARDTYPE_FOOD1, D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+	SetBillboard(D3DXVECTOR3(980.0f, 85.0f, 160.0f), BILLBOARDTYPE_FOOD2, D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+	SetBillboard(D3DXVECTOR3(980.0f, 85.0f, -160.0f), BILLBOARDTYPE_FOOD3, D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+	SetBillboard(D3DXVECTOR3(1300.0f, 85.0f, -160.0f), BILLBOARDTYPE_FOOD4, D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+
+	SetBillboard(D3DXVECTOR3(2000.0f, 85.0f, 160.0f), BILLBOARDTYPE_TALK, D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+	SetBillboard(D3DXVECTOR3(1680.0f, 85.0f, 160.0f), BILLBOARDTYPE_KIKAKU, D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+	SetBillboard(D3DXVECTOR3(1680.0f, 85.0f, -160.0f), BILLBOARDTYPE_KARISUMA, D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+	SetBillboard(D3DXVECTOR3(2000.0f, 85.0f, -160.0f), BILLBOARDTYPE_HYO, D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 
 	//モデル
 	SetModel(D3DXVECTOR3(-220.0f, 0.0f, 385.0f), WALLTYPE_OKU);		//	ルーム1の奥壁
@@ -91,6 +101,8 @@ void InitGame(void)
 	SetModel(D3DXVECTOR3(2260.0f, 0.0f, 140.0f), WALLTYPE_GOALOKU);		//	ゴールの奥壁
 	SetModel(D3DXVECTOR3(2260.0f, 0.0f, -60.0f), WALLTYPE_GOALTEMAE);	//	ゴールの手前壁
 	SetModel(D3DXVECTOR3(2370.0f, 0.0f, 30.0f), WALLTYPE_GOALMIGI);		//	ゴールの右壁
+
+	SetModel(D3DXVECTOR3(2300.0f, 0.0f, 30.0f), WALLTYPE_CLEAR);		//	ゴールのプレゼント
 
 	// カメラの初期化
 	InitCamera();
@@ -145,12 +157,17 @@ void InitGame(void)
 
 	SetItem(D3DXVECTOR3(600.0f, 20.0f, 160.0f), ITEMTYPE_SHOP);
 	SetItem(D3DXVECTOR3(280.0f, 20.0f, 160.0f), ITEMTYPE_PARK);
-	SetItem(D3DXVECTOR3(280.0f, 20.0f, -160.0f), ITEMTYPE_SCHOOL);
+	SetItem(D3DXVECTOR3(450.0f, 20.0f, -160.0f), ITEMTYPE_SCHOOL);
 
-	//SetItem(D3DXVECTOR3(600.0f, 20.0f, 160.0f), ITEMTYPE_FOOD1);
-	//SetItem(D3DXVECTOR3(280.0f, 20.0f, 160.0f), ITEMTYPE_FOOD2);
-	//SetItem(D3DXVECTOR3(280.0f, 20.0f, -160.0f), ITEMTYPE_FOOD3);
-	//SetItem(D3DXVECTOR3(600.0f, 20.0f, -160.0f), ITEMTYPE_FOOD4);
+	SetItem(D3DXVECTOR3(1300.0f, 20.0f, 160.0f), ITEMTYPE_FOOD1);
+	SetItem(D3DXVECTOR3(980.0f, 20.0f, 160.0f), ITEMTYPE_FOOD2);
+	SetItem(D3DXVECTOR3(980.0f, 20.0f, -160.0f), ITEMTYPE_FOOD3);
+	SetItem(D3DXVECTOR3(1300.0f, 20.0f, -160.0f), ITEMTYPE_FOOD4);
+
+	SetItem(D3DXVECTOR3(2000.0f, 20.0f, 160.0f), ITEMTYPE_TALK);
+	SetItem(D3DXVECTOR3(1680.0f, 20.0f, 160.0f), ITEMTYPE_KIKAKU);
+	SetItem(D3DXVECTOR3(1680.0f, 20.0f, -160.0f), ITEMTYPE_KARISUMA);
+	SetItem(D3DXVECTOR3(2000.0f, 20.0f, -160.0f), ITEMTYPE_HYO);
 
 	g_gameState = GAMESTATE_NORMAL;	//　通常状態の設定
 	g_nCounterGameState = 0;		//	カウンターの初期化
@@ -225,7 +242,7 @@ void UpdateGame(void)
 {
 	int nNum = GetScore();
 	//int nTime = GetTime();
-	//bool bExit = GetExit();
+	bool bExit = GetExit();
 
 	Player* pPlayer = GetPlayer();//プレイヤーの情報へのポインタにプレイヤーの先頭アドレスが代入される
 
@@ -324,12 +341,10 @@ void UpdateGame(void)
 
 	//bool bEnd = GetEnd();
 
-	if ((pPlayer->bDisp == false /*|| bExit == true*/ /*|| nTime <= 0*/ /*|| bEnd == true*/) && g_gameState != GAMESTATE_NONE)
+	if ((pPlayer->bDisp == false || bExit == true /*|| nTime <= 0*/ /*|| bEnd == true*/) && g_gameState != GAMESTATE_NONE)
 	{
-
 		//モード設定(リザルト画面に移行)
 		g_gameState = GAMESTATE_END;
-
 	}
 
 	int nResultScore;

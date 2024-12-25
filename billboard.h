@@ -31,11 +31,16 @@ typedef enum
 	BILLBOARDTYPE_PARK,
 	BILLBOARDTYPE_SCHOOL,
 
-	BILLBOARDTYPE_FOOD1,
-	BILLBOARDTYPE_FOOD2,
-	BILLBOARDTYPE_FOOD3,
-	BILLBOARDTYPE_FOOD4,
+	BILLBOARDTYPE_FOOD1,//団子
+	BILLBOARDTYPE_FOOD2,//スイカ
+	BILLBOARDTYPE_FOOD3,//いも
+	BILLBOARDTYPE_FOOD4,//みかん
 
+	BILLBOARDTYPE_TALK,		//トーク
+	BILLBOARDTYPE_KIKAKU,	//企画
+	BILLBOARDTYPE_KARISUMA,	//カリスマ
+	BILLBOARDTYPE_HYO,		//表現
+	
 	BILLBOARDTYPE_MAX
 }BILLBOARDTYPE;
 
@@ -52,6 +57,16 @@ static const char* BILLBOARD_TEXTURE[BILLBOARDTYPE_MAX] =
 	"data\\TEXTURE\\04_Shop.png",
 	"data\\TEXTURE\\05_Park.png",
 	"data\\TEXTURE\\06_School.png",
+
+	"data\\TEXTURE\\07_Dumpling.png",
+	"data\\TEXTURE\\08_WaterMelon.png",
+	"data\\TEXTURE\\09_SweetPotato.png",
+	"data\\TEXTURE\\10_Orange.png",
+
+	"data\\TEXTURE\\13_Talk.png",
+	"data\\TEXTURE\\14_Plan.png",
+	"data\\TEXTURE\\15_Charisma.png",
+	"data\\TEXTURE\\16_Expression.png",
 
 };
 

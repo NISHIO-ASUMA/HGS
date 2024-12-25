@@ -191,6 +191,7 @@ void UpdateModel(void)
 	bool bItemGet1 = ItemGet1();
 	bool bItemGet2 = ItemGet2();
 	bool bItemGet3 = ItemGet3();
+	bool bItemGet4 = ItemGet4();
 
 	for (int nCntModel = 0; nCntModel < MAX_MODEL; nCntModel++)
 	{
@@ -226,6 +227,20 @@ void UpdateModel(void)
 		if (bItemGet3 == true)
 		{
 			if (g_aModel[nCntModel].nType == WALLTYPE_DOOR3)
+			{
+				if (g_aModel[nCntModel].pos.z >= 130)
+				{
+					g_aModel[nCntModel].move.z = 0.0f;
+				}
+				else
+				{
+					g_aModel[nCntModel].move.z += 0.2f;
+				}
+			}
+		}
+		if (bItemGet4 == true)
+		{
+			if (g_aModel[nCntModel].nType == WALLTYPE_DOOR4)
 			{
 				if (g_aModel[nCntModel].pos.z >= 130)
 				{
@@ -498,6 +513,88 @@ void CollisionBlock(void)
 
 		}
 
+
+		if (g_aModel[nCntModel].nType == WALLTYPE_CLEAR)
+		{
+
+			if (pPlayer->posOld.y < g_aModel[nCntModel].pos.y + g_aModel[nCntModel].size.y &&
+				pPlayer->posOld.y + pPlayer->size.y > g_aModel[nCntModel].pos.y)
+			{
+
+				//左右(X方向)の当たり判定
+				if (pPlayer->pos.z - pPlayer->size.z / 2 < g_aModel[nCntModel].pos.z + g_aModel[nCntModel].size.z / 2 &&
+					pPlayer->pos.z + pPlayer->size.z / 2 > g_aModel[nCntModel].pos.z - g_aModel[nCntModel].size.z / 2)
+				{
+					//左から右に当たった
+					if (pPlayer->posOld.x + pPlayer->size.x / 2 < g_aModel[nCntModel].pos.x - g_aModel[nCntModel].size.x / 2 &&
+						pPlayer->pos.x + pPlayer->size.x / 2 > g_aModel[nCntModel].pos.x - g_aModel[nCntModel].size.x / 2)
+					{
+						pPlayer->pos.x = g_aModel[nCntModel].pos.x - g_aModel[nCntModel].size.x / 2 - pPlayer->size.x / 2 - 0.1f;
+						g_bExit = true;
+					}
+					//右から左に当たった
+					else if (pPlayer->posOld.x - pPlayer->size.x / 2 > g_aModel[nCntModel].pos.x + g_aModel[nCntModel].size.x / 2 &&
+						pPlayer->pos.x - pPlayer->size.x / 2 < g_aModel[nCntModel].pos.x + g_aModel[nCntModel].size.x / 2)
+					{
+						pPlayer->pos.x = (g_aModel[nCntModel].pos.x + g_aModel[nCntModel].size.x / 2) + pPlayer->size.x / 2 + 0.1f;
+						g_bExit = true;
+
+					}
+
+				}
+
+				//前後(Z方向)の当たり判定
+				if (pPlayer->pos.x - pPlayer->size.x / 2 < g_aModel[nCntModel].pos.x + g_aModel[nCntModel].size.x / 2 &&
+					pPlayer->pos.x + pPlayer->size.x / 2 > g_aModel[nCntModel].pos.x - g_aModel[nCntModel].size.x / 2)
+				{
+
+					//手前から当たった
+					if (pPlayer->posOld.z + pPlayer->size.z / 2 < g_aModel[nCntModel].pos.z - g_aModel[nCntModel].size.z / 2 &&
+						pPlayer->pos.z + pPlayer->size.z / 2 > g_aModel[nCntModel].pos.z - g_aModel[nCntModel].size.z / 2)
+					{
+						pPlayer->pos.z = (g_aModel[nCntModel].pos.z - g_aModel[nCntModel].size.z / 2) - pPlayer->size.z / 2 - 0.1f;
+						g_bExit = true;
+					}
+					//奥から当たった
+					else if (pPlayer->posOld.z - pPlayer->size.z / 2 > g_aModel[nCntModel].pos.z + g_aModel[nCntModel].size.z / 2 &&
+						pPlayer->pos.z - pPlayer->size.z / 2 < g_aModel[nCntModel].pos.z + g_aModel[nCntModel].size.z / 2)
+					{
+						pPlayer->pos.z = (g_aModel[nCntModel].pos.z + g_aModel[nCntModel].size.z / 2) + pPlayer->size.z / 2 + 0.1f;
+						g_bExit = true;
+					}
+
+				}
+
+				//縦(Y方向)の当たり判定
+				if (pPlayer->posOld.x - pPlayer->size.x / 2 < g_aModel[nCntModel].pos.x + g_aModel[nCntModel].size.x / 2 &&
+					pPlayer->pos.x + pPlayer->size.x / 2 > g_aModel[nCntModel].pos.x - g_aModel[nCntModel].size.x / 2)
+				{
+
+					if (pPlayer->posOld.z - pPlayer->size.z / 2 < g_aModel[nCntModel].pos.z + g_aModel[nCntModel].size.z / 2 &&
+						pPlayer->pos.z + pPlayer->size.z / 2 > g_aModel[nCntModel].pos.z - g_aModel[nCntModel].size.z / 2)
+					{
+
+						//上から下に当たった
+						if (pPlayer->posOld.y < g_aModel[nCntModel].pos.y + g_aModel[nCntModel].size.y &&
+							pPlayer->pos.y > g_aModel[nCntModel].pos.y - g_aModel[nCntModel].size.y)
+						{
+							pPlayer->pos.y = (g_aModel[nCntModel].pos.y + g_aModel[nCntModel].size.y / 2) + pPlayer->size.y / 2 - 0.9f;
+							pPlayer->move.y = 0.0f;
+						}
+						//下から上に当たった
+						if (pPlayer->posOld.y - pPlayer->size.y / 2 < g_aModel[nCntModel].pos.y / 2 &&
+							pPlayer->pos.y - pPlayer->size.y / 2 > g_aModel[nCntModel].pos.y / 2)
+						{
+							pPlayer->pos.y = (g_aModel[nCntModel].pos.y - pPlayer->size.y);
+							pPlayer->move.y = 0.0f;
+						}
+
+					}
+				}
+			}
+
+		}
+
 	}
 
 	//return bTask;
@@ -535,7 +632,5 @@ bool GetTask5(void)
 //======================================================
 bool GetExit(void)
 {
-
 	return g_bExit;
-
 }

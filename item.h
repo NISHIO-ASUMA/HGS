@@ -30,8 +30,11 @@ typedef enum
 	ITEMTYPE_FOOD2,			// スイカ
 	ITEMTYPE_FOOD3,			// サツマイモ
 	ITEMTYPE_FOOD4,			// みかん
-	ITEMTYPE_RING,			// 指輪
-	ITEMTYPE_NECK,			// ネックレス
+
+	ITEMTYPE_TALK,			// トーク
+	ITEMTYPE_KIKAKU,		// 企画
+	ITEMTYPE_KARISUMA,		// カリスマ
+	ITEMTYPE_HYO,			// 表現
 
 	ITEMTYPE_MAX
 }ITEMTYPE;
@@ -49,6 +52,14 @@ static const char* ITEM_MODEL[ITEMTYPE_MAX] =
 	"data\\MODEL\\present_box.x",
 	"data\\MODEL\\present_box.x",
 	"data\\MODEL\\present_box.x",
+	"data\\MODEL\\present_box.x",
+	"data\\MODEL\\present_box.x",
+	"data\\MODEL\\present_box.x",
+	"data\\MODEL\\present_box.x",
+	"data\\MODEL\\present_box.x",
+	"data\\MODEL\\present_box.x",
+	"data\\MODEL\\present_box.x",
+
 };
 
 //*********************************

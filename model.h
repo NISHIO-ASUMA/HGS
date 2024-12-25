@@ -9,7 +9,7 @@
 
 #include "main.h"
 
-#define MAX_MODEL (24)	//	モデルの使う数
+#define MAX_MODEL (25)	//	モデルの使う数
 #define MAX_TEXTUREMODEL (128)
 
 //壁の種類
@@ -88,6 +88,8 @@ static const char* MODEL[MAX_MODEL] =
 	"data/MODEL/wall_goal_oku.x",	//	ゴールの奥壁
 	"data/MODEL/wall_goal_temae.x",	//	ゴールの手前壁
 	"data/MODEL/wall_goal_migi.x",	//	ゴールの右壁
+
+	"data/MODEL/present_box.x",		//	ゴールのプレゼント
 
 };
 
