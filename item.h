@@ -21,6 +21,10 @@ typedef enum
 	ITEMTYPE_SUMMER,		// 夏
 	ITEMTYPE_AUTUMN,		// 秋
 	ITEMTYPE_WINTER,		// 冬
+	ITEMTYPE_FOOD1,			// 三色団子
+	ITEMTYPE_FOOD2,			// スイカ
+	ITEMTYPE_FOOD3,			// サツマイモ
+	ITEMTYPE_FOOD4,			// みかん
 	ITEMTYPE_MAX
 }ITEMTYPE;
 
@@ -37,9 +41,9 @@ static const char* ITEM_MODEL[ITEMTYPE_MAX] =
 //*********************************
 typedef struct
 {
-	LPD3DXMESH pMeshEnemy;					   // メッシュのポインタ
-	LPD3DXBUFFER pBuffMatEnemy;				   // マテリアルのポインタ
-	DWORD dwNumMatEnemy;					   // マテリアル数
+	LPD3DXMESH pMesh;					   // メッシュのポインタ
+	LPD3DXBUFFER pBuffMat;				   // マテリアルのポインタ
+	DWORD dwNumMat;					       // マテリアル数
 	LPDIRECT3DTEXTURE9 pTexture[ITEMTYPE_MAX]; // テクスチャのポインタ
 }ItemModel;
 
@@ -50,9 +54,11 @@ typedef struct
 {
 	D3DXVECTOR3 pos; // 座標
 	D3DXVECTOR3 rot; // 角度
-	bool bUse;       // 使用判定
+	D3DXMATRIX mtxWorld;	// ワールドマトリックス
 	ITEMTYPE Type;	 // 種類
 	ItemModel aModel[ITEMTYPE_MAX]; // モデル情報
+	bool bUse;       // 使用判定
+	int nIdxshadow;  // 影
 }Item;
 
 //*********************************
@@ -63,6 +69,5 @@ void UninitItem();				// 終了処理
 void UpdateItem();				// 更新処理
 void DrawItem();				// 描画処理
 void SetItem(D3DXVECTOR3 pos, ITEMTYPE Type);	// 設定処理
-void LoadItem();				// 読み込み
 
 #endif
