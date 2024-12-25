@@ -158,6 +158,7 @@ void UpdateItem()
 			}
 		}
 
+		// ‰ñ“]
 		g_Item[nCnt].rot.y += 0.02f;
 	}	
 }
