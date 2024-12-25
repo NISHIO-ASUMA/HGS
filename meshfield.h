@@ -16,8 +16,8 @@
 //	D3DXVECTOR3 rot;
 //}MeshField;
 
-#define MAX_WIDTH (2000.0f)			//横幅
-#define MAX_HEIGHT (2400.0f)		//縦幅
+#define MAX_WIDTH (3100.0f)			//横幅
+#define MAX_HEIGHT (1100.0f)		//縦幅
 
 #define MESHFIELD_X (20)			//X方向のブロック数
 #define MESHFIELD_Z (20)			//Z方向のブロック数

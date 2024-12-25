@@ -9,19 +9,26 @@
 
 #include "main.h"
 
-#define MAX_MODEL (2)	//	モデルの使う数
+#define MAX_MODEL (24)	//	モデルの使う数
 #define MAX_TEXTUREMODEL (128)
 
 //壁の種類
 typedef enum
 {
-	WALLTYPE_NORMAL=0,
-	WALLTYPE_MINI,
-	WALLTYPE_DOOR,
-	WALLTYPE_EXIT,
-	WALLTYPE_ROOM,
-	WALLTYPE_ENTERDOOR,
+	WALLTYPE_OKU=0,
+	WALLTYPE_HIDARI,
+	WALLTYPE_TEMAE,
+	WALLTYPE_MIGI,
+	WALLTYPE_DOOR1,
+	WALLTYPE_DOOR2,
+	WALLTYPE_DOOR3,
+	WALLTYPE_DOOR4,
 
+	WALLTYPE_GOALOKU,
+	WALLTYPE_GOALTEMAE,
+	WALLTYPE_GOALMIGI,
+
+	WALLTYPE_CLEAR,
 	WALLTYPE_MAX
 }WALLTYPE;
 
@@ -52,34 +59,35 @@ typedef struct
 static const char* MODEL[MAX_MODEL] =
 {
 
-	"data/MODEL/wall.x",				//	奥の壁左
-	"data/MODEL/wall.x",				//	奥の壁右
-	//"data/MODEL/passagewall.x",			//	奥の通路壁左
-	//"data/MODEL/passagewall.x",			//	奥の通路壁左
-	//"data/MODEL/wall01.x",				//	部屋の手前壁左
-	//"data/MODEL/wall01.x",				//	部屋の手前壁右
-	//"data/MODEL/wall01.x",				//	部屋の手前壁真ん中
-	//"data/MODEL/rightwall001.x",		//	部屋の右奥壁
-	//"data/MODEL/rightwall001.x",		//	部屋の右手前壁
-	//"data/MODEL/wall2.x",				//	通路の手前壁
-	//"data/MODEL/wall3.x",				//	通路の奥壁
-	//"data/MODEL/rightwall001.x",		//	部屋の左奥壁
-	//"data/MODEL/rightwall001.x",		//	部屋の左手前壁
-	//"data/MODEL/wall2.x",				//	通路の手前壁
-	//"data/MODEL/wall3.x",				//	通路の奥壁
-	//"data/MODEL/door1.x",				//	出口ドア
-	//"data/MODEL/centerwall.x",			//	真ん中の左
-	//"data/MODEL/centerwall.x",			//	真ん中の右
-	//"data/MODEL/centerwall2.x",			//	真ん中の奥
-	//"data/MODEL/centerwall2.x",			//	真ん中の手前
-	//"data/MODEL/roomwall01.x",			//	奥の部屋の手前左
-	//"data/MODEL/roomwall01.x",			//	奥の部屋の手前右
-	//"data/MODEL/roomwallside.x",		//	奥の部屋の左
-	//"data/MODEL/roomwallside.x",		//	奥の部屋の右
-	//"data/MODEL/roomwallOku.x",			//	奥の部屋の奥壁
-	//"data/MODEL/exit.x",				//	出口ドア
-	//"data/MODEL/roomdoor.x",			//	奥の部屋のドア
-	//"data/MODEL/exit.x",				//	入口ドア
+	"data/MODEL/wall_oku.x",		//	ルーム1の奥の壁
+	"data/MODEL/wall_hidari.x",		//	ルーム1の左壁
+	"data/MODEL/wall_temae.x",		//	ルーム1の手前壁
+	"data/MODEL/wall_migi.x",		//	ルーム1の右壁奥
+	"data/MODEL/wall_migi.x",		//	ルーム1の右壁手前
+
+	"data/MODEL/wall_oku.x",		//	ルーム2の奥の壁
+	"data/MODEL/wall_temae.x",		//	ルーム2の手前壁
+	"data/MODEL/wall_migi.x",		//	ルーム2の右壁奥
+	"data/MODEL/wall_migi.x",		//	ルーム2の右壁手前
+
+	"data/MODEL/wall_oku.x",		//	ルーム3の奥の壁
+	"data/MODEL/wall_temae.x",		//	ルーム3の手前壁
+	"data/MODEL/wall_migi.x",		//	ルーム3の右壁奥
+	"data/MODEL/wall_migi.x",		//	ルーム3の右壁手前
+
+	"data/MODEL/wall_oku.x",		//	ルーム4の奥の壁
+	"data/MODEL/wall_temae.x",		//	ルーム4の手前壁
+	"data/MODEL/wall_migi.x",		//	ルーム4の右壁奥
+	"data/MODEL/wall_migi.x",		//	ルーム4の右壁手前
+
+	"data/MODEL/roomdoor.x",		//	ルーム1のドア
+	"data/MODEL/roomdoor.x",		//	ルーム2のドア
+	"data/MODEL/roomdoor.x",		//	ルーム3のドア
+	"data/MODEL/roomdoor.x",		//	ルーム4のドア
+
+	"data/MODEL/wall_goal_oku.x",	//	ゴールの奥壁
+	"data/MODEL/wall_goal_temae.x",	//	ゴールの手前壁
+	"data/MODEL/wall_goal_migi.x",	//	ゴールの右壁
 
 };
 

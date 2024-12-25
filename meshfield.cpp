@@ -27,7 +27,7 @@ void InitMeshfield(void)
 	//デバイスの取得
 	pDevice = GetDevice();
 
-	g_posMeshfield = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+	g_posMeshfield = D3DXVECTOR3(850.0f, 0.0f, 0.0f);
 	g_rotMeshfield = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 
 	//頂点バッファの生成

@@ -39,7 +39,7 @@ void InitPlayer(void)
 	pDevice = GetDevice();
 
 	//初期化
-	g_player.pos = D3DXVECTOR3(-680.0f, 0.0f, 0.0f);			//位置を初期化する
+	g_player.pos = D3DXVECTOR3(-380.0f, 0.0f, 0.0f);			//位置を初期化する
 	g_player.posOld = D3DXVECTOR3(0.0f, 0.0f, 0.0f);			//前の位置を初期化する
 	g_player.move = D3DXVECTOR3(0.0f, 0.0f, 0.0f);				//移動量を初期化する
 	g_player.rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);				//向きを初期化する

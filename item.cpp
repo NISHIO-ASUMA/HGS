@@ -209,9 +209,6 @@ void DrawItem()
 			// マテリアルデータへのポインタを取得
 			pMat = (D3DXMATERIAL*)g_Item[nCnt].aModel[nType].pBuffMat->GetBufferPointer();
 
-			// マテリアル
-			D3DXMATERIAL mat;
-
 			// テクスチャ設定
 			pDevice->SetTexture(0, g_Item[nCnt].aModel[nType].pTexture[nCntMat]);
 
