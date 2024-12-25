@@ -10,6 +10,8 @@
 //*******************************
 #include "item.h"
 #include "shadow.h"
+#include "player.h"
+#include "input.h"
 
 //*******************************
 // マクロ定義
@@ -22,6 +24,7 @@
 Item g_Item[MAX_ITEM];		// 構造体変数
 int nNumItem;				// アイテム数
 int nGetNumber;				// 取得番号
+bool g_bItem[ITEMTYPE_MAX];	// 取得	
 
 //==============================
 // 初期化
@@ -42,6 +45,7 @@ void InitItem()
 		g_Item[nCnt].pos = D3DXVECTOR3(0.0f, 0.0f, 0.0f); // 座標
 		g_Item[nCnt].rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f); // 角度
 		g_Item[nCnt].Type = ITEMTYPE_SPRING;			  // 種類
+		g_Item[nCnt].nLife = 1;							  // 体力
 
 		for (int nModel = 0; nModel < ITEMTYPE_MAX; nModel++)
 		{// モデルの読み込み
@@ -106,7 +110,54 @@ void UninitItem()
 //==============================
 void UpdateItem()
 {
-	// TODO : 後に処理追加
+	// プレイヤーの取得
+	Player* pPlayer = GetPlayer();
+
+	for (int nCnt = 0; nCnt < MAX_ITEM; nCnt++)
+	{
+		if (!g_Item[nCnt].bUse)
+		{// 未使用状態の時
+			continue;
+		}
+
+		// 種類を保存
+		int nType = g_Item[nCnt].Type;
+
+		// 影の座標更新設定
+		SetPositionShadow(g_Item[nCnt].nIdxshadow, D3DXVECTOR3(g_Item[nCnt].pos.x, 0.0f, g_Item[nCnt].pos.z));
+
+		// 半径を算出する変数
+		D3DXVECTOR3 PlayerPos(20.0f, 0.0f, 20.0f);
+		D3DXVECTOR3 ItemPos(20.0f, 0.0f, 20.0f);
+
+		// プレイヤーとの距離の差を求める
+		D3DXVECTOR3 diff = pPlayer->pos - g_Item[nCnt].pos;
+
+		// 角度の算出
+		float fAngle = atan2f(diff.x, diff.z);
+
+		// 範囲計算===============================================
+		// 距離を求める
+		float fDisX = (pPlayer->pos.x - g_Item[nCnt].pos.x);
+		float fDisY = (pPlayer->pos.y - g_Item[nCnt].pos.y);
+		float fDisZ = (pPlayer->pos.z - g_Item[nCnt].pos.z);
+
+		// 2つの半径
+		float fRadX = (PlayerPos.x + ItemPos.x);
+		float fRadY = (PlayerPos.y + ItemPos.y);
+		float fRadZ = (PlayerPos.z + ItemPos.z);
+		//========================================================
+
+		// 範囲内にはいったとき
+		if ((fDisX * fDisX) + (fDisY * fDisY) + (fDisZ * fDisZ) <= (fRadX + fRadY + fRadZ) * (fRadX + fRadY + fRadZ))
+		{
+			if (KeyboardTrigger(DIK_RETURN) || JoyPadTrigger(JOYKEY_B))
+			{// ENTER もしくはBボタンが押された
+				// ヒット処理
+				HitItem(nCnt, 1);
+			}
+		}
+	}	
 }
 //==============================
 // 描画
@@ -186,7 +237,7 @@ void SetItem(D3DXVECTOR3 pos, ITEMTYPE Type)
 			g_Item[nCnt1].bUse = true;		// 使用判定
 
 			// 影の設定
-			g_Item[nCnt1].nIdxshadow = SetShadow(D3DXVECTOR3(g_Item[nCnt1].pos.x, 0.0f, g_Item[nCnt1].pos.z), g_Item[nCnt1].rot, D3DXVECTOR3(0.5f, 0.0f, 0.5f));
+			g_Item[nCnt1].nIdxshadow = SetShadow(D3DXVECTOR3(g_Item[nCnt1].pos.x, 0.0f, g_Item[nCnt1].pos.z), g_Item[nCnt1].rot);
 
 			// アイテム数をカウント
 			nNumItem++;
@@ -194,4 +245,37 @@ void SetItem(D3DXVECTOR3 pos, ITEMTYPE Type)
 			break;
 		}
 	}
+}
+//============================
+// ヒット処理
+//============================
+void HitItem(int nCnt, int nDamage)
+{
+	// ダメージを受けたら体力減少
+	g_Item[nCnt].nLife -= nDamage;
+
+	// Lifeが0以下の時
+	if (g_Item[nCnt].nLife <= 0)
+	{
+		//	未使用判定
+		g_Item[nCnt].bUse = false;
+
+		// 取得した状態にする
+		g_bItem[g_Item[nCnt].Type] = true;
+	}
+}
+//============================
+// リザルトへの番号を渡す
+//============================
+int GetResultNumber()
+{
+	// TODO : 取ったアイテムによってリザルトのテクスチャを変更させる処理
+	return nGetNumber;
+}
+//============================
+// 取得処理
+//============================
+Item* GetItem()
+{
+	return &g_Item[0];
 }

@@ -59,6 +59,7 @@ typedef struct
 	ItemModel aModel[ITEMTYPE_MAX]; // モデル情報
 	bool bUse;       // 使用判定
 	int nIdxshadow;  // 影
+	int nLife;		 // 体力
 }Item;
 
 //*********************************
@@ -69,5 +70,8 @@ void UninitItem();				// 終了処理
 void UpdateItem();				// 更新処理
 void DrawItem();				// 描画処理
 void SetItem(D3DXVECTOR3 pos, ITEMTYPE Type);	// 設定処理
+void HitItem(int nCnt, int nDamage); // ヒット処理
+int GetResultNumber();			// リザルト番号
+Item* GetItem();				// 取得処理
 
 #endif
