@@ -200,6 +200,29 @@ void UpdateItem()
 				}
 
 				//エリア2
+				if (bGet && g_Item[nCnt].Type == ITEMTYPE_SHOP)
+				{
+					g_Item[ITEMTYPE_PARK].bUse = false;
+					g_Item[ITEMTYPE_SCHOOL].bUse = false;
+
+					bGet = false;
+				}
+				else if (bGet && g_Item[nCnt].Type == ITEMTYPE_PARK)
+				{
+					g_Item[ITEMTYPE_SHOP].bUse = false;
+					g_Item[ITEMTYPE_SCHOOL].bUse = false;
+
+					bGet = false;
+				}
+				else if (bGet && g_Item[nCnt].Type == ITEMTYPE_SCHOOL)
+				{
+					g_Item[ITEMTYPE_SHOP].bUse = false;
+					g_Item[ITEMTYPE_PARK].bUse = false;
+
+					bGet = false;
+				}
+
+				//エリア3
 				if (bGet && g_Item[nCnt].Type == ITEMTYPE_FOOD1)
 				{
 					g_Item[ITEMTYPE_FOOD2].bUse = false;
@@ -256,21 +279,35 @@ void UpdateItem()
 		}
 
 		//エリア2
-		if (g_Item[nCnt].Type == ITEMTYPE_FOOD1 && g_Item[nCnt].bUse == false)
+		if (g_Item[nCnt].Type == ITEMTYPE_SHOP && g_Item[nCnt].bUse == false)
 		{
 			bItemGet2 = true;
+		}
+		else if (g_Item[nCnt].Type == ITEMTYPE_PARK && g_Item[nCnt].bUse == false)
+		{
+			bItemGet2 = true;
+		}
+		else if (g_Item[nCnt].Type == ITEMTYPE_SCHOOL && g_Item[nCnt].bUse == false)
+		{
+			bItemGet2 = true;
+		}
+
+		//エリア3
+		if (g_Item[nCnt].Type == ITEMTYPE_FOOD1 && g_Item[nCnt].bUse == false)
+		{
+			bItemGet3 = true;
 		}
 		else if (g_Item[nCnt].Type == ITEMTYPE_FOOD2 && g_Item[nCnt].bUse == false)
 		{
-			bItemGet2 = true;
+			bItemGet3 = true;
 		}
 		else if (g_Item[nCnt].Type == ITEMTYPE_FOOD3 && g_Item[nCnt].bUse == false)
 		{
-			bItemGet2 = true;
+			bItemGet3 = true;
 		}
 		else if (g_Item[nCnt].Type == ITEMTYPE_FOOD4 && g_Item[nCnt].bUse == false)
 		{
-			bItemGet2 = true;
+			bItemGet3 = true;
 		}
 
 		g_Item[nCnt].rot.y += 0.02f;

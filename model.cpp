@@ -190,6 +190,7 @@ void UpdateModel(void)
 {
 	bool bItemGet1 = ItemGet1();
 	bool bItemGet2 = ItemGet2();
+	bool bItemGet3 = ItemGet3();
 
 	for (int nCntModel = 0; nCntModel < MAX_MODEL; nCntModel++)
 	{
@@ -211,6 +212,20 @@ void UpdateModel(void)
 		if (bItemGet2 == true)
 		{
 			if (g_aModel[nCntModel].nType == WALLTYPE_DOOR2)
+			{
+				if (g_aModel[nCntModel].pos.z >= 130)
+				{
+					g_aModel[nCntModel].move.z = 0.0f;
+				}
+				else
+				{
+					g_aModel[nCntModel].move.z += 0.2f;
+				}
+			}
+		}
+		if (bItemGet3 == true)
+		{
+			if (g_aModel[nCntModel].nType == WALLTYPE_DOOR3)
 			{
 				if (g_aModel[nCntModel].pos.z >= 130)
 				{

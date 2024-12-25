@@ -21,10 +21,18 @@ typedef enum
 	ITEMTYPE_SUMMER,		// 夏
 	ITEMTYPE_AUTUMN,		// 秋
 	ITEMTYPE_WINTER,		// 冬
+
+	ITEMTYPE_SHOP,			// お店
+	ITEMTYPE_PARK,			// 公園
+	ITEMTYPE_SCHOOL,		// 学校
+
 	ITEMTYPE_FOOD1,			// 三色団子
 	ITEMTYPE_FOOD2,			// スイカ
 	ITEMTYPE_FOOD3,			// サツマイモ
 	ITEMTYPE_FOOD4,			// みかん
+	ITEMTYPE_RING,			// 指輪
+	ITEMTYPE_NECK,			// ネックレス
+
 	ITEMTYPE_MAX
 }ITEMTYPE;
 
