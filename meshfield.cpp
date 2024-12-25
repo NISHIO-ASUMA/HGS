@@ -40,7 +40,7 @@ void InitMeshfield(void)
 
 	//テクスチャの読み込み
 	D3DXCreateTextureFromFile(pDevice,
-		"data\\TEXTURE\\floor.png",
+		"data\\TEXTURE\\wood000.jpg",
 		&g_pTextureMeshfield);
 
 	//インデックスバッファの生成

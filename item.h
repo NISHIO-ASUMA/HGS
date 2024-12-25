@@ -33,7 +33,14 @@ typedef enum
 //*********************************
 static const char* ITEM_MODEL[ITEMTYPE_MAX] =
 {
-
+	"data\\MODEL\\present_box.x",
+	"data\\MODEL\\present_box.x",
+	"data\\MODEL\\present_box.x",
+	"data\\MODEL\\present_box.x",
+	"data\\MODEL\\present_box.x",
+	"data\\MODEL\\present_box.x",
+	"data\\MODEL\\present_box.x",
+	"data\\MODEL\\present_box.x",
 };
 
 //*********************************

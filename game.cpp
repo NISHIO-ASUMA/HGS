@@ -29,6 +29,7 @@
 #include "rankscore.h"
 #include "sound.h"
 #include "bullet.h"
+#include "item.h"
 
 //**********************************
 // グローバル変数宣言
@@ -111,6 +112,9 @@ void InitGame(void)
 	// タイマーの初期化
 	InitTimer();
 
+	// アイテムの初期化
+	InitItem();
+
 	//// 敵の初期化
 	//InitEnemy();
 
@@ -119,6 +123,9 @@ void InitGame(void)
 
 	// スコアの初期化
 	InitScore();
+
+	// セット
+	SetItem(D3DXVECTOR3(200.0f, 20.0f, 0.0f), ITEMTYPE_SPRING);
 
 	g_gameState = GAMESTATE_NORMAL;	//　通常状態の設定
 	g_nCounterGameState = 0;		//	カウンターの初期化
@@ -168,8 +175,8 @@ void UninitGame(void)
 	// プレイヤーの終了
 	UninitPlayer();
 
-	// プレイヤーの終了
-	UninitPlayer();			
+	// アイテムの終了
+	UninitItem();
 
 	// エフェクトの終了
 	UninitEffect();			
@@ -215,6 +222,8 @@ void UpdateGame(void)
 		//プレイヤーの更新処理
 		UpdatePlayer();
 
+		// アイテムの更新
+		UpdateItem();
 
 		////敵の更新処理
 		//UpdateEnemy();
@@ -349,6 +358,9 @@ void DrawGame(void)
 	// カメラのセット
 	SetCamera();
 
+	// アイテムの描画
+	DrawItem();
+
 	// メッシュフィールドの描画
 	DrawMeshfield();
 
@@ -363,6 +375,7 @@ void DrawGame(void)
 
 	//モデルの描画処理
 	DrawModel();
+
 
 	//// ブロックの描画
 	//DrawBlock();
