@@ -157,7 +157,7 @@ void UpdateItem()
 		// 範囲内にはいったとき
 		if ((fDisX * fDisX) + (fDisY * fDisY) + (fDisZ * fDisZ) <= (fRadX + fRadY + fRadZ) * (fRadX + fRadY + fRadZ))
 		{
-			if (KeyboardTrigger(DIK_RETURN) || JoyPadTrigger(JOYKEY_B))
+			if (KeyboardTrigger(DIK_RETURN) || JoyPadTrigger(JOYKEY_A))
 			{// ENTER もしくはBボタンが押された
 				// ヒット処理
 				HitItem(nCnt, 1);

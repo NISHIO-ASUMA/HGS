@@ -242,47 +242,47 @@ void StickCamera(void)
 	// スティック
 	XINPUT_STATE* pStick = GetJoyStickAngle();
 
-	if (GetJoyStick())
-	{
-		float RStickAngleY = pStick->Gamepad.sThumbRY;
-		float RStickAngleX = pStick->Gamepad.sThumbRX;
+	//if (GetJoyStick())
+	//{
+	//	float RStickAngleY = pStick->Gamepad.sThumbRY;
+	//	float RStickAngleX = pStick->Gamepad.sThumbRX;
 
-		float DeadZone = 10920.0f;
-		float fMag = sqrtf((RStickAngleX * RStickAngleX) + (RStickAngleY * RStickAngleY));
+	//	float DeadZone = 10920.0f;
+	//	float fMag = sqrtf((RStickAngleX * RStickAngleX) + (RStickAngleY * RStickAngleY));
 
-		if (fMag > DeadZone)
-		{
-			if (pStick->Gamepad.sThumbRX < -10920.0f)
-			{
-				// 角度
-				g_camera.rot.y -= 0.03f;
+	//	if (fMag > DeadZone)
+	//	{
+	//		if (pStick->Gamepad.sThumbRX < -10920.0f)
+	//		{
+	//			// 角度
+	//			g_camera.rot.y -= 0.03f;
 
-				g_camera.posV.x = g_camera.posR.x - sinf(g_camera.rot.y) * sinf(g_camera.rot.y) * g_camera.fDistance;
-				g_camera.posV.z = g_camera.posR.z - sinf(g_camera.rot.y) * cosf(g_camera.rot.y) * g_camera.fDistance;
+	//			g_camera.posV.x = g_camera.posR.x - sinf(g_camera.rot.y) * sinf(g_camera.rot.y) * g_camera.fDistance;
+	//			g_camera.posV.z = g_camera.posR.z - sinf(g_camera.rot.y) * cosf(g_camera.rot.y) * g_camera.fDistance;
 
-			}
-			else if (pStick->Gamepad.sThumbRX > 10920.0f)
-			{
-				// 角度
-				g_camera.rot.y += 0.03f;
+	//		}
+	//		else if (pStick->Gamepad.sThumbRX > 10920.0f)
+	//		{
+	//			// 角度
+	//			g_camera.rot.y += 0.03f;
 
-				g_camera.posV.x = g_camera.posR.x - sinf(g_camera.rot.y) * sinf(g_camera.rot.y) * g_camera.fDistance;
-				g_camera.posV.z = g_camera.posR.z - sinf(g_camera.rot.y) * cosf(g_camera.rot.y) * g_camera.fDistance;
+	//			g_camera.posV.x = g_camera.posR.x - sinf(g_camera.rot.y) * sinf(g_camera.rot.y) * g_camera.fDistance;
+	//			g_camera.posV.z = g_camera.posR.z - sinf(g_camera.rot.y) * cosf(g_camera.rot.y) * g_camera.fDistance;
 
-			}
+	//		}
 
+	
+	//		// 角度の正規化
+	//		if (g_camera.rot.y > D3DX_PI)
+	//		{// D3DX_PIより大きくなったら
+	//			g_camera.rot.y -= D3DX_PI * 2.0f;
+	//		}
 
-			// 角度の正規化
-			if (g_camera.rot.y > D3DX_PI)
-			{// D3DX_PIより大きくなったら
-				g_camera.rot.y -= D3DX_PI * 2.0f;
-			}
-
-			// 角度の正規化
-			if (g_camera.rot.y < -D3DX_PI)
-			{// D3DX_PIより小さくなったら
-				g_camera.rot.y += D3DX_PI * 2.0f;
-			}
-		}
-	}
+	//		// 角度の正規化
+	//		if (g_camera.rot.y < -D3DX_PI)
+	//		{// D3DX_PIより小さくなったら
+	//			g_camera.rot.y += D3DX_PI * 2.0f;
+	//		}
+	//	}
+	//}
 }

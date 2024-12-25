@@ -188,7 +188,7 @@ void InitTitle(void)
 	}
 
 
-	SetTitle(TITLE_FIRST, D3DXVECTOR3(620.0f, 230.0f, 0.0f));//タイトル1
+	SetTitle(TITLE_FIRST, D3DXVECTOR3(620.0f, 250.0f, 0.0f));//タイトル1
 	SetTitle(TITLE_SECOND, D3DXVECTOR3(640.0f, 600.0f, 0.0f));//タイトル2
 	//SetTitle(TITLE_TWO, D3DXVECTOR3(980.0f, 350.0f, 0.0f));//2
 
@@ -401,8 +401,8 @@ void SetTitle(int nType, D3DXVECTOR3 pos)
 			{
 			case TITLE_FIRST:
 
-				g_aTitle[nCntTitle].fHeight = 450.0f;//高さ
-				g_aTitle[nCntTitle].fWidth = 850.0f;//横幅
+				g_aTitle[nCntTitle].fHeight = 250.0f;//高さ
+				g_aTitle[nCntTitle].fWidth = 770.0f;//横幅
 				break;
 
 			case TITLE_SECOND:
@@ -414,7 +414,7 @@ void SetTitle(int nType, D3DXVECTOR3 pos)
 			case TITLE_TWO:
 
 				g_aTitle[nCntTitle].fHeight = 160.0f;//高さ
-				g_aTitle[nCntTitle].fWidth = 130.0f; //横幅
+				g_aTitle[nCntTitle].fWidth = 650.0f; //横幅
 				break;
 
 			}
