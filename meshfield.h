@@ -16,7 +16,7 @@
 //	D3DXVECTOR3 rot;
 //}MeshField;
 
-#define MAX_WIDTH (3100.0f)			//‰¡•
+#define MAX_WIDTH (3300.0f)			//‰¡•
 #define MAX_HEIGHT (1100.0f)		//c•
 
 #define MESHFIELD_X (20)			//X•ûŒü‚ÌƒuƒƒbƒN”
