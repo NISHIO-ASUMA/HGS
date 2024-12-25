@@ -636,7 +636,7 @@ void DrawDebugPlayerPos(void)
 	char aString3[256];
 
 	// Žæ“¾
-	PLAYER* pPlayer = GetPlayer();
+	Player* pPlayer = GetPlayer();
 
 	// •¶Žš—ñ‚É‘ã“ü
 	sprintf(&aString[0],  "ƒvƒŒƒCƒ„[‚Ìpos.x:%.2f\n",  pPlayer->pos.x);

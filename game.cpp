@@ -43,11 +43,43 @@ bool isSelect = false;						// セレクト画面かどうか
 //========================
 void InitGame(void)
 {
+	//モデルの初期化処理
+	InitModel();
+
+
+	//モデル
+	SetModel(D3DXVECTOR3(-220.0f, 0.0f, 385.0f), WALLTYPE_NORMAL);		//	奥壁左
+	SetModel(D3DXVECTOR3(260.0f, 0.0f, 385.0f), WALLTYPE_NORMAL);		//	奥壁右
+	//SetModel(D3DXVECTOR3(-60.0f, 0.0f, 480.0f), WALLTYPE_NORMAL);		//	奥の通路壁左
+	//SetModel(D3DXVECTOR3(100.0f, 0.0f, 480.0f), WALLTYPE_NORMAL);		//	奥の通路壁右
+	//SetModel(D3DXVECTOR3(-220.0f, 0.0f, -395.0f), WALLTYPE_MINI);		//	手前壁左
+	//SetModel(D3DXVECTOR3(240.0f, 0.0f, -395.0f), WALLTYPE_MINI);		//	手前壁右
+	//SetModel(D3DXVECTOR3(10.0f, 0.0f, -445.0f), WALLTYPE_MINI);			//	手前壁真ん中
+	//SetModel(D3DXVECTOR3(385.0f, 0.0f, 235.0f), WALLTYPE_NORMAL);		//	右の奥壁
+	//SetModel(D3DXVECTOR3(385.0f, 0.0f, -235.0f), WALLTYPE_NORMAL);		//	右の手前壁
+	//SetModel(D3DXVECTOR3(565.0f, 0.0f, -90.0f), WALLTYPE_MINI);			//	出口通路手前
+	//SetModel(D3DXVECTOR3(585.0f, 0.0f, 90.0f), WALLTYPE_NORMAL);		//	出口通路奥
+	//SetModel(D3DXVECTOR3(-385.0f, 0.0f, 235.0f), WALLTYPE_NORMAL);		//	左の奥壁
+	//SetModel(D3DXVECTOR3(-385.0f, 0.0f, -235.0f), WALLTYPE_NORMAL);		//	左の壁手前
+	//SetModel(D3DXVECTOR3(-565.0f, 0.0f, -90.0f), WALLTYPE_MINI);		//　入口通路手前
+	//SetModel(D3DXVECTOR3(-585.0f, 0.0f, 90.0f), WALLTYPE_NORMAL);		//	入口通路奥
+	//SetModel(D3DXVECTOR3(-160.0f, 0.0f, -20.0f), WALLTYPE_NORMAL);		//	真ん中の壁左
+	//SetModel(D3DXVECTOR3(180.0f, 0.0f, -20.0f), WALLTYPE_NORMAL);		//	真ん中の壁右
+	//SetModel(D3DXVECTOR3(10.0f, 0.0f, 180.0f), WALLTYPE_MINI);			//	真ん中の奥
+	//SetModel(D3DXVECTOR3(10.0f, 0.0f, -215.0f), WALLTYPE_MINI);			//	真ん中の手前
+	//SetModel(D3DXVECTOR3(-170.0f, 0.0f, 610.0f), WALLTYPE_MINI);		//	奥の部屋の手前左
+	//SetModel(D3DXVECTOR3(200.0f, 0.0f, 610.0f), WALLTYPE_MINI);			//	奥の部屋の手前右
+	//SetModel(D3DXVECTOR3(-260.0f, 0.0f, 750.0f), WALLTYPE_NORMAL);		//	奥の部屋の左
+	//SetModel(D3DXVECTOR3(280.0f, 0.0f, 750.0f), WALLTYPE_NORMAL);		//	奥の部屋の右
+	//SetModel(D3DXVECTOR3(10.0f, 0.0f, 920.0f), WALLTYPE_NORMAL);		//	奥の部屋の奥壁
+	//SetModel(D3DXVECTOR3(-480.0f, 0.0f, 0.0f), WALLTYPE_EXIT);			//	出口のドア奥
+	//SetModel(D3DXVECTOR3(-750.0f, 0.0f, 0.0f), WALLTYPE_ENTERDOOR);		//	入口ドア
+
 	// カメラの初期化
 	InitCamera();
 
 	// メッシュフィールドの初期化
-	InitMeshField();
+	InitMeshfield();
 
 	// メッシュのシリンダー形の初期化
 	InitMeshWall();
@@ -76,11 +108,11 @@ void InitGame(void)
 	// タイマーの初期化
 	InitTimer();
 
-	// 敵の初期化
-	InitEnemy();
+	//// 敵の初期化
+	//InitEnemy();
 
-	// ブロックの初期化
-	InitBlock();
+	//// ブロックの初期化
+	//InitBlock();
 
 	// スコアの初期化
 	InitScore();
@@ -113,7 +145,7 @@ void UninitGame(void)
 	UninitShadow();
 
 	// メッシュフィールドの終了
-	UninitMeshField();
+	UninitMeshfield();
 
 	 // メッシュのシリンダー形の終了
 	UninitMeshWall();
@@ -121,11 +153,14 @@ void UninitGame(void)
 	 // メッシュドームの終了
 	UninitmeshFan();
 
-	// ブロックの終了
-	UninitBlock();
+	//モデルの終了処理
+	UninitModel();
 
-	// 敵の終了
-	UninitEnemy();
+	//// ブロックの終了
+	//UninitBlock();
+
+	//// 敵の終了
+	//UninitEnemy();
 
 	// プレイヤーの終了
 	UninitPlayer();
@@ -154,7 +189,7 @@ void UpdateGame(void)
 	//int nTime = GetTime();
 	//bool bExit = GetExit();
 
-	PLAYER* pPlayer = GetPlayer();//プレイヤーの情報へのポインタにプレイヤーの先頭アドレスが代入される
+	Player* pPlayer = GetPlayer();//プレイヤーの情報へのポインタにプレイヤーの先頭アドレスが代入される
 
 	if (KeyboardTrigger(DIK_P) == true || JoyPadTrigger(JOYKEY_START) == true)
 	{//ESCAPE(ポーズ)キーが押された
@@ -178,8 +213,8 @@ void UpdateGame(void)
 		UpdatePlayer();
 
 
-		//敵の更新処理
-		UpdateEnemy();
+		////敵の更新処理
+		//UpdateEnemy();
 
 
 		////メッシュフィールドの更新処理
@@ -312,22 +347,25 @@ void DrawGame(void)
 	SetCamera();
 
 	// メッシュフィールドの描画
-	DrawMeshField();
+	DrawMeshfield();
 
-	// メッシュドームの描画
-	DrawmeshFan();
+	//// メッシュドームの描画
+	//DrawmeshFan();
 
-	// メッシュのシリンダー形の描画
-	DrawMeshWall();
+	//// メッシュのシリンダー形の描画
+	//DrawMeshWall();
 
 	// 影の描画
 	DrawShadow();
 
-	// ブロックの描画
-	DrawBlock();
+	//モデルの描画処理
+	DrawModel();
 
-	// 敵の描画
-	DrawEnemy();
+	//// ブロックの描画
+	//DrawBlock();
+
+	//// 敵の描画
+	//DrawEnemy();
 
 	// プレイヤーの描画
 	DrawPlayer();

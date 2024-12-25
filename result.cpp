@@ -31,7 +31,7 @@ void InitResult(void)
 	LPDIRECT3DDEVICE9 pDevice = GetDevice();		
 
 	// プレイヤーの取得
-	PLAYER* pPlayer = GetPlayer();
+	Player* pPlayer = GetPlayer();
 
 	// タイマー情報を取得
 	int nTime = GetTimer();
@@ -115,7 +115,7 @@ void UninitResult(void)
 void UpdateResult(void)
 {
 	// プレイヤーの取得
-	PLAYER* pPlayer = GetPlayer();
+	Player* pPlayer = GetPlayer();
 
 	// 現在のフェードの取得
 	FADE g_fade = GetFade();
@@ -136,7 +136,7 @@ void UpdateResult(void)
 void DrawResult(void)
 {
 	//プレイヤーの取得
-	PLAYER* pPlayer = GetPlayer();
+	Player* pPlayer = GetPlayer();
 
 	// デバイスへのポインタ
 	LPDIRECT3DDEVICE9 pDevice = GetDevice();		

@@ -152,7 +152,7 @@ void UpdateBullet(void)
 			{// 体力が0以下なら
 				g_Bullet[nCnt].bUse = false;		// 未使用
 				SetParticle(D3DXVECTOR3(g_Bullet[nCnt].pos.x, g_Bullet[nCnt].pos.y + 10.0f, g_Bullet[nCnt].pos.z),D3DXCOLOR (1.0f,1.0f,0.0f,1.0f),15,PARTICLETYPE_BULLET);
-				DeleteShadow(g_Bullet[nCnt].nIdxBullet);	// 影の消去
+				//DeleteShadow(g_Bullet[nCnt].nIdxBullet);	// 影の消去
 			}
 		}
 	}
@@ -237,7 +237,7 @@ void SetBullet(D3DXVECTOR3 pos, D3DXVECTOR3 dir,int nLife,D3DXVECTOR3 move)
 			g_Bullet[nCnt].dir = dir;	// 方向ベクトル
 			g_Bullet[nCnt].move = move;
 			g_Bullet[nCnt].nLife = nLife;
-			g_Bullet[nCnt].nIdxBullet = SetShadow(D3DXVECTOR3(g_Bullet[nCnt].pos.x, 0.0f, g_Bullet[nCnt].pos.z), g_Bullet[nCnt].rot, D3DXVECTOR3(0.5f,0.0f,0.5f));
+			//g_Bullet[nCnt].nIdxBullet = SetShadow(D3DXVECTOR3(g_Bullet[nCnt].pos.x, 0.0f, g_Bullet[nCnt].pos.z), g_Bullet[nCnt].rot, D3DXVECTOR3(0.5f,0.0f,0.5f));
 
 			break;
 		}

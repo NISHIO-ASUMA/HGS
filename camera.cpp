@@ -49,7 +49,7 @@ void UninitCamera(void)
 void UpdateCamera(void)
 {
 	// プレイヤーを取得
-	PLAYER* pPlayer = GetPlayer();
+	Player* pPlayer = GetPlayer();
 
 	//// マウス情報を取得
 	//DIMOUSESTATE pMouse = GetMouseState();

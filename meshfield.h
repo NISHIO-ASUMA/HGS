@@ -1,33 +1,35 @@
-//======================================
+//=======================================
 //
-// メッシュフィールド処理 [mashfield.h]
-// Author: TEAM_2
+//メッシュフィールド処理[meshfield.h]
+//Author : TANEKAWA RIKU
 //
-//======================================
-#ifndef _MESHFIELD_H_
-#define _MESHFIELD_H_
+//=======================================
+#ifndef _MESHFIELD_H_//このマクロ定義がされていなかったら
+#define _MESHFIELD_H_//2重インクルード防止のマクロ定義
 
-//***************************
-// インクルードファイル宣言
-//***************************
 #include "main.h"
 
-//***************************
-// 構造体宣言
-//***************************
-typedef struct
-{
-	D3DXVECTOR3 pos;		// 位置
-	D3DXVECTOR3 rot;		// 向き
-	D3DXMATRIX  mtxWorld;	// ワールドマトリックス
-}Meshfield;
+////メッシュフィールド構造体
+//typedef struct
+//{
+//	D3DXVECTOR3 pos;
+//	D3DXVECTOR3 rot;
+//}MeshField;
 
-//**********************
-// プロトタイプ宣言
-//**********************
-void InitMeshField(void);	// ポリゴン初期化処理
-void UninitMeshField(void);	// ポリゴン終了処理
-void UpdateMeshField(void);	// ポリゴン更新処理
-void DrawMeshField(void);	// ポリゴン描画処理
+#define MAX_WIDTH (2000.0f)			//横幅
+#define MAX_HEIGHT (2400.0f)		//縦幅
 
-#endif // !_POLYGON_H_
+#define MESHFIELD_X (20)			//X方向のブロック数
+#define MESHFIELD_Z (20)			//Z方向のブロック数
+
+#define MAX_PRIMITIVE (((MESHFIELD_X * MESHFIELD_Z) * 2)) + (4 * (MESHFIELD_Z - 1))//プリミティブ数
+#define MAX_VERTEX ((MESHFIELD_X + 1) * (MESHFIELD_Z + 1))//頂点数
+#define MAX_INDEX (MAX_PRIMITIVE + 2)//インデックス数
+
+//プロトタイプ宣言
+void InitMeshfield(void);
+void UninitMeshfield(void);
+void UpdateMeshfield(void);
+void DrawMeshfield(void);
+
+#endif
