@@ -30,3 +30,5 @@
 *.exe
 *.out
 *.app
+/.vs/hgs-2024/v16/*.db
+/.vs/hgs-2024/v16/*.suo
