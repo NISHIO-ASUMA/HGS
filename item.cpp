@@ -127,8 +127,8 @@ void UpdateItem()
 		int nType = g_Item[nCnt].Type;
 
 		// ”¼Œa‚ðŽZo‚·‚é•Ï”
-		D3DXVECTOR3 PlayerPos(6.0f, 0.0f, 6.0f);
-		D3DXVECTOR3 ItemPos(6.0f, 0.0f, 6.0f);
+		D3DXVECTOR3 PlayerPos(15.0f, 0.0f, 15.0f);
+		D3DXVECTOR3 ItemPos(15.0f, 0.0f, 15.0f);
 
 		// ƒvƒŒƒCƒ„[‚Æ‚Ì‹——£‚Ì·‚ð‹‚ß‚é
 		D3DXVECTOR3 diff = pPlayer->pos - g_Item[nCnt].pos;
