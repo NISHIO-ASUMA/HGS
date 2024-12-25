@@ -78,10 +78,10 @@ void InitTutorial(void)
 	pVtx[3].tex = D3DXVECTOR2(1.0f, 1.0f);
 
 
-
 	//頂点バッファをアンロックする
 	g_pVtxBuffTutorial->Unlock();
 
+	PlaySound(SOUND_LABEL_TUTORIALBGM);
 
 }
 //=================================
@@ -117,9 +117,6 @@ void UpdateTutorial(void)
 	{//決定キー(ENTERキー)が押された
 		//モード設定(チュートリアル画面2に移行)
 		SetMode(MODE_TUTORIAL2);
-
-		//PlaySound(SOUND_LABEL_TUTORIAL);
-
 	}
 
 }

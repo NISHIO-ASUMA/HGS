@@ -195,7 +195,7 @@ void InitTitle(void)
 	//アンロック
 	g_pVtxBuffTitle->Unlock();
 
-	//PlaySound(SOUND_LABEL_BGM);
+	PlaySound(SOUND_LABEL_TITLEBGM);
 
 }
 //==================
@@ -204,9 +204,9 @@ void InitTitle(void)
 void UninitTitle(void)
 {
 
-	////サウンドの停止
-	//StopSound(SOUND_LABEL_BGM);
-	//StopSound(SOUND_LABEL_ENTER);
+	//サウンドの停止
+	StopSound(SOUND_LABEL_TITLEBGM);
+	StopSound(SOUND_LABLE_ENTERSE);
 
 
 	//==================
@@ -304,7 +304,7 @@ void UpdateTitle(void)
 		{
 			alpha = 0.0f;
 
-			//PlaySound(SOUND_LABEL_ENTER);
+			PlaySound(SOUND_LABLE_ENTERSE);
 
 			//Enterキーが押された
 			for (int nCntTitle = 0; nCntTitle < NUM_TITLE; nCntTitle++)

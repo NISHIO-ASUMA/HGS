@@ -252,5 +252,5 @@ Shadow* GetShadow(void)
 }
 void ShadowFalse(int nIdxShadow)
 {//消したいオブジェクトの影
-	g_aShadow[nIdxShadow].bUse = false;
+	//g_aShadow[nIdxShadow].bUse = false;
 }

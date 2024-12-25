@@ -33,10 +33,10 @@ DWORD g_aSizeAudio[SOUND_LABEL_MAX] = {};					// オーディオデータサイズ
 // サウンドの情報
 SOUNDINFO g_aSoundInfo[SOUND_LABEL_MAX] =
 {
-	{"data/BGM/TitleBgm.wav", -1},   // タイトル
-	{"data/BGM/TutorialBgm.wav", -1},// チュートリアル
-	{"data/BGM/GameBgm.wav", -1},    // ゲーム
-	{"data/BGM/ResultBgm.wav", -1},  // リザルト
+	{"data/BGM/Title.wav", -1},   // タイトル
+	{"data/BGM/Tutorial.wav", -1},// チュートリアル
+	{"data/BGM/Game.wav", -1},    // ゲーム
+	{"data/BGM/Result.wav", -1},  // リザルト
 	{"data/BGM/RankingBgm.wav", -1}, // ランキング
 	{"data/SE/EnterSE.wav", 0},      // 決定キー
 	{"data/SE/Damage.wav", 0},     // ダメージSE
@@ -46,6 +46,8 @@ SOUNDINFO g_aSoundInfo[SOUND_LABEL_MAX] =
 	{"data/SE/PlayerDamage.wav", 0},		// プレイヤーダメージSE
 	{"data/SE/PauseMenu.wav", 0},		// ポーズ画面
 	{"data/SE/Select.wav", 0},		// セレクト入る
+	{"data/SE/footstep1.wav", 0},		// 足音1
+	{"data/SE/footstep2.wav", 0},		// 足音2
 
 };
 

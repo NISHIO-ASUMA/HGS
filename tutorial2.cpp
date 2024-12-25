@@ -84,7 +84,7 @@ void InitTutorial2(void)
 //=================================
 void UninitTutorial2(void)
 {
-	StopSound();
+	StopSound(SOUND_LABEL_TUTORIALBGM);
 
 	//テクスチャの破棄
 	if (g_pTextureTutorial2 != NULL)
@@ -115,15 +115,11 @@ void UpdateTutorial2(void)
 		//モード設定(セレクト画面に移行)
 		SetFade(MODE_GAME);
 
-		//PlaySound(SOUND_LABEL_TUTORIALEND);
-
 	}
 	else if (g_fade == FADE_NONE && (KeyboardTrigger(DIK_LEFT) == true || JoyPadTrigger(JOYKEY_B) == true))
 	{
 		//モード設定(チュートリアル画面に移行)
 		SetMode(MODE_TUTORIAL);
-
-		//PlaySound(SOUND_LABEL_TUTORIAL);
 
 	}
 }

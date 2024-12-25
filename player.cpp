@@ -144,8 +144,8 @@ void InitPlayer(void)
 //=============================
 void UninitPlayer(void)
 {
-	//StopSound(SOUND_LABEL_STEP1);
-	//StopSound(SOUND_LABEL_STEP2);
+	StopSound(SOUND_LABLE_STEP1);
+	StopSound(SOUND_LABLE_STEP2);
 
 	for (int nCntModel = 0; nCntModel < MAX_PARTS; nCntModel++)
 	{
@@ -395,14 +395,14 @@ void UpdatePlayer(void)
 	g_player.move.z += (0.0f - g_player.move.z) * 0.3f;
 	g_player.move.y += (0.0f - g_player.move.y) * 0.1f;
 
-	//if (g_player.motion.motionType == MOTIONTYPE_MOVE && g_player.motion.nKey == 1 && g_player.motion.nCounterMotion == 9)
-	//{
-	//	PlaySound(SOUND_LABEL_STEP1);
-	//}
-	//else if (g_player.motion.motionType == MOTIONTYPE_MOVE && g_player.motion.nKey == 3 && g_player.motion.nCounterMotion == 5)
-	//{
-	//	PlaySound(SOUND_LABEL_STEP2);
-	//}
+	if (g_player.motion.motionType == MOTIONTYPE_MOVE && g_player.motion.nKey == 1 && g_player.motion.nCounterMotion == 9)
+	{
+		PlaySound(SOUND_LABLE_STEP1);
+	}
+	else if (g_player.motion.motionType == MOTIONTYPE_MOVE && g_player.motion.nKey == 3 && g_player.motion.nCounterMotion == 5)
+	{
+		PlaySound(SOUND_LABLE_STEP2);
+	}
 
 	SetPositionShadow(g_nIdxShadow, D3DXVECTOR3(g_player.pos.x, 0.0f, g_player.pos.z));
 
