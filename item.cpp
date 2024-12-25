@@ -260,6 +260,7 @@ void UpdateItem()
 			}
 		}
 
+<<<<<<< HEAD
 		//ƒGƒŠƒA1
 		if (g_Item[nCnt].Type == ITEMTYPE_SPRING && g_Item[nCnt].bUse == false)
 		{
@@ -310,6 +311,9 @@ void UpdateItem()
 			bItemGet3 = true;
 		}
 
+=======
+		// ‰ñ“]
+>>>>>>> a68248052c48030b33f092368eb1f0f3d4971d17
 		g_Item[nCnt].rot.y += 0.02f;
 	}	
 }
