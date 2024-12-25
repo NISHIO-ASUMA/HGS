@@ -43,6 +43,16 @@ void InitItem()
 	nGetNumber = 0;
 	nNumItem = 0;
 	bGet = false;
+	bItemGet1 = false;
+	bItemGet2 = false;
+	bItemGet3 = false;
+	bItemGet4 = false;
+
+	// 初期化
+	for (int nNum = 0; nNum < ITEMTYPE_MAX; nNum++)
+	{
+		g_bItem[nNum] = false;
+	}
 
 	// 構造体変数の初期化
 	for (int nCnt = 0; nCnt < MAX_ITEM; nCnt++)
@@ -63,7 +73,7 @@ void InitItem()
 				NULL,
 				&g_Item[nCnt].aModel[nModel].dwNumMat,
 				&g_Item[nCnt].aModel[nModel].pMesh);
-
+			
 			// マテリアルデータへのポインタ
 			D3DXMATERIAL* pMat;
 
@@ -502,6 +512,7 @@ void HitItem(int nCnt, int nDamage)
 //============================
 int GetResultNumber()
 {
+	// TODO : S = 0,A = 1,B = 2,C = 3,D = 4,? = 5
 	// 取ったアイテムによってリザルトのテクスチャを変更させる処理
 	if (g_bItem[ITEMTYPE_SPRING])
 	{// 春を獲得
@@ -512,21 +523,49 @@ int GetResultNumber()
 				if (g_bItem[ITEMTYPE_HYO])
 				{// 表現
 					// 番号を返す
-					nGetNumber = 2;
+					nGetNumber = 0;	// Sランク
 				}
 			}
 			else if (g_bItem[ITEMTYPE_FOOD3])
 			{// サツマイモ
 				// 番号を返す
-				nGetNumber = 5;
+				nGetNumber = 3;  // Cランク
+			}
+			else
+			{
+				nGetNumber = 3;  // Cランク
 			}
 		}
-		else
-		{// 条件式に入らないとき
-			// 番号を返す
-			nGetNumber = 5;
+		else if (g_bItem[ITEMTYPE_PARK])
+		{// 公園
+			if (g_bItem[ITEMTYPE_FOOD1])
+			{// 団子を獲得
+				// 番号を返す
+				nGetNumber = 1; // Aランク
+			}
+			else
+			{
+				nGetNumber = 3;  // Cランク
+			}
 		}
-
+		else if (g_bItem[ITEMTYPE_SCHOOL])
+		{// 学校
+			if (g_bItem[ITEMTYPE_FOOD2])
+			{// スイカ
+				// 番号を返す
+				nGetNumber = 4; // Dランク
+			}
+			else if (g_bItem[ITEMTYPE_FOOD4])
+			{// みかん
+				// 番号を返す
+				nGetNumber = 2; // Bランク
+			}
+			else
+			{
+				// 番号を返す
+				nGetNumber = 5; // ?ランク
+			}
+		}
 	}
 	else if (g_bItem[ITEMTYPE_SUMMER])
 	{// 夏を獲得
@@ -537,13 +576,18 @@ int GetResultNumber()
 				if (g_bItem[ITEMTYPE_KARISUMA])
 				{
 					// 番号を返す
-					nGetNumber = 2;
+					nGetNumber = 0; // Sランク
 				}
 			}
 			else if (g_bItem[ITEMTYPE_FOOD4])
 			{// みかん
 				// 番号を返す
-				nGetNumber = 5;
+				nGetNumber = 3; // Cランク
+			}
+			else
+			{
+				// 番号を返す
+				nGetNumber = 4;		// Dランク
 			}
 
 		}
@@ -551,14 +595,40 @@ int GetResultNumber()
 		{// 店
 			if (g_bItem[ITEMTYPE_FOOD2])
 			{// スイカを獲得
-				if (g_bItem[ITEMTYPE_TALK])
-				{
+				// 番号を返す
+				nGetNumber = 1;		// Aランク
+			}
+			else if (g_bItem[ITEMTYPE_FOOD1])
+			{// 団子を獲得
+				// 番号を返す
+				nGetNumber = 3;		// Cランク
+			}
+			else
+			{
+				// 番号を返す
+				nGetNumber = 4;		// Dランク
+			}
+		}
+		else if (g_bItem[ITEMTYPE_SCHOOL])
+		{// 学校
+			if (g_bItem[ITEMTYPE_FOOD3])
+			{// サツマイモ
+				if (g_bItem[ITEMTYPE_KARISUMA])
+				{// カリスマ
 					// 番号を返す
-					nGetNumber = 3;
+					nGetNumber = 4;		// Dランク
+
+				}
+			}
+			else if (g_bItem[ITEMTYPE_FOOD1])
+			{// 団子
+				if (g_bItem[ITEMTYPE_TALK])
+				{// 話術
+					// 番号を返す
+					nGetNumber = 3;		// Cランク
 				}
 			}
 		}
-
 	}
 	else if (g_bItem[ITEMTYPE_AUTUMN])
 	{// 秋を獲得
@@ -567,15 +637,15 @@ int GetResultNumber()
 			if (g_bItem[ITEMTYPE_FOOD3])
 			{// サツマイモを獲得
 				if (g_bItem[ITEMTYPE_KIKAKU])
-				{
+				{// 企画
 					// 番号を返す
-					nGetNumber = 2;
+					nGetNumber = 0; // Sランク
 				}
 			}
 			else if (g_bItem[ITEMTYPE_FOOD1])
 			{// 団子
 				// 番号を返す
-				nGetNumber = 5;
+				nGetNumber = 2; // Bランク
 			}
 		}
 		else if (g_bItem[ITEMTYPE_SHOP])
@@ -585,8 +655,26 @@ int GetResultNumber()
 				if (g_bItem[ITEMTYPE_TALK])
 				{
 					// 番号を返す
-					nGetNumber = 0;
+					nGetNumber = 1; // Aランク
 				}
+			}
+		}
+		else if (g_bItem[ITEMTYPE_PARK])
+		{// 公園
+			if (g_bItem[ITEMTYPE_FOOD3])
+			{// サツマイモ
+				//番号を返す
+				nGetNumber = 2; // Bランク
+			}
+			else if (g_bItem[ITEMTYPE_FOOD1])
+			{// 団子
+				//番号を返す
+				nGetNumber = 2; // Cランク
+			}
+			else
+			{
+				// 番号を返す
+				nGetNumber = 5; // ?ランク
 			}
 		}
 	}
@@ -599,25 +687,57 @@ int GetResultNumber()
 				if (g_bItem[ITEMTYPE_TALK])
 				{// 話術
 					// 番号を返す
-					nGetNumber = 2;
+					nGetNumber = 0; // Sランク
 				}
 			}
 			else if (g_bItem[ITEMTYPE_FOOD2])
 			{// スイカ
 				// 番号を返す
-				nGetNumber = 5;
+				nGetNumber = 5; // ?ランク
 			}
 		}
 		else if (g_bItem[ITEMTYPE_PARK])
 		{// 公園
-			if (g_bItem[ITEMTYPE_FOOD1] || g_bItem[ITEMTYPE_HYO])
-			{// 団子 または 表現力
+			if (g_bItem[ITEMTYPE_FOOD1])
+			{// 団子 
 				// 番号を返す
-				nGetNumber = 1;
+				nGetNumber = 3; // Cランク
+			}
+			else if (g_bItem[ITEMTYPE_FOOD2])
+			{// スイカ
+				// 番号を返す
+				nGetNumber = 4; // Dランク
+			}
+			else if (g_bItem[ITEMTYPE_FOOD4])
+			{// みかん
+				// 番号を返す
+				nGetNumber = 2; // Bランク
+			}
+		}
+		else if (g_bItem[ITEMTYPE_SHOP])
+		{// 店
+			if (g_bItem[ITEMTYPE_FOOD1])
+			{// 団子
+				if (g_bItem[ITEMTYPE_KIKAKU])
+				{// 企画
+					// 番号を返す
+					nGetNumber = 1; // Aランク
+				}
+			}
+			else if (g_bItem[ITEMTYPE_FOOD2])
+			{// スイカ
+				// 番号を返す
+				nGetNumber = 5; // ?ランク
+			}
+			else
+			{
+				// 番号を返す
+				nGetNumber = 1; // Aランク
 			}
 		}
 	}
 
+	// 番号を返す
 	return nGetNumber;
 }
 //============================

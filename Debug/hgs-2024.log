@@ -1,2 +1,42 @@
-﻿  shadow.cpp
-  hgs-2024.vcxproj -> C:\Users\student\Desktop\HGS\HGS\Debug\hgs-2024.exe
+﻿  Timer.cpp
+  Title.cpp
+  billboard.cpp
+  block.cpp
+  bullet.cpp
+  camera.cpp
+  effect.cpp
+  enemy.cpp
+  explosion.cpp
+  fade.cpp
+  game.cpp
+  input.cpp
+  item.cpp
+  light.cpp
+  main.cpp
+  meshfan.cpp
+  meshfield.cpp
+  meshwall.cpp
+  model.cpp
+  motion.cpp
+  コードを生成中...
+C:\Users\student\Desktop\ハッカソン\HGS\input.cpp(59): warning C4715: 'InitKeyboard': 値を返さないコントロール パスがあります。
+C:\Users\student\Desktop\ハッカソン\HGS\input.cpp(242): warning C4715: 'GetJoyTrigger': 値を返さないコントロール パスがあります。
+  コンパイル中...
+  particle.cpp
+C:\Users\student\Desktop\ハッカソン\HGS\particle.cpp(84,15): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\student\Desktop\ハッカソン\HGS\particle.cpp(115,15): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+C:\Users\student\Desktop\ハッカソン\HGS\particle.cpp(145,15): warning C4244: '初期化中': 'float' から 'int' への変換です。データが失われる可能性があります。
+  pause.cpp
+  player.cpp
+C:\Users\student\Desktop\ハッカソン\HGS\player.cpp(354,33): warning C4305: '-=': 'double' から 'float' へ切り詰めます。
+  ranking.cpp
+  rankscore.cpp
+  ranksetdata.cpp
+  result.cpp
+  score.cpp
+  shadow.cpp
+  sound.cpp
+  tutorial.cpp
+  tutorial2.cpp
+  コードを生成中...
+  hgs-2024.vcxproj -> C:\Users\student\Desktop\ハッカソン\HGS\Debug\hgs-2024.exe

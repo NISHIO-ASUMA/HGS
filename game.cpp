@@ -140,15 +140,6 @@ void InitGame(void)
 	// アイテムの初期化
 	InitItem();
 
-	//// 敵の初期化
-	//InitEnemy();
-
-	//// ブロックの初期化
-	//InitBlock();
-
-	// スコアの初期化
-	InitScore();
-
 	// プレゼントセット
 	SetItem(D3DXVECTOR3(-80.0f, 20.0f, 160.0f), ITEMTYPE_SPRING);
 	SetItem(D3DXVECTOR3(-400.0f, 20.0f, 160.0f), ITEMTYPE_SUMMER);
@@ -211,12 +202,6 @@ void UninitGame(void)
 	//ビルボードの終了
 	UninitBillboard();
 
-	//// ブロックの終了
-	//UninitBlock();
-
-	//// 敵の終了
-	//UninitEnemy();
-
 	// プレイヤーの終了
 	UninitPlayer();
 
@@ -231,9 +216,6 @@ void UninitGame(void)
 
 	// タイマーの終了
 	UninitTimer();
-
-	// スコアの終了
-	UninitScore();
 }
 //===================
 // ゲームの更新
@@ -244,7 +226,8 @@ void UpdateGame(void)
 	int nTime = GetTimer();
 	bool bExit = GetExit();
 
-	Player* pPlayer = GetPlayer();//プレイヤーの情報へのポインタにプレイヤーの先頭アドレスが代入される
+	//プレイヤーの情報へのポインタにプレイヤーの先頭アドレスが代入される
+	Player* pPlayer = GetPlayer();
 
 	if (KeyboardTrigger(DIK_P) == true || JoyPadTrigger(JOYKEY_START) == true)
 	{//ESCAPE(ポーズ)キーが押された
@@ -270,17 +253,6 @@ void UpdateGame(void)
 		// アイテムの更新
 		UpdateItem();
 
-		////敵の更新処理
-		//UpdateEnemy();
-
-
-		////メッシュフィールドの更新処理
-		//UpdateMeshfield();
-
-
-		////メッシュシリンダーの更新処理
-		//UpdateMeshcylinder();
-
 
 		//カメラの更新処理
 		UpdateCamera();
@@ -301,15 +273,6 @@ void UpdateGame(void)
 		//弾の更新処理
 		UpdateBullet();
 
-
-		////ビルボードの更新処理
-		//UpdateBillboard();
-
-
-		////壁の更新処理
-		//UpdateWall();
-
-
 		//エフェクトの更新処理
 		UpdateEffect();
 
@@ -321,25 +284,9 @@ void UpdateGame(void)
 		//スコアの更新処理
 		UpdateScore();
 
-
-		////リザルトスコアの更新処理
-		//UpdateResultScore();
-
-
 		//パーティクルの更新処理
 		UpdateParticle();
-
-		//if (KeyboardTrigger(DIK_F5) == true)
-		//{
-		//	onWireFrame();
-		//}
-		//else if (KeyboardTrigger(DIK_F6) == true)
-		//{
-		//	offWireFrame();
-		//}
 	}
-
-	//bool bEnd = GetEnd();
 
 	if ((pPlayer->bDisp == false || bExit == true || nTime <= 0 ) && g_gameState != GAMESTATE_NONE)
 	{
@@ -349,7 +296,6 @@ void UpdateGame(void)
 
 	int nResultScore;
 	nResultScore = GetScore();
-	//nTime = GetTime();
 
 	switch (g_gameState)
 	{
@@ -368,27 +314,6 @@ void UpdateGame(void)
 
 			//モード設定(リザルト画面に移行)
 			SetFade(MODE_RESULT);
-
-			//if (bExit == true)
-			//{
-
-				////タイムに応じてスコア加算
-				//AddScore((nTime * GetScore()) * 0.2f);
-
-
-				////リザルトスコアの設定
-				//SetResultScore(GetScore());
-
-
-				//ランキングのリセット
-				ResetRanking();
-
-
-				//ランキングの設定
-				SetRanking(GetScore());
-
-			//}
-
 		}
 		break;
 	}
@@ -407,12 +332,6 @@ void DrawGame(void)
 	// メッシュフィールドの描画
 	DrawMeshfield();
 
-	//// メッシュドームの描画
-	//DrawmeshFan();
-
-	//// メッシュのシリンダー形の描画
-	//DrawMeshWall();
-
 	// 影の描画
 	DrawShadow();
 
@@ -422,12 +341,6 @@ void DrawGame(void)
 	//ビルボードの描画処理
 	DrawBillboard();
 
-	//// ブロックの描画
-	//DrawBlock();
-
-	//// 敵の描画
-	//DrawEnemy();
-
 	// プレイヤーの描画
 	DrawPlayer();
 
@@ -436,9 +349,6 @@ void DrawGame(void)
 
 	//タイマー
 	DrawTimer();
-
-	// スコアの描画
-	DrawScore();
 
 	if (g_bPause == true)
 	{

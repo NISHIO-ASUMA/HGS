@@ -51,30 +51,37 @@ void InitResult(void)
 	switch (nNumResult)
 	{
 	case 0:
-		TextureName = "data\\TEXTURE\\result_B.png";
-		break;
-
-	case 1:
-		TextureName = "data\\TEXTURE\\result_D.png";
-		break;
-
-	case 2:
+		// Sランク
 		TextureName = "data\\TEXTURE\\result_S.png";
 		break;
 
-	case 3:
+	case 1:
+		// Aランク
 		TextureName = "data\\TEXTURE\\result_A.png";
 		break;
 
-	case 4:
+	case 2:
+		// Bランク
+		TextureName = "data\\TEXTURE\\result_B.png";
+		break;
+
+	case 3:
+		// Cランク
 		TextureName = "data\\TEXTURE\\result_C.png";
 		break;
 
+	case 4:
+		// Dランク
+		TextureName = "data\\TEXTURE\\result_D.png";
+		break;
+
 	case 5:
+		// ?ランク
 		TextureName = "data\\TEXTURE\\result_hatena.png";
 		break;
 
 	default:
+		// 例外対処策
 		TextureName = "data\\TEXTURE\\result_hatena.png";
 		break;
 	}

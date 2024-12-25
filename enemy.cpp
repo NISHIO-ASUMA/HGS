@@ -573,4 +573,3 @@ Enemy* GetEnemy()
 {
 	return &g_Enemy[0];
 }
-// TODO : テキストやりたかったらどうぞ
