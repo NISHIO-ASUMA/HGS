@@ -25,7 +25,12 @@ Item g_Item[MAX_ITEM];		// 構造体変数
 int nNumItem;				// アイテム数
 int nGetNumber;				// 取得番号
 bool g_bItem[ITEMTYPE_MAX];	// 取得	
+bool bItemGet1 = false; //アイテム取得判定
+bool bItemGet2 = false; //アイテム取得判定
+bool bItemGet3 = false; //アイテム取得判定
+bool bItemGet4 = false; //アイテム取得判定
 
+bool bGet;
 //==============================
 // 初期化
 //==============================
@@ -37,6 +42,7 @@ void InitItem()
 	// グローバル変数の初期化
 	nGetNumber = 0;
 	nNumItem = 0;
+	bGet = false;
 
 	// 構造体変数の初期化
 	for (int nCnt = 0; nCnt < MAX_ITEM; nCnt++)
@@ -124,7 +130,7 @@ void UpdateItem()
 		int nType = g_Item[nCnt].Type;
 
 		// 影の座標更新設定
-		SetPositionShadow(g_Item[nCnt].nIdxshadow, D3DXVECTOR3(g_Item[nCnt].pos.x, 0.0f, g_Item[nCnt].pos.z));
+		//SetPositionShadow(g_Item[nCnt].nIdxshadow, D3DXVECTOR3(g_Item[nCnt].pos.x, 0.0f, g_Item[nCnt].pos.z));
 
 		// 半径を算出する変数
 		D3DXVECTOR3 PlayerPos(6.0f, 0.0f, 6.0f);
@@ -155,7 +161,116 @@ void UpdateItem()
 			{// ENTER もしくはBボタンが押された
 				// ヒット処理
 				HitItem(nCnt, 1);
+
+				bGet = true;
+
+				//エリア1
+				if (bGet && g_Item[nCnt].Type == ITEMTYPE_SPRING)
+				{
+					g_Item[ITEMTYPE_SUMMER].bUse = false;
+					g_Item[ITEMTYPE_AUTUMN].bUse = false;
+					g_Item[ITEMTYPE_WINTER].bUse = false;
+
+
+					bGet = false;
+				}
+				else if (bGet && g_Item[nCnt].Type == ITEMTYPE_SUMMER)
+				{
+					g_Item[ITEMTYPE_SPRING].bUse = false;
+					g_Item[ITEMTYPE_AUTUMN].bUse = false;
+					g_Item[ITEMTYPE_WINTER].bUse = false;
+
+					bGet = false;
+				}
+				else if (bGet && g_Item[nCnt].Type == ITEMTYPE_AUTUMN)
+				{
+					g_Item[ITEMTYPE_SPRING].bUse = false;
+					g_Item[ITEMTYPE_SUMMER].bUse = false;
+					g_Item[ITEMTYPE_WINTER].bUse = false;
+
+					bGet = false;
+				}
+				else if (bGet && g_Item[nCnt].Type == ITEMTYPE_WINTER)
+				{
+					g_Item[ITEMTYPE_SPRING].bUse = false;
+					g_Item[ITEMTYPE_SUMMER].bUse = false;
+					g_Item[ITEMTYPE_AUTUMN].bUse = false;
+
+					bGet = false;
+				}
+
+				//エリア2
+				if (bGet && g_Item[nCnt].Type == ITEMTYPE_FOOD1)
+				{
+					g_Item[ITEMTYPE_FOOD2].bUse = false;
+					g_Item[ITEMTYPE_FOOD3].bUse = false;
+					g_Item[ITEMTYPE_FOOD4].bUse = false;
+
+
+					bGet = false;
+				}
+				else if (bGet && g_Item[nCnt].Type == ITEMTYPE_FOOD2)
+				{
+					g_Item[ITEMTYPE_FOOD1].bUse = false;
+					g_Item[ITEMTYPE_FOOD3].bUse = false;
+					g_Item[ITEMTYPE_FOOD4].bUse = false;
+
+					bGet = false;
+				}
+				else if (bGet && g_Item[nCnt].Type == ITEMTYPE_FOOD3)
+				{
+					g_Item[ITEMTYPE_FOOD1].bUse = false;
+					g_Item[ITEMTYPE_FOOD2].bUse = false;
+					g_Item[ITEMTYPE_FOOD4].bUse = false;
+
+					bGet = false;
+				}
+				else if (bGet && g_Item[nCnt].Type == ITEMTYPE_FOOD4)
+				{
+					g_Item[ITEMTYPE_FOOD1].bUse = false;
+					g_Item[ITEMTYPE_FOOD2].bUse = false;
+					g_Item[ITEMTYPE_FOOD3].bUse = false;
+
+					bGet = false;
+				}
+
 			}
+		}
+
+		//エリア1
+		if (g_Item[nCnt].Type == ITEMTYPE_SPRING && g_Item[nCnt].bUse == false)
+		{
+			bItemGet1 = true;
+		}
+		else if (g_Item[nCnt].Type == ITEMTYPE_SUMMER && g_Item[nCnt].bUse == false)
+		{
+			bItemGet1 = true;
+		}
+		else if (g_Item[nCnt].Type == ITEMTYPE_AUTUMN && g_Item[nCnt].bUse == false)
+		{
+			bItemGet1 = true;
+		}
+		else if (g_Item[nCnt].Type == ITEMTYPE_WINTER && g_Item[nCnt].bUse == false)
+		{
+			bItemGet1 = true;
+		}
+
+		//エリア2
+		if (g_Item[nCnt].Type == ITEMTYPE_FOOD1 && g_Item[nCnt].bUse == false)
+		{
+			bItemGet2 = true;
+		}
+		else if (g_Item[nCnt].Type == ITEMTYPE_FOOD2 && g_Item[nCnt].bUse == false)
+		{
+			bItemGet2 = true;
+		}
+		else if (g_Item[nCnt].Type == ITEMTYPE_FOOD3 && g_Item[nCnt].bUse == false)
+		{
+			bItemGet2 = true;
+		}
+		else if (g_Item[nCnt].Type == ITEMTYPE_FOOD4 && g_Item[nCnt].bUse == false)
+		{
+			bItemGet2 = true;
 		}
 
 		g_Item[nCnt].rot.y += 0.02f;
@@ -242,7 +357,7 @@ void SetItem(D3DXVECTOR3 pos, ITEMTYPE Type)
 			g_Item[nCnt1].bUse = true;		// 使用判定
 
 			// 影の設定
-			g_Item[nCnt1].nIdxshadow = SetShadow(D3DXVECTOR3(g_Item[nCnt1].pos.x, 0.0f, g_Item[nCnt1].pos.z), g_Item[nCnt1].rot);
+			//g_Item[nCnt1].nIdxshadow = SetShadow(D3DXVECTOR3(g_Item[nCnt1].pos.x, 0.0f, g_Item[nCnt1].pos.z), g_Item[nCnt1].rot);
 
 			// アイテム数をカウント
 			nNumItem++;
@@ -259,17 +374,20 @@ void HitItem(int nCnt, int nDamage)
 	// ダメージを受けたら体力減少
 	g_Item[nCnt].nLife -= nDamage;
 
-	// Lifeが0以下の時
-	if (g_Item[nCnt].nLife <= 0)
+	for (int nCntItem = 0; nCntItem < MAX_ITEM; nCntItem++)
 	{
-		//	未使用判定
-		g_Item[nCnt].bUse = false;
+		// Lifeが0以下の時
+		if (g_Item[nCntItem].nLife <= 0)
+		{
+			//	未使用判定
+			g_Item[nCntItem].bUse = false;
 
-		// 影を消す
-		ShadowFalse(g_Item[nCnt].nIdxshadow);
+			// 影を消す
+			ShadowFalse(g_Item[nCntItem].nIdxshadow);
 
-		// 取得した状態にする
-		g_bItem[g_Item[nCnt].Type] = true;
+			// 取得した状態にする
+			g_bItem[g_Item[nCntItem].Type] = true;
+		}
 	}
 }
 //============================
@@ -286,4 +404,20 @@ int GetResultNumber()
 Item* GetItem()
 {
 	return &g_Item[0];
+}
+bool ItemGet1(void)
+{
+	return bItemGet1;
+}
+bool ItemGet2(void)
+{
+	return bItemGet2;
+}
+bool ItemGet3(void)
+{
+	return bItemGet3;
+}
+bool ItemGet4(void)
+{
+	return bItemGet4;
 }

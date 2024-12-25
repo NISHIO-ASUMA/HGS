@@ -30,6 +30,7 @@
 #include "sound.h"
 #include "bullet.h"
 #include "item.h"
+#include "billboard.h"
 
 //**********************************
 // グローバル変数宣言
@@ -47,6 +48,18 @@ void InitGame(void)
 	//モデルの初期化処理
 	InitModel();
 
+	//ビルボードの初期化
+	InitBillboard();
+
+	//ビルボード
+	SetBillboard(D3DXVECTOR3(-80.0f, 85.0f, 160.0f), BILLBOARDTYPE_SPRING, D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+	SetBillboard(D3DXVECTOR3(-400.0f, 85.0f, 160.0f), BILLBOARDTYPE_SUMMER, D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+	SetBillboard(D3DXVECTOR3(-400.0f, 85.0f, -160.0f), BILLBOARDTYPE_AUTUMN, D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+	SetBillboard(D3DXVECTOR3(-80.0f, 85.0f, -160.0f), BILLBOARDTYPE_WINTER, D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+
+	SetBillboard(D3DXVECTOR3(600.0f, 85.0f, 160.0f), BILLBOARDTYPE_SHOP, D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+	SetBillboard(D3DXVECTOR3(280.0f, 85.0f, 160.0f), BILLBOARDTYPE_PARK, D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+	SetBillboard(D3DXVECTOR3(280.0f, 85.0f, -160.0f), BILLBOARDTYPE_SCHOOL, D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 
 	//モデル
 	SetModel(D3DXVECTOR3(-220.0f, 0.0f, 385.0f), WALLTYPE_OKU);		//	ルーム1の奥壁
@@ -124,8 +137,16 @@ void InitGame(void)
 	// スコアの初期化
 	InitScore();
 
-	// セット
-	SetItem(D3DXVECTOR3(200.0f, 20.0f, 0.0f), ITEMTYPE_SPRING);
+	// プレゼントセット
+	SetItem(D3DXVECTOR3(-80.0f, 20.0f, 160.0f), ITEMTYPE_SPRING);
+	SetItem(D3DXVECTOR3(-400.0f, 20.0f, 160.0f), ITEMTYPE_SUMMER);
+	SetItem(D3DXVECTOR3(-400.0f, 20.0f, -160.0f), ITEMTYPE_AUTUMN);
+	SetItem(D3DXVECTOR3(-80.0f, 20.0f, -160.0f), ITEMTYPE_WINTER);
+
+	SetItem(D3DXVECTOR3(600.0f, 20.0f, 160.0f), ITEMTYPE_FOOD1);
+	SetItem(D3DXVECTOR3(280.0f, 20.0f, 160.0f), ITEMTYPE_FOOD2);
+	SetItem(D3DXVECTOR3(280.0f, 20.0f, -160.0f), ITEMTYPE_FOOD3);
+	SetItem(D3DXVECTOR3(600.0f, 20.0f, -160.0f), ITEMTYPE_FOOD4);
 
 	g_gameState = GAMESTATE_NORMAL;	//　通常状態の設定
 	g_nCounterGameState = 0;		//	カウンターの初期化
@@ -165,6 +186,9 @@ void UninitGame(void)
 
 	//モデルの終了処理
 	UninitModel();
+
+	//ビルボードの終了
+	UninitBillboard();
 
 	//// ブロックの終了
 	//UninitBlock();
@@ -376,6 +400,8 @@ void DrawGame(void)
 	//モデルの描画処理
 	DrawModel();
 
+	//ビルボードの描画処理
+	DrawBillboard();
 
 	//// ブロックの描画
 	//DrawBlock();
@@ -395,7 +421,7 @@ void DrawGame(void)
 	// スコアの描画
 	DrawScore();
 
-	if (g_gameState == GAMESTATE_PAUSE)
+	if (g_bPause == true)
 	{
 		//ポーズ中
 		//ポーズの描画

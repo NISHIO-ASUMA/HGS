@@ -42,7 +42,7 @@ void InitBillboard(void)
 		g_Billboard[nCnt].rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);	// 角度
 		g_Billboard[nCnt].move = D3DXVECTOR3(0.0f, 0.0f, 0.0f);	// 移動量
 		g_Billboard[nCnt].dir = D3DXVECTOR3(0.0f, 0.0f, 0.0f);	// ベクトル
-		g_Billboard[nCnt].Type = BILLBOARDTYPE_FIRST;			// 種類
+		g_Billboard[nCnt].Type = BILLBOARDTYPE_SPRING;			// 種類
 		g_Billboard[nCnt].bUse = false;							// 使用判定
 	}
 
@@ -63,19 +63,19 @@ void InitBillboard(void)
 	{
 		// 頂点座標の設定
 		pVtx[0].pos.x = g_Billboard[nCntBillboard].pos.x - 70.0f;
-		pVtx[0].pos.y = g_Billboard[nCntBillboard].pos.y + 70.0f;
+		pVtx[0].pos.y = g_Billboard[nCntBillboard].pos.y + 30.0f;
 		pVtx[0].pos.z = g_Billboard[nCntBillboard].pos.z;  
 														   
 		pVtx[1].pos.x = g_Billboard[nCntBillboard].pos.x + 70.0f;
-		pVtx[1].pos.y = g_Billboard[nCntBillboard].pos.y + 70.0f;
+		pVtx[1].pos.y = g_Billboard[nCntBillboard].pos.y + 30.0f;
 		pVtx[1].pos.z = g_Billboard[nCntBillboard].pos.z;  
 														   
 		pVtx[2].pos.x = g_Billboard[nCntBillboard].pos.x - 70.0f;
-		pVtx[2].pos.y = g_Billboard[nCntBillboard].pos.y - 70.0f;
+		pVtx[2].pos.y = g_Billboard[nCntBillboard].pos.y - 20.0f;
 		pVtx[2].pos.z = g_Billboard[nCntBillboard].pos.z;  
 														   
 		pVtx[3].pos.x = g_Billboard[nCntBillboard].pos.x + 70.0f;
-		pVtx[3].pos.y = g_Billboard[nCntBillboard].pos.y - 70.0f;
+		pVtx[3].pos.y = g_Billboard[nCntBillboard].pos.y - 20.0f;
 		pVtx[3].pos.z = g_Billboard[nCntBillboard].pos.z;
 
 		// 各頂点の法線(ベクトル)の設定
@@ -153,7 +153,7 @@ void DrawBillboard(void)
 		if (g_Billboard[nCnt].bUse)
 		{// 使われているとき
 
-			if (g_Billboard[nCnt].Type == BILLBOARDTYPE_FIRST)
+			if (g_Billboard[nCnt].Type == BILLBOARDTYPE_SPRING)
 			{
 				// Zテスト
 				pDevice->SetRenderState(D3DRS_ZFUNC, D3DCMP_ALWAYS);
@@ -199,7 +199,7 @@ void DrawBillboard(void)
 			// ポリゴンの描画
 			pDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, nCnt * 4, 2);
 
-			if (g_Billboard[nCnt].Type == BILLBOARDTYPE_FIRST)
+			if (g_Billboard[nCnt].Type == BILLBOARDTYPE_SPRING)
 			{
 				// Zテスト
 				pDevice->SetRenderState(D3DRS_ZFUNC, D3DCMP_LESSEQUAL);

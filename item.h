@@ -80,5 +80,9 @@ void SetItem(D3DXVECTOR3 pos, ITEMTYPE Type);	// 設定処理
 void HitItem(int nCnt, int nDamage); // ヒット処理
 int GetResultNumber();			// リザルト番号
 Item* GetItem();				// 取得処理
+bool ItemGet1(void);
+bool ItemGet2(void);
+bool ItemGet3(void);
+bool ItemGet4(void);
 
 #endif

@@ -22,9 +22,20 @@
 //*****************************
 typedef enum
 {
-	BILLBOARDTYPE_FIRST = 0,
-	BILLBOARDTYPE_SECOND,
-	BILLBOARDTYPE_LAST,
+	BILLBOARDTYPE_SPRING = 0,
+	BILLBOARDTYPE_SUMMER,
+	BILLBOARDTYPE_AUTUMN,
+	BILLBOARDTYPE_WINTER,
+
+	BILLBOARDTYPE_SHOP,
+	BILLBOARDTYPE_PARK,
+	BILLBOARDTYPE_SCHOOL,
+
+	BILLBOARDTYPE_FOOD1,
+	BILLBOARDTYPE_FOOD2,
+	BILLBOARDTYPE_FOOD3,
+	BILLBOARDTYPE_FOOD4,
+
 	BILLBOARDTYPE_MAX
 }BILLBOARDTYPE;
 
@@ -33,9 +44,15 @@ typedef enum
 //************************************
 static const char* BILLBOARD_TEXTURE[BILLBOARDTYPE_MAX] = 
 {
-	"data\\TEXTURE\\bill1.png",
-	"data\\TEXTURE\\yajirusi.png",
-	"data\\TEXTURE\\pause001.png",
+	"data\\TEXTURE\\00_Spring.png",
+	"data\\TEXTURE\\01_Summer.png",
+	"data\\TEXTURE\\02_Autumn.png",
+	"data\\TEXTURE\\03_Winter.png",
+
+	"data\\TEXTURE\\04_Shop.png",
+	"data\\TEXTURE\\05_Park.png",
+	"data\\TEXTURE\\06_School.png",
+
 };
 
 //***************************
