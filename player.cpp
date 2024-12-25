@@ -276,8 +276,8 @@ void UpdatePlayer(void)
 	// カメラの情報を取得
 	Camera* pCamera = GetCamera();
 
-	// トリガー情報を取得
-	DIMOUSESTATE pMouse = GetMouseTriggerState();
+	//// トリガー情報を取得
+	//DIMOUSESTATE pMouse = GetMouseTriggerState();
 
 	bPad = false;
 
@@ -346,10 +346,10 @@ void UpdatePlayer(void)
 
 	if (bPad == false)
 	{
-		if (GetKeyboardPress(DIK_A) || JoypadPress(JOYKEY_LEFT))
+		if (GetKeyboardPress(DIK_A) || GetJoypadPress(JOYKEY_LEFT))
 		{// Aキーを押した
 
-			if (GetKeyboardPress(DIK_W) || JoypadPress(JOYKEY_UP))
+			if (GetKeyboardPress(DIK_W) || GetJoypadPress(JOYKEY_UP))
 			{// Wキーを押した
 				g_Player.move.x += sinf(pCamera->rot.y - D3DX_PI * 0.25f) * MAX_MOVE;
 				g_Player.move.z += cosf(pCamera->rot.y - D3DX_PI * 0.25f) * MAX_MOVE;
@@ -358,7 +358,7 @@ void UpdatePlayer(void)
 				g_Player.state = PLAYERSTATE_MOVE;
 
 			}
-			else if (GetKeyboardPress(DIK_S) || JoypadPress(JOYKEY_DOWN))
+			else if (GetKeyboardPress(DIK_S) || GetJoypadPress(JOYKEY_DOWN))
 			{// Sキーを押した
 				g_Player.move.x -= sinf(pCamera->rot.y + D3DX_PI * 0.25f) * MAX_MOVE;
 				g_Player.move.z -= cosf(pCamera->rot.y + D3DX_PI * 0.25f) * MAX_MOVE;
@@ -385,9 +385,9 @@ void UpdatePlayer(void)
 			}
 
 		}
-		else if (GetKeyboardPress(DIK_D) || JoypadPress(JOYKEY_RIGHT))
+		else if (GetKeyboardPress(DIK_D) || GetJoypadPress(JOYKEY_RIGHT))
 		{// Dキーを押した
-			if (GetKeyboardPress(DIK_W) || JoypadPress(JOYKEY_UP))
+			if (GetKeyboardPress(DIK_W) || GetJoypadPress(JOYKEY_UP))
 			{// Wキーを押した
 				g_Player.move.x += sinf(pCamera->rot.y + D3DX_PI * 0.25f) * MAX_MOVE;
 				g_Player.move.z += cosf(pCamera->rot.y + D3DX_PI * 0.25f) * MAX_MOVE;
@@ -398,7 +398,7 @@ void UpdatePlayer(void)
 
 			}
 
-			else if (GetKeyboardPress(DIK_S) || JoypadPress(JOYKEY_DOWN))
+			else if (GetKeyboardPress(DIK_S) || GetJoypadPress(JOYKEY_DOWN))
 			{// Sキーを押した
 				g_Player.move.x -= sinf(pCamera->rot.y - D3DX_PI * 0.25f) * MAX_MOVE;
 				g_Player.move.z -= cosf(pCamera->rot.y - D3DX_PI * 0.25f) * MAX_MOVE;
@@ -426,7 +426,7 @@ void UpdatePlayer(void)
 			}
 
 		}
-		else if (GetKeyboardPress(DIK_W) || JoypadPress(JOYKEY_UP))
+		else if (GetKeyboardPress(DIK_W) || GetJoypadPress(JOYKEY_UP))
 		{// Wキーを押した
 			//　タイプ切り替え
 			g_Player.state = PLAYERSTATE_MOVE;
@@ -442,7 +442,7 @@ void UpdatePlayer(void)
 			}
 
 		}
-		else if (GetKeyboardPress(DIK_S) || JoypadPress(JOYKEY_DOWN))
+		else if (GetKeyboardPress(DIK_S) || GetJoypadPress(JOYKEY_DOWN))
 		{// Sキーを押した
 			//　タイプ切り替え
 			g_Player.state = PLAYERSTATE_MOVE;
@@ -471,7 +471,7 @@ void UpdatePlayer(void)
 
 	}
 	
-	if (KeyboardTrigger(DIK_RETURN) || JoypadTrigger(JOYKEY_X))
+	if (KeyboardTrigger(DIK_RETURN) || JoyPadTrigger(JOYKEY_X))
 	{// ENTERキーを押した
 		// モーション変更
 		g_Player.nKey = 0;
@@ -496,7 +496,7 @@ void UpdatePlayer(void)
 
 	if (g_Player.bjump == false)
 	{// ジャンプしていなくて着地していないとき
-		if (KeyboardTrigger(DIK_SPACE) == true || JoypadTrigger(JOYKEY_A) == true)
+		if (KeyboardTrigger(DIK_SPACE) == true || JoyPadTrigger(JOYKEY_A) == true)
 		{
 			// 音楽再生
 			PlaySound(SOUND_LABLE_JUMPSE);

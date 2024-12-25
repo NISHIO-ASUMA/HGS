@@ -28,6 +28,7 @@
 #include "score.h"
 #include "rankscore.h"
 #include "sound.h"
+#include "bullet.h"
 
 //**********************************
 // グローバル変数宣言
@@ -149,126 +150,157 @@ void UninitGame(void)
 //===================
 void UpdateGame(void)
 {
-	if (KeyboardTrigger(DIK_RETURN))
-	{
-		// 画面遷移
-		SetFade(MODE_RESULT);
-	}
+	int nNum = GetScore();
+	//int nTime = GetTime();
+	//bool bExit = GetExit();
 
-	// モードの取得
-	MODE nMode = GetMode();
+	PLAYER* pPlayer = GetPlayer();//プレイヤーの情報へのポインタにプレイヤーの先頭アドレスが代入される
 
-	// プレイヤーの取得
-	PLAYER* pPlayer = GetPlayer();
+	if (KeyboardTrigger(DIK_P) == true || JoyPadTrigger(JOYKEY_START) == true)
+	{//ESCAPE(ポーズ)キーが押された
+		g_bPause = g_bPause ? false : true;
 
-	// 敵の取得
-	int nNum = GetNumEnemy();
+		//PlaySound(SOUND_LABEL_PAUSE);
 
-	// タイマーを取得
-	int nTime = GetTimer();
-
-	if ( (nTime <= 0 || pPlayer->bDisp == false) && g_gameState != GAMESTATE_NONE)
-	{
-		g_gameState = GAMESTATE_END;  //終了状態
-	}
-
-	switch (g_gameState)
-	{
-	case GAMESTATE_NORMAL: // 通常状態
-		break;
-
-	case GAMESTATE_END:
-		g_nCounterGameState++;
-		if (g_nCounterGameState >= 60)
-		{
-			// カウンターを初期化
-			g_nCounterGameState = 0;
-
-			// 1秒経過
-			g_gameState = GAMESTATE_NONE;		// 何もしていない状態
-
-			// 画面遷移
-			SetFade(MODE_RESULT);
-
-			//読み込み
-			ResetRanking();
-
-			//ランキングの設定
-			SetRanking(GetScore());
-		}
-		break;
-
-	case GAMESTATE_PAUSE:
-		//ポーズ中
-		//ポーズの更新処理
-		UpdatePause();
-		break;
-
-	}
-
-	// ポーズ画面
-	if (nMode == MODE_GAME)
-	{
-		if (KeyboardTrigger(DIK_P) == true || JoypadTrigger(JOYKEY_START))
-		{// pが押された or startボタン
-			// 有効か無効か判定
-			g_bPause = g_bPause ? false : true;
-
-			// 音楽再生
-			PlaySound(SOUND_LABLE_PAUSEMENU);
-		}
 	}
 
 	if (g_bPause == true)
-	{// g_bPauseがtrueの時
-		g_gameState = GAMESTATE_PAUSE;
+	{//ポーズ中
+
+		//ポーズの更新処理
+		UpdatePause();
+
 	}
-	else if (!g_bPause && g_gameState != GAMESTATE_SELECT)
+	else
 	{
-		g_gameState = GAMESTATE_NORMAL;
-	}
 
-	if (g_gameState == GAMESTATE_NORMAL)
-	{//ポーズ中で無ければ
-		
-		// カメラの更新
-		UpdateCamera();
-
-		// ブロックの更新
-		UpdateBlock();
-
-		// ライトの更新
-		UpdateLight();
-
-		// メッシュフィールドの更新
-		UpdateMeshField();
-
-		// メッシュのシリンダー形の更新
-		UpdateMeshWall();
-
-		// メッシュドームの更新
-		UpdatemeshFan();
-
-		// 影の更新
-		UpdateShadow();
-
-		// 敵の更新
-		UpdateEnemy();
-
-		// プレイヤーの更新
+		//プレイヤーの更新処理
 		UpdatePlayer();
 
-		// エフェクトの更新
-		UpdateEffect();		
 
-		// パーティクルの更新
-		UpdateParticle();	
+		//敵の更新処理
+		UpdateEnemy();
 
-		// タイマーの更新
-		UpdateTimer();
 
-		// スコアの更新
+		////メッシュフィールドの更新処理
+		//UpdateMeshfield();
+
+
+		////メッシュシリンダーの更新処理
+		//UpdateMeshcylinder();
+
+
+		//カメラの更新処理
+		UpdateCamera();
+
+
+		//ライトの更新処理
+		UpdateLight();
+
+
+		//モデルの更新処理
+		UpdateModel();
+
+
+		//影の更新処理
+		UpdateShadow();
+
+
+		//弾の更新処理
+		UpdateBullet();
+
+
+		////ビルボードの更新処理
+		//UpdateBillboard();
+
+
+		////壁の更新処理
+		//UpdateWall();
+
+
+		//エフェクトの更新処理
+		UpdateEffect();
+
+
+		////タイムの更新処理
+		//UpdateTime();
+
+
+		//スコアの更新処理
 		UpdateScore();
+
+
+		////リザルトスコアの更新処理
+		//UpdateResultScore();
+
+
+		//パーティクルの更新処理
+		UpdateParticle();
+
+		//if (KeyboardTrigger(DIK_F5) == true)
+		//{
+		//	onWireFrame();
+		//}
+		//else if (KeyboardTrigger(DIK_F6) == true)
+		//{
+		//	offWireFrame();
+		//}
+	}
+
+	//bool bEnd = GetEnd();
+
+	if ((pPlayer->bDisp == false /*|| bExit == true*/ /*|| nTime <= 0*/ /*|| bEnd == true*/) && g_gameState != GAMESTATE_NONE)
+	{
+
+		//モード設定(リザルト画面に移行)
+		g_gameState = GAMESTATE_END;
+
+	}
+
+	int nResultScore;
+	nResultScore = GetScore();
+	//nTime = GetTime();
+
+	switch (g_gameState)
+	{
+	case GAMESTATE_NORMAL://通常状態
+		break;
+
+	case GAMESTATE_END://終了状態
+		g_nCounterGameState++;
+
+		if (g_nCounterGameState >= 60)
+		{
+
+			g_nCounterGameState = 0;
+
+			g_gameState = GAMESTATE_NONE;
+
+			//モード設定(リザルト画面に移行)
+			SetFade(MODE_RESULT);
+
+			//if (bExit == true)
+			//{
+
+				////タイムに応じてスコア加算
+				//AddScore((nTime * GetScore()) * 0.2f);
+
+
+				////リザルトスコアの設定
+				//SetResultScore(GetScore());
+
+
+				//ランキングのリセット
+				ResetRanking();
+
+
+				//ランキングの設定
+				SetRanking(GetScore());
+
+			//}
+
+		}
+		break;
 	}
 }
 //===================

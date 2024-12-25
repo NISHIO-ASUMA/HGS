@@ -1,89 +1,65 @@
-//============================
+//=============================================================================
 //
-//  入力処理[input.h]
-// Author:TEAM_2
+// インプット処理 [input.h]
+// Author : TANEKAWA RIKU
 //
-//============================
+//=============================================================================
 #ifndef _INPUT_H_
 #define _INPUT_H_
 
-//****************************
-// インクルードファイル宣言
-//****************************
 #include "main.h"
 
-//***************************
-// ジョイパッドのキーの列挙型
-//***************************
+
+//キーの種類
 typedef enum
 {
-	JOYKEY_UP = 0,				//十字キー(上)
-	JOYKEY_DOWN,				//十字キー(下)
-	JOYKEY_LEFT,				//十字キー(左)
-	JOYKEY_RIGHT,				//十字キー(右)
+	JOYKEY_UP = 0,      //十字キー上
+	JOYKEY_DOWN = 1,    //十字キー下
+	JOYKEY_LEFT = 2,    //十字キー左
+	JOYKEY_RIGHT = 3,   //十字キー右
 
-	JOYKEY_START,				//スタートキーが押された
-	JOYKEY_BACK,				//バックキーが押された
+	JOYKEY_START = 4,   //スタートボタン
+	JOYKEY_BACK = 5,    //バックボタン
 
-	JOYKEY_LS,					//L3(Lスティック)が押された
-	JOYKEY_RS,					//R3(Rスティック)が押された
+	JOYKEY_LS = 6,      //左スティック押し込み
+	JOYKEY_RS = 7,      //右スティック押し込み
 
-	JOYKEY_LEFT_B,				//LBキーが押された
-	JOYKEY_RIGHT_B,				//RBキーが押された
+	JOYKEY_LB = 8,      //左ボタン
+	JOYKEY_RB = 9,      //右ボタン
 
-	JOYKEY_LEFT_TRIGGER,		//LTキーが押された
-	JOYKEY_RIGHT_TRIGGER,		//RTキーが押された
+	JOYKEY_LT = 10,     //左トリガー
+	JOYKEY_RT = 11,     //右トリガー
 
-	JOYKEY_A,					//Aボタンが押された
-	JOYKEY_B,					//Bボタンが押された
-	JOYKEY_X,					//Xボタンが押された
-	JOYKEY_Y,					//Yボタンが押された
+	JOYKEY_A = 12,      //Aボタン
+	JOYKEY_B = 13,      //Bボタン
+	JOYKEY_X = 14,      //Xボタン
+	JOYKEY_Y = 15,      //Yボタン
 
-	JOYKEY_MAX					//パッドの最大数
+	JOYKEY_MAX
 }JOYKEY;
 
-//***********************
-// マウスの種類の列挙型
-//***********************
-typedef enum
-{
-	MOUSE_LEFTBUTTON = 0,
-	MOUSE_RIGHTBUTTON,
-	MOUSE_WHEEL,
-	MOUSE_MAX
-}MOUSEBUTTON;
 
-//********************
-// プロトタイプ宣言
-//********************
-HRESULT InitKeyboard(HINSTANCE hInstance, HWND hWnd);	// キーの初期化
-void UninitKeyboard(void);							// キーの終了
-void UpdateKeyboard(void);							// キーの更新
-bool GetKeyboardPress(int nkey);					// キーのプレス
-bool KeyboardTrigger(int nKey);						// キーのトリガー
-bool KeyboardRelease(int nKey);						// キーのリリース
-bool KeyboardRepeat(int nKey);						// キーのリピート
+//プロトタイプ宣言
+HRESULT InitKeyboard(HINSTANCE hInstance, HWND hWnd);
+void UninitKeyboard(void);
+void UpdateKeyboard(void);
+bool GetKeyboardPress(int nKey);
 
-HRESULT InitJoypad(void);							// ジョイパッドの初期化
-void UninitJoypad(void);							// ジョイパッドの終了
-void UpdateJoypad(void);							// ジョイパッドの更新
-bool JoypadPress(JOYKEY key);						// ジョイパッドのプレス情報を取得
-bool JoypadTrigger(JOYKEY key);						// ジョイパッドのトリガー情報を取得
-bool JoypadRelease(JOYKEY key);						// キーのリリース
-bool JoypadRepeat(JOYKEY key);						// キーのリピート
 
-bool GetJoyStick(void);								//ジョイパッドのスティック情報(L)
-bool GetJoyStickRrepeat(void);						//ジョイパッドのスティック情報(R)
-void UpdateStick(void);								//Rスティック
+HRESULT InitJoypad(void);
+void UninitJoypad(void);
+void UpdateJoypad(void);
+bool GetJoypadPress(JOYKEY Key);
 
-XINPUT_STATE* GetJoyStickAngle(void);				//スティックの角度情報
+bool GetJoyStick(void);
+bool JoyPadTrigger(JOYKEY Key);
+bool JoyPadRelease(JOYKEY Key);
+XINPUT_STATE* GetJoyStickAngle(void);
 
-bool InitDInputMouse(HWND hWnd);					// DInoutマウスの初期化
-bool ReleaseDInputMouse();							// DInputマウスの終了
-void UpdateMouse();									// DInputマウス更新
-bool GetMousePress(int nKey);						// プレス情報
-bool GetMouseTrigger(int nKey);						// トリガー情報
-DIMOUSESTATE GetMouseState();						// マウスの取得
-DIMOUSESTATE GetMouseTriggerState();
+
+bool KeyboardTrigger(int nKey);
+bool KeyboardRelease(int nKey);
+bool KeyboardRepeat(int nKey);
+
 
 #endif

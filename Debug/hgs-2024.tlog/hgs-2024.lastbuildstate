@@ -1,2 +1,6 @@
 PlatformToolSet=v142:VCToolArchitecture=Native32Bit:VCToolsVersion=14.29.30133:TargetPlatformVersion=10.0.19041.0:
+<<<<<<< HEAD
 Debug|Win32|C:\Users\student\Desktop\ハッカソン\HGS\|
+=======
+Debug|Win32|C:\Users\student\Desktop\HGS\HGS\|
+>>>>>>> 3bb80671b6c6b8929d957613c99b18a0e4063536
