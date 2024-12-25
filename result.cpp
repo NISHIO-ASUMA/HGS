@@ -23,6 +23,7 @@ LPDIRECT3DVERTEXBUFFER9 g_pVtxBuffResult = NULL; // 頂点バッファのポインタ
 LPDIRECT3DTEXTURE9 g_pTextureResult= NULL;		 // テクスチャのポインタ
 int g_aCount;									 // カウント
 int nNumResult;
+
 //==================
 // リザルトの初期化
 //==================
@@ -44,6 +45,7 @@ void InitResult(void)
 	// 取得
 	nNumResult = GetResultNumber();
 
+	// テクスチャを設定
 	const char* TextureName = {};
 
 	switch (nNumResult)
