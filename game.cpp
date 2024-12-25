@@ -241,7 +241,7 @@ void UninitGame(void)
 void UpdateGame(void)
 {
 	int nNum = GetScore();
-	//int nTime = GetTime();
+	int nTime = GetTimer();
 	bool bExit = GetExit();
 
 	Player* pPlayer = GetPlayer();//プレイヤーの情報へのポインタにプレイヤーの先頭アドレスが代入される
@@ -314,8 +314,8 @@ void UpdateGame(void)
 		UpdateEffect();
 
 
-		////タイムの更新処理
-		//UpdateTime();
+		//タイムの更新処理
+		UpdateTimer();
 
 
 		//スコアの更新処理
@@ -341,7 +341,7 @@ void UpdateGame(void)
 
 	//bool bEnd = GetEnd();
 
-	if ((pPlayer->bDisp == false || bExit == true /*|| nTime <= 0*/ /*|| bEnd == true*/) && g_gameState != GAMESTATE_NONE)
+	if ((pPlayer->bDisp == false || bExit == true || nTime <= 0 ) && g_gameState != GAMESTATE_NONE)
 	{
 		//モード設定(リザルト画面に移行)
 		g_gameState = GAMESTATE_END;
