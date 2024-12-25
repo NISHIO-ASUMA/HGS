@@ -628,6 +628,11 @@ int GetResultNumber()
 					nGetNumber = 3;		// Cランク
 				}
 			}
+			else
+			{
+				// 番号を返す
+				nGetNumber = 4; // Dランク
+			}
 		}
 	}
 	else if (g_bItem[ITEMTYPE_AUTUMN])
@@ -641,11 +646,22 @@ int GetResultNumber()
 					// 番号を返す
 					nGetNumber = 0; // Sランク
 				}
+				else
+				{
+					// 番号を返す
+					nGetNumber = 4; // Dランク
+				}
+
 			}
 			else if (g_bItem[ITEMTYPE_FOOD1])
 			{// 団子
 				// 番号を返す
 				nGetNumber = 2; // Bランク
+			}
+			else
+			{
+				// 番号を返す
+				nGetNumber = 3; // Cランク
 			}
 		}
 		else if (g_bItem[ITEMTYPE_SHOP])
@@ -657,6 +673,11 @@ int GetResultNumber()
 					// 番号を返す
 					nGetNumber = 1; // Aランク
 				}
+			}
+			else
+			{
+				// 番号を返す
+				nGetNumber = 3; // Cランク
 			}
 		}
 		else if (g_bItem[ITEMTYPE_PARK])
@@ -695,6 +716,11 @@ int GetResultNumber()
 				// 番号を返す
 				nGetNumber = 5; // ?ランク
 			}
+			else
+			{
+				// 番号を返す
+				nGetNumber = 4; // Dランク
+			}
 		}
 		else if (g_bItem[ITEMTYPE_PARK])
 		{// 公園
@@ -712,6 +738,11 @@ int GetResultNumber()
 			{// みかん
 				// 番号を返す
 				nGetNumber = 2; // Bランク
+			}
+			else if (g_bItem[ITEMTYPE_FOOD3])
+			{// サツマイモ
+				// 番号を返す
+				nGetNumber = 4; // Dランク
 			}
 		}
 		else if (g_bItem[ITEMTYPE_SHOP])
@@ -732,7 +763,7 @@ int GetResultNumber()
 			else
 			{
 				// 番号を返す
-				nGetNumber = 1; // Aランク
+				nGetNumber = 3; // Cランク
 			}
 		}
 	}
