@@ -127,8 +127,8 @@ void UpdateItem()
 		SetPositionShadow(g_Item[nCnt].nIdxshadow, D3DXVECTOR3(g_Item[nCnt].pos.x, 0.0f, g_Item[nCnt].pos.z));
 
 		// 半径を算出する変数
-		D3DXVECTOR3 PlayerPos(20.0f, 0.0f, 20.0f);
-		D3DXVECTOR3 ItemPos(20.0f, 0.0f, 20.0f);
+		D3DXVECTOR3 PlayerPos(6.0f, 0.0f, 6.0f);
+		D3DXVECTOR3 ItemPos(6.0f, 0.0f, 6.0f);
 
 		// プレイヤーとの距離の差を求める
 		D3DXVECTOR3 diff = pPlayer->pos - g_Item[nCnt].pos;
@@ -157,6 +157,8 @@ void UpdateItem()
 				HitItem(nCnt, 1);
 			}
 		}
+
+		g_Item[nCnt].rot.y += 0.02f;
 	}	
 }
 //==============================
@@ -178,13 +180,14 @@ void DrawItem()
 
 	for (int nCnt = 0; nCnt < MAX_ITEM; nCnt++)
 	{
-		// タイプを保存
-		int nType = g_Item[nCnt].Type;
 
 		if (!g_Item[nCnt].bUse)
 		{// 未使用状態なら
 			continue;
 		}
+
+		// タイプを保存
+		int nType = g_Item[nCnt].Type;
 
 		// ワールドマトリックスの初期化
 		D3DXMatrixIdentity(&g_Item[nCnt].mtxWorld);
@@ -203,11 +206,14 @@ void DrawItem()
 		// 現在のマトリックスの取得
 		pDevice->GetMaterial(&matDef);
 
+		// マテリアルデータへのポインタを取得
+		pMat = (D3DXMATERIAL*)g_Item[nCnt].aModel[nType].pBuffMat->GetBufferPointer();
+
 		// マテリアル数だけ回す
 		for (int nCntMat = 0; nCntMat < (int)g_Item[nCnt].aModel[nType].dwNumMat; nCntMat++)
 		{
-			// マテリアルデータへのポインタを取得
-			pMat = (D3DXMATERIAL*)g_Item[nCnt].aModel[nType].pBuffMat->GetBufferPointer();
+			// マテリアルの設定
+			pDevice->SetMaterial(&pMat[nCntMat].MatD3D);
 
 			// テクスチャ設定
 			pDevice->SetTexture(0, g_Item[nCnt].aModel[nType].pTexture[nCntMat]);
@@ -217,6 +223,8 @@ void DrawItem()
 		}
 		// マテリアルを戻す
 		pDevice->SetMaterial(&matDef);
+
+
 	}
 }
 //==============================
@@ -256,6 +264,9 @@ void HitItem(int nCnt, int nDamage)
 	{
 		//	未使用判定
 		g_Item[nCnt].bUse = false;
+
+		// 影を消す
+		ShadowFalse(g_Item[nCnt].nIdxshadow);
 
 		// 取得した状態にする
 		g_bItem[g_Item[nCnt].Type] = true;
